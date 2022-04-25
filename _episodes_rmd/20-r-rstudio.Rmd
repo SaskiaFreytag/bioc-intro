@@ -267,47 +267,6 @@ Your working directory should now look like this:
 knitr::include_graphics("../fig/r-starting-how-it-should-look-like.png")
 ```
 
-**Project management** is also applicable to bioinformatics projects,
-of course[^bioindatascience]. William Noble (@Noble:2009) proposes the
-following directory structure:
-
-[^bioindatascience]: In this course, we consider bioinformatics as
-    data science applied to biological or bio-medical data.
-
-> Directory names are in large typeface, and filenames are in smaller
-> typeface. Only a subset of the files are shown here. Note that the
-> dates are formatted `<year>-<month>-<day>` so that they can be
-> sorted in chronological order. The source code `src/ms-analysis.c`
-> is compiled to create `bin/ms-analysis` and is documented in
-> `doc/ms-analysis.html`. The `README` files in the data directories
-> specify who downloaded the data files from what URL on what
-> date. The driver script `results/2009-01-15/runall` automatically
-> generates the three subdirectories split1, split2, and split3,
-> corresponding to three cross-validation splits. The
-> `bin/parse-sqt.py` script is called by both of the `runall` driver
-> scripts.
-
-
-```{r bioinfoproj, fig.cap="Directory structure for a sample bioinformatics project.", out.width='100%', echo=FALSE}
-knitr::include_graphics("../fig/noble-bioinfo-project.png")
-```
-
-The most important aspect of a well defined and well documented
-project directory is to enable someone unfamiliar with the
-project[^futureself] to
-
-1. understand what the project is about, what data are available, what
-   analyses were run, and what results were produced and, most
-   importantly to
-
-2. repeat the analysis over again - with new data, or changing some
-   analysis parameters.
-
-[^futureself]: That someone could be, and very likely will be your
-    future self, a couple of months or years after the analyses were
-    run.
-
-
 ### The working directory
 
 The working directory is an important concept to understand. It is the
