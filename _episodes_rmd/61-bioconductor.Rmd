@@ -18,6 +18,7 @@ source("../bin/chunk-options.R")
 
 ```{r, echo=FALSE, message=FALSE}
 library(SummarizedExperiment)
+library(tidyverse)
 rna <- read_csv("data/rnaseq.csv")
 counts <- rna %>%
   select(gene, sample, expression) %>%
