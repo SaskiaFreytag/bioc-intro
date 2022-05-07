@@ -4,12 +4,14 @@ title: "Bioconductor"
 teaching: XX
 exercises: XX
 questions:
-- "Bioconductor"
+- What is Bioconductor?
+- How can I use Bioconductor effectively for my analysis?
 objectives:
 - Give an overview of the Bioconductor project including its website
 - Introduce concepts of reproducibility, coherence, interoperability and stability
 keypoints:
-- "Tabular data in R"
+- "Bioconductor collates interoperable packages for analyses of biological data."
+- "Using biocView can help you to find packages for a specific topic."
 ---
 
 ```{r, include=FALSE}
@@ -147,9 +149,9 @@ trying to get familar with a new package.
 knitr::include_graphics("../fig/vignettes.png")
 ```
 
-### Core Bioconductor principles
+## Core Bioconductor principles
 
-The Bioconductor is organized around some core principles:
+Bioconductor is organized around some core principles:
 
 * interoperablility with existing infrastructure to facilitate reuse and
 avoid replication
@@ -162,7 +164,7 @@ While it is not absolutely necessary for the end-user to remember these, the
 core principles explain some of the idiosyncrasies of Bioconductor that you
 may come across.
 
-#### S4 classes
+### S4 classes
 
 > ## Challenge
 >
@@ -177,9 +179,8 @@ may come across.
 > {: .solution}
 {: .challenge}
 
-S4 classes allow object-oriented programming in R and thus ensure **coherence,**
-**stability, and interoperability**. In S4, certain
-classes are defined with specific accessibility functions (called methods). 
+S4 programming allows object-oriented programming in R and thus ensure **coherence,**
+**stability, and interoperability**. Object-oriented programming is a computer programming model that organizes software design around data, or objects, rather than functions and logic. An object can be defined as a data field that has unique attributes and behavior.In S4, certain classes are defined with specific accessibility functions (called methods). 
 
 ```{r}
 # These two statements will result in the same output.
@@ -204,7 +205,7 @@ colData(se) #colData is a method that allows access to the column meta data
 If you want to know more about S4 classes you can find more information in
 [these slides on their implementation in the Bioconductor package](https://bioconductor.org/packages/devel/bioc/vignettes/S4Vectors/inst/doc/S4QuickOverview.pdf).
 
-#### The release cycle
+### The release cycle
 
 Bioconductor has two releases each year, typically in April and October, where
 all packages are updated to their next version in a way that they are 
@@ -220,3 +221,155 @@ with packages being ahead of the Bioconductor release.
 2) You will need to update your Bioconductor packages twice a year (after updating R) to have all the latest versions. Refer to [this guide for updating R qnd R-Studio](https://www.r-bloggers.com/2022/01/how-to-install-and-update-r-and-rstudio/)
 and [this guide for updating Bioconductor](https://www.bioconductor.org/install/). 
 
+## Working with annotations
+
+Bioconductor provides extensive annotation resources. These can be gene centric, or
+genome centric. Annotations can be provided in packages curated by Bioconductor,
+or obtained from web-based resources.   
+
+Gene centric AnnotationDbi packages include:
+
+* Organism level: e.g. org.Mm.eg.db.
+* Platform level: e.g. hgu133plus2.db, hgu133plus2.probes, hgu133plus2.cdf.
+* System-biology level: GO.db
+Genome centric GenomicFeatures packages include
+* Transcriptome level: e.g. TxDb.Hsapiens.UCSC.hg19.knownGene, EnsDb.Hsapiens.v75.
+* Generic genome features: Can generate via GenomicFeatures
+One web-based resource accesses biomart, via the biomaRt package:
+* Query web-based ‘biomart’ resource for genes, sequence, SNPs, and etc
+
+The most popular annotation packages have been modified so that they can make use
+of a new set of methods to more easily access their contents. These four methods
+are named: `columns`, `keytypes`, `keys` and `select`. They can currently be used with all `chip`, `organism,` and `TxDb` packages along with the popular `GO.db` package.
+
+An extremely common kind of Annotation package is the so called platform based or
+chip based package type. This package is intended to make the manufacturer labels
+for a series of probes or probesets to a wide range of gene-based features. A package
+of this kind will load an `ChipDb` object. Below is a set of examples to show how you
+might use the standard 4 methods to interact with an object of this type.
+First we need to load the package:
+
+```{r}
+suppressPackageStartupMessages({
+library(hgu95av2.db)
+})
+```
+
+If we list the contents of this package, we can see that one of the many things loaded
+is an object named after the package "hgu95av2.db":
+
+```{r}
+ls("package:hgu95av2.db")
+```
+
+We can look at this object to learn more about it:
+
+```{r}
+hgu95av2.db
+```
+
+If we want to know what kinds of data are retriveable via select, then we should use
+the columns method like this:
+
+```{r}
+columns(hgu95av2.db)
+```
+
+If we are further curious to know more about those values for columns, we can consult
+the help pages. Asking about any of these values will pull up a manual page describing
+the different fields and what they mean.
+
+```{r}
+help("SYMBOL")
+```
+
+If we are curious about what kinds of fields we could potential use as keys to query
+the database, we can use the `keytypes` method. In a perfect world, this method will
+return values very similar to what was returned by columns, but in reality, some kinds
+of values make poor keys and so this list is often shorter.
+
+```{r}
+keytypes(hgu95av2.db)
+```
+
+If we want to extract some sample keys of a particular type, we can use the `keys`
+method.
+
+```{r}
+head(keys(hgu95av2.db, keytype="SYMBOL"))
+```
+
+And finally, if we have some keys, we can use `select` to extract them. By simply
+using appropriate argument values with select we can specify what keys we want to
+look up values for (keys), what we want returned back (columns) and the type of
+keys that we are passing in (keytype).
+
+```{r}
+#1st get some example keys
+k <- head(keys(hgu95av2.db,keytype="PROBEID"))
+# then call select
+select(hgu95av2.db, keys=k, columns=c("SYMBOL","GENENAME"), keytype="PROBEID")
+```
+
+
+An organism level package (an ‘org’ package) uses a central gene identifier (e.g.
+Entrez Gene id) and contains mappings between this identifier and other kinds of
+identifiers (e.g. GenBank or Uniprot accession number, RefSeq id, etc.). The name
+of an org package is always of the form org.<Ab>.<id>.db (e.g. org.Sc.sgd.db)
+where <Ab> is a 2-letter abbreviation of the organism (e.g. Sc for Saccharomyces
+cerevisiae) and <id> is an abbreviation (in lower-case) describing the type of central identifier (e.g. sgd for gene identifiers assigned by the Saccharomyces Genome
+Database, or eg for Entrez Gene ids).
+Just as the chip packages load a *ChipDb* object, the org packages will load a *OrgDb*
+object. The following exercise should acquaint you with the use of these methods in
+the context of an organism package.
+
+> ## Challenge
+>
+> Display the OrgDb object for the `org.Hs.eg.db` package.
+> Use the columns method to discover which sorts of annotations can be extracted
+> from it. Is this the same as the result from the keytypes method? Use the keytypes
+> method to find out.
+> Finally, use the keys method to extract UNIPROT identifiers and then pass those
+> keys in to the select method in such a way that you extract the gene symbol and
+> KEGG pathway information for each. Use the help system as needed to learn which
+> values to pass in to columns in order to achieve this.
+>
+> > ## Solution
+> > 
+> > 
+> > ```{r, message=FALSE}
+> > library(org.Hs.eg.db)
+> > uniKeys <- head(keys(org.Hs.eg.db, keytype="UNIPROT"))
+> > cols <- c("SYMBOL", "PATH")
+> > select(org.Hs.eg.db, keys=uniKeys, columns=cols, keytype="UNIPROT")
+> > ```
+> {: .solution}
+{: .challenge}
+
+A *TxDb* package (a ’TxDb’ package) connects a set of genomic coordinates to various
+transcript oriented features. The package can also contain Identifiers to features such
+as genes and transcripts, and the internal schema describes the relationships between
+these different elements. All TxDb containing packages follow a specific naming
+scheme that tells where the data came from as well as which build of the genome it
+comes from.
+
+> ## Challenge
+>
+> Display the TxDb object for the `TxDb.Hsapiens.UCSC.hg19.knownGene` package.
+> As before, use the columns and keytypes methods to discover which sorts of 
+> annotations can be extracted from it.
+> Use the `keys` method to extract just a few gene identifiers and then pass those keys in
+> to the `select` method in such a way that you extract the transcript ids and transcript
+> starts for each.
+>
+> > ## Solution
+> > 
+> > 
+> > ```{r, message=FALSE}
+> > library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+> > keys <- head(keys(txdb, keytype="GENEID"))
+> > cols <- c("TXID", "TXSTART")
+> > select(txdb, keys=keys, columns=cols, keytype="GENEID")
+> > ```
+> {: .solution}
+{: .challenge}

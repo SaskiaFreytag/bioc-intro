@@ -59,8 +59,11 @@ We have already downloaded the data and it can be found in the directory
 
 You are now ready to load the data:
 
+```{r, include=FALSE}
+rna <- read.csv("data/rnaseq.csv")
+```
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 rna <- read.csv("course-data/data/GSE96870/rnaseq.csv")
 ```
 
@@ -99,7 +102,13 @@ the main `read.table()` function with different arguments.  As such,
 the data above could have also been loaded by using `read.table()`
 with the separation argument as `,`. The code is as follows:
 
-```{r, eval = TRUE}
+```{r, include=FALSE}
+rna <- read.table(file = "data/rnaseq.csv",
+                  sep = ",",
+                  header = TRUE)
+```
+
+```{r, eval = FALSE}
 rna <- read.table(file = "course-data/data/GSE96870/rnaseq.csv",
                   sep = ",",
                   header = TRUE)
