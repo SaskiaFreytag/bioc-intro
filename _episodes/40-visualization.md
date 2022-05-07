@@ -21,7 +21,6 @@ keypoints:
 
 
 
-
 ## Data Visualization
 
 We start by loading the required packages. **`ggplot2`** is included
@@ -156,7 +155,11 @@ rna_plot + geom_histogram()
 ~~~
 {: .language-r}
 
+<<<<<<< HEAD
 > ## Homework Challenge
+=======
+> ## Challenge
+>>>>>>> main
 >
 > You have probably noticed an automatic message that appears when
 > drawing the histogram:
@@ -425,12 +428,31 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 > > 
 > > ~~~
 > > library("hexbin")
+> > ~~~
+> > {: .language-r}
 > > 
+> > 
+> > 
+> > ~~~
+> > Error in library("hexbin"): there is no package called 'hexbin'
+> > ~~~
+> > {: .error}
+> > 
+> > 
+> > 
+> > ~~~
 > > ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
 > >   geom_hex() +
 > >   geom_abline(intercept = 0)
 > > ~~~
 > > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Warning: Computation failed in `stat_binhex()`:
+> > ~~~
+> > {: .warning}
 > > 
 > > <img src="../fig/rmd-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 > {: .solution}
@@ -556,16 +578,6 @@ ggplot(data = rna,
 > > 
 > > <img src="../fig/rmd-boxplot-color-time-2.png" title="plot of chunk boxplot-color-time" alt="plot of chunk boxplot-color-time" width="612" style="display: block; margin: auto;" />
 > {: .solution}
-{: .challenge}
-
-> ## Homework Challenge
->
-> Boxplots are useful summaries, but hide the *shape* of the
-> distribution. For example, if the distribution is bimodal, we would
-> not see it in a boxplot. An alternative to the boxplot is the violin
-> plot, where the shape (of the density of points) is drawn.
->
-> - Replace the box plot with a violin plot; see `geom_violin()`. Fill in the violins according to the time with the argument `fill`.
 {: .challenge}
 
 > ## Homework Challenge
@@ -906,9 +918,14 @@ ggplot(rna, aes(x = expression_log)) +
 
 > ## Challenge
 >
+<<<<<<< HEAD
 > With all of this information in hand, try to create the most ugly plot that
 > you can think about. You can use one  of the plots generated in this exercise 
 > as a starting point. Use the RStudio [**`ggplot2`**
+=======
+> With all of this information in hand, please take another five minutes
+> to either improve one of the plots generated in this exercise or
+> create a beautiful graph of your own. Use the RStudio [**`ggplot2`**
 > cheat
 > sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 > for inspiration. Here are some ideas:
@@ -1103,6 +1120,12 @@ ggsave("fig_output/combo_plot_chromosome_sex.png", combo_plot,
 
 Note: The parameters `width` and `height` also determine the font size in the saved plot.
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> main
 ## Other packages for visualisation
 
 `ggplot2` is a very powerful package that fits very nicely in our

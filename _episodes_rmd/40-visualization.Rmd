@@ -15,7 +15,6 @@ keypoints:
 - "Visualization in R"
 ---
 
-
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 ```
@@ -137,7 +136,11 @@ rna_plot <- ggplot(data = rna,
 rna_plot + geom_histogram()
 ```
 
+<<<<<<< HEAD
 > ## Homework Challenge
+=======
+> ## Challenge
+>>>>>>> main
 >
 > You have probably noticed an automatic message that appears when
 > drawing the histogram:
@@ -429,16 +432,6 @@ ggplot(data = rna,
 {: .challenge}
 
 > ## Homework Challenge
->
-> Boxplots are useful summaries, but hide the *shape* of the
-> distribution. For example, if the distribution is bimodal, we would
-> not see it in a boxplot. An alternative to the boxplot is the violin
-> plot, where the shape (of the density of points) is drawn.
->
-> - Replace the box plot with a violin plot; see `geom_violin()`. Fill in the violins according to the time with the argument `fill`.
-{: .challenge}
-
-> ## Homework Challenge
 > - Modify the violin plot to fill in the violins by `sex`.
 {: .challenge}
 
@@ -687,9 +680,14 @@ ggplot(rna, aes(x = expression_log)) +
 
 > ## Challenge
 >
+<<<<<<< HEAD
 > With all of this information in hand, try to create the most ugly plot that
 > you can think about. You can use one  of the plots generated in this exercise 
 > as a starting point. Use the RStudio [**`ggplot2`**
+=======
+> With all of this information in hand, please take another five minutes
+> to either improve one of the plots generated in this exercise or
+> create a beautiful graph of your own. Use the RStudio [**`ggplot2`**
 > cheat
 > sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 > for inspiration. Here are some ideas:
@@ -842,6 +840,19 @@ ggsave("fig_output/combo_plot_chromosome_sex.png", combo_plot,
 
 Note: The parameters `width` and `height` also determine the font size in the saved plot.
 
+<<<<<<< HEAD
+=======
+
+```{r final-challenge, eval=FALSE, purl=TRUE, echo=FALSE}
+### Final plotting challenge:
+##  With all of this information in hand, please take another five
+##  minutes to either improve one of the plots generated in this
+##  exercise or create a beautiful graph of your own. Use the RStudio
+##  ggplot2 cheat sheet for inspiration:
+##  https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf
+```
+
+>>>>>>> main
 ## Other packages for visualisation
 
 `ggplot2` is a very powerful package that fits very nicely in our

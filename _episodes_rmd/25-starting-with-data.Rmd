@@ -57,6 +57,7 @@ columns represent:
 We have already downloaded the data and it can be found in the directory
 `course-data/data/GSE96870/`. 
 
+
 You are now ready to load the data:
 
 ```{r, include=FALSE}
@@ -415,6 +416,13 @@ plot(sex)
 >        feel = c("furry", "squishy", "spiny"),
 >        weight = c(45, 8 1.1, 0.8))
 > ```
+> > ## Solution
+> >
+> > - missing quotations around the names of the animals
+> > - missing one entry in the "feel" column (probably for one of the furry animals)
+> > - missing one comma in the weight column
+> >
+> {: .solution}
 {: .challenge}
 
 
@@ -480,6 +488,7 @@ m
 > Using the function `installed.packages()`, create a `character` matrix
 > containing the information about all packages currently installed on
 > your computer. Explore it.
+>
 {: .challenge}
 
 It is often useful to create large random data matrices as test
@@ -492,6 +501,7 @@ data drawn from a normal distribution of mean 0 and standard deviation
 >
 > Construct a matrix of dimension 1000 by 3 of normally distributed data
 > (mean 0, standard deviation 1)
+>
 {: .challenge}
 
 ## Summary of R objects

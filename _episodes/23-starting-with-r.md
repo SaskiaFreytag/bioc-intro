@@ -658,6 +658,28 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > combined_logical <- c(num_logical, char_logical)
 > ~~~
 > {: .language-r}
+<<<<<<< HEAD
+=======
+> > ## Solution
+> >
+> > Only one. There is no memory of past data types, and the coercion
+> > happens the first time the vector is evaluated. Therefore, the `TRUE`
+> > in `num_logical` gets converted into a `1` before it gets converted
+> > into `"1"` in `combined_logical`.
+> >
+> >~~~
+> > combined_logical
+> >~~~
+> >{: .language-r}
+> >
+> >
+> >
+> >~~~
+> >[1] "1"    "2"    "3"    "1"    "a"    "b"    "c"    "TRUE"
+> >~~~
+> >{: .output}
+> {: .solution}
+>>>>>>> main
 {: .challenge}
 
 
@@ -668,6 +690,7 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > whereby some types get preferentially coerced into other types. Can
 > you draw a diagram that represents the hierarchy of how these data
 > types are coerced?
+>
 {: .challenge}
 
 
@@ -926,6 +949,7 @@ molecules[molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")]
 > ## Homework Challenge:
 >
 > Can you figure out why `"four" > "five"` returns `TRUE`?
+>
 {: .challenge}
 
 
@@ -1133,6 +1157,7 @@ heights[complete.cases(heights)]
 > {: .language-r}
 > 2. Use the function `median()` to calculate the median of the `heights` vector.
 > 3. Use R to figure out how many people in the set are taller than 67 inches.
+>
 {: .challenge}
 
 
@@ -1196,6 +1221,7 @@ There are similar constructors for characters and logicals, named
 > ## Homework Challenge:
 >
 > What are the defaults for character and logical vectors?
+>
 {: .challenge}
 
 ### Replicate elements
@@ -1256,6 +1282,7 @@ rep(c(1, 2, 3), 5)
 > What if we wanted to repeat the values 1, 2 and 3 five times, but
 > obtain five 1s, five 2s and five 3s in that order? There are two
 > possibilities - see `?rep` or `?sort` for help.
+>
 {: .challenge}
 
 ### Sequence generation
@@ -1410,6 +1437,7 @@ sample(1:5, 10, replace = TRUE)
 >   random draw. Observe that you now get the same random draws.
 >
 > - Repeat by setting a different seed.
+>
 {: .challenge}
 
 ### Homework reading: Drawing samples from a normal distribution
@@ -1419,7 +1447,7 @@ sample from a normal distribution. Two normal distributions of means 0
 and 100 and standard deviations 1 and 5, noted noted *N(0, 1)* and
 *N(100, 5)*, are shown below
 
-<img src="../fig/rmd-unnamed-chunk-51-1.png" title="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." alt="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-52-1.png" title="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." alt="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." width="864" style="display: block; margin: auto;" />
 
 The three arguments, `n`, `mean` and `sd`, define the size of the
 sample, and the parameters of the normal distribution, i.e the mean
