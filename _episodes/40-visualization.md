@@ -21,7 +21,10 @@ keypoints:
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 ## Data Visualization
 
 We start by loading the required packages. **`ggplot2`** is included
@@ -33,12 +36,33 @@ library("tidyverse")
 ~~~
 {: .language-r}
 
+<<<<<<< HEAD
+=======
+
+
+~~~
+Warning: package 'tidyverse' was built under R version 4.0.2
+~~~
+{: .warning}
+
+
+
+~~~
+Warning: package 'ggplot2' was built under R version 4.0.2
+~~~
+{: .warning}
+
+>>>>>>> main
 If not still in the workspace, load the data we saved in the previous lesson.
 
 
 
 ~~~
+<<<<<<< HEAD
 rna <- read.csv("course-data/data/GSE96870/rnaseq.csv")
+=======
+rna <- read.csv("data/rnaseq.csv")
+>>>>>>> main
 ~~~
 {: .language-r}
 
@@ -79,11 +103,20 @@ ggplot graphics are built step by step by adding new elements. Adding
 layers in this fashion allows for extensive flexibility and
 customization of plots.
 
+<<<<<<< HEAD
 > The idea behind the Grammar of Graphics it is that you can build every
 graph from the same 3 components: (1) a data set, (2) a coordinate system,
 and (3) geoms — i.e. visual marks that represent data points [^three_comp_ggplot2].
 
 [^three_comp_ggplot2]: Source: [Data Visualization Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf).
+=======
+> The idea behind the Grammar of Graphics it is that you can build every 
+graph from the same 3 components: (1) a data set, (2) a coordinate system,
+and (3) geoms — i.e. visual marks that represent data points [^three_comp_ggplot2].
+
+[^three_comp_ggplot2]: Source: [Data Visualization Cheat
+Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf).
+>>>>>>> main
 
 To build a ggplot, we will use the following basic template that can
 be used for different types of plots:
@@ -156,19 +189,55 @@ rna_plot + geom_histogram()
 ~~~
 {: .language-r}
 
+<<<<<<< HEAD
 > ## Homework Challenge
 >
 > You have probably noticed an automatic message that appears when
 > drawing the histogram:
 >
+=======
+> ## Challenge
+> 
+> You have probably noticed an automatic message that appears when
+> drawing the histogram:
+> 
+>>>>>>> main
 > 
 > ~~~
 > `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 > ~~~
 > {: .output}
+<<<<<<< HEAD
 >
 > Change the arguments `bins` or `binwidth` of `geom_histogram()` to
 > change the number or width of the bins.
+=======
+> 
+> Change the arguments `bins` or `binwidth` of `geom_histogram()` to
+> change the number or width of the bins.
+> 
+> > ## Solution
+> > 
+> > 
+> > ~~~
+> > # change bins
+> > ggplot(rna, aes(x = expression)) +
+> >     geom_histogram(bins = 15)
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+> > 
+> > ~~~
+> > # change binwidth
+> > ggplot(rna, aes(x = expression)) +
+> >     geom_histogram(binwidth = 2000)
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-5-2.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+> {: .solution}
+>>>>>>> main
 {: .challenge}
 
 We can observe here that the data are skewed to the right. We can
@@ -205,13 +274,18 @@ ggplot(rna, aes(x = expression_log)) + geom_histogram()
 From now on we will work on the log-transformed expression values.
 
 > ## Challenge
+<<<<<<< HEAD
 >
+=======
+> 
+>>>>>>> main
 > Another way to visualize this transformation is to consider the scale
 > of the observations. For example, it may be worth changing the scale
 > of the axis to better distribute the observations in the space of the
 > plot. Changing the scale of the axes is done similarly to
 > adding/modifying other components (i.e., by incrementally adding
 > commands). Try making this modification:
+<<<<<<< HEAD
 >
 > * Represent the un-transformed expression on the log10 scale; see
 >   `scale_x_log10()`. Compare it with the previous graph. Why do you
@@ -222,6 +296,18 @@ From now on we will work on the log-transformed expression values.
 > > ~~~
 > > ggplot(data = rna,mapping = aes(x = expression))+
 > >   geom_histogram() +
+=======
+> 
+> * Represent the un-transformed expression on the log10 scale; see
+>   `scale_x_log10()`. Compare it with the previous graph. Why do you
+>   now have warning messages appearing?
+> 
+> > ## Solution
+> > 
+> > ~~~
+> > ggplot(data = rna,mapping = aes(x = expression))+ 
+> >   geom_histogram() + 
+>>>>>>> main
 > >   scale_x_log10()
 > > ~~~
 > > {: .language-r}
@@ -247,7 +333,11 @@ From now on we will work on the log-transformed expression values.
 > > ~~~
 > > {: .warning}
 > > 
+<<<<<<< HEAD
 > > <img src="../fig/rmd-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+=======
+> > <img src="../fig/rmd-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+>>>>>>> main
 > {: .solution}
 {: .challenge}
 
@@ -396,7 +486,11 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 <img src="../fig/rmd-color-by-gene_biotype3-1.png" title="plot of chunk color-by-gene_biotype3" alt="plot of chunk color-by-gene_biotype3" width="612" style="display: block; margin: auto;" />
 
 > ## Challenge
+<<<<<<< HEAD
 >
+=======
+> 
+>>>>>>> main
 > Scatter plots can be useful exploratory tools for small datasets. For
 > data sets with large numbers of observations, such as the
 > `rna_fc` data set, overplotting of points can be a
@@ -404,6 +498,7 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 > is to use hexagonal binning of observations. The plot space is
 > tessellated into hexagons. Each hexagon is assigned a color based on
 > the number of observations that fall within its boundaries.
+<<<<<<< HEAD
 >
 > - To use hexagonal binning in `ggplot2`, first install the R package
 >   `hexbin` from CRAN and load it.
@@ -416,28 +511,67 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 >
 > > ## Solution
 > >
+=======
+> 
+> - To use hexagonal binning in `ggplot2`, first install the R package
+>   `hexbin` from CRAN and load it.
+> 
+> - Then use the `geom_hex()` function to produce the hexbin figure.
+> 
+> - What are the relative strengths and weaknesses of a hexagonal bin
+>   plot compared to a scatter plot? Examine the above scatter plot and
+>   compare it with the hexagonal bin plot that you created.
+> 
+> > ## Solution
+> > 
+>>>>>>> main
 > > 
 > > ~~~
 > > install.packages("hexbin")
 > > ~~~
 > > {: .language-r}
+<<<<<<< HEAD
 > >
 > > 
 > > ~~~
 > > library("hexbin")
 > > 
+=======
+> > 
+> > 
+> > ~~~
+> > library("hexbin")
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Warning: package 'hexbin' was built under R version 4.0.2
+> > ~~~
+> > {: .warning}
+> > 
+> > 
+> > 
+> > ~~~
+>>>>>>> main
 > > ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
 > >   geom_hex() +
 > >   geom_abline(intercept = 0)
 > > ~~~
 > > {: .language-r}
 > > 
+<<<<<<< HEAD
 > > <img src="../fig/rmd-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+=======
+> > <img src="../fig/rmd-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+>>>>>>> main
 > {: .solution}
 {: .challenge}
 
 
 > ## Challenge
+<<<<<<< HEAD
 >
 > Use what you just learned to create a scatter plot of `expression_log`
 > over `sample` from the `rna` dataset with the time showing in
@@ -445,6 +579,15 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 >
 > > ## Solution
 > >
+=======
+> 
+> Use what you just learned to create a scatter plot of `expression_log`
+> over `sample` from the `rna` dataset with the time showing in
+> different colors. Is this a good way to show this type of data?
+> 
+> > ## Solution
+> > 
+>>>>>>> main
 > > 
 > > ~~~
 > > ggplot(data = rna, mapping = aes(y = expression_log, x = sample)) +
@@ -452,7 +595,11 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 > > ~~~
 > > {: .language-r}
 > > 
+<<<<<<< HEAD
 > > <img src="../fig/rmd-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+=======
+> > <img src="../fig/rmd-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+>>>>>>> main
 > {: .solution}
 {: .challenge}
 
@@ -488,21 +635,35 @@ ggplot(data = rna,
 > ## Challenge
 > Note how the boxplot layer is in front of the jitter layer? What do you
 > need to change in the code to put the boxplot below the points?
+<<<<<<< HEAD
 >
 > > ## Solution
 > > We should switch the order of these two geoms:
 > >
+=======
+> 
+>  ## Solution
+> > We should switch the order of these two geoms:
+> > 
+>>>>>>> main
 > > 
 > > ~~~
 > > ggplot(data = rna,
 > >          mapping = aes(y = expression_log, x = sample)) +
 > >   geom_boxplot(alpha = 0) +
+<<<<<<< HEAD
 > >   geom_jitter(alpha = 0.2, color = "tomato")
+=======
+> >   geom_jitter(alpha = 0.2, color = "tomato") 
+>>>>>>> main
 > > ~~~
 > > {: .language-r}
 > > 
 > > <img src="../fig/rmd-boxplot-with-points2-1.png" title="plot of chunk boxplot-with-points2" alt="plot of chunk boxplot-with-points2" width="612" style="display: block; margin: auto;" />
+<<<<<<< HEAD
 > >
+=======
+>>>>>>> main
 > {: .solution}
 {: .challenge}
 
@@ -521,6 +682,7 @@ ggplot(data = rna,
 <img src="../fig/rmd-boxplot-xaxis-rotated-1.png" title="plot of chunk boxplot-xaxis-rotated" alt="plot of chunk boxplot-xaxis-rotated" width="612" style="display: block; margin: auto;" />
 
 > ## Challenge
+<<<<<<< HEAD
 >
 > Add color to the data points on your boxplot according to the duration of the infection (`time`).
 >
@@ -529,6 +691,16 @@ ggplot(data = rna,
 >
 > > ## Solution
 > >
+=======
+> 
+> Add color to the data points on your boxplot according to the duration of the infection (`time`).
+> 
+> *Hint:* Check the class for `time`. Consider changing the class of
+> `time` from integer to factor directly in the ggplot mapping. Why does this change how R makes the graph?
+> 
+> > ## Solution
+> > 
+>>>>>>> main
 > > 
 > > ~~~
 > > # time as integer
@@ -558,18 +730,58 @@ ggplot(data = rna,
 > {: .solution}
 {: .challenge}
 
+<<<<<<< HEAD
 > ## Homework Challenge
 >
+=======
+> ## Challenge
+> 
+>>>>>>> main
 > Boxplots are useful summaries, but hide the *shape* of the
 > distribution. For example, if the distribution is bimodal, we would
 > not see it in a boxplot. An alternative to the boxplot is the violin
 > plot, where the shape (of the density of points) is drawn.
+<<<<<<< HEAD
 >
 > - Replace the box plot with a violin plot; see `geom_violin()`. Fill in the violins according to the time with the argument `fill`.
 {: .challenge}
 
 > ## Homework Challenge
 > - Modify the violin plot to fill in the violins by `sex`.
+=======
+> 
+> - Replace the box plot with a violin plot; see `geom_violin()`. Fill in the violins according to the time with the argument `fill`.
+> 
+> > ## Solution
+> > 
+> > ~~~
+> > ggplot(data = rna,
+> >          mapping = aes(y = expression_log, x = sample)) +
+> >   geom_violin(aes(fill = as.factor(time))) +
+> >   theme(axis.text.x = element_text(angle = 90,  hjust = 0.5, vjust = 0.5))
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+> {: .solution}
+{: .challenge}
+
+> ## Challenge
+> - Modify the violin plot to fill in the violins by `sex`.
+> 
+> > ## Solution
+> > 
+> > ~~~
+> > ggplot(data = rna,
+> >          mapping = aes(y = expression_log, x = sample)) +
+> >   geom_violin(aes(fill = sex)) +
+> >   theme(axis.text.x = element_text(angle = 90,  hjust = 0.5, vjust = 0.5))
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+> {: .solution}
+>>>>>>> main
 {: .challenge}
 
 ## Line plots
@@ -595,8 +807,13 @@ mean_exp_by_time <- sub_rna %>%
 
 
 ~~~
+<<<<<<< HEAD
 `summarise()` has grouped output by 'gene'. You can override using the
 `.groups` argument.
+=======
+`summarise()` has grouped output by 'gene'. You can override using the `.groups`
+argument.
+>>>>>>> main
 ~~~
 {: .output}
 
@@ -617,7 +834,11 @@ the aesthetic function to include `group = gene`:
 
 
 ~~~
+<<<<<<< HEAD
 ggplot(data = mean_exp_by_time,
+=======
+ggplot(data = mean_exp_by_time, 
+>>>>>>> main
        mapping = aes(x = time, y = mean_exp, group = gene)) +
   geom_line()
 ~~~
@@ -720,12 +941,21 @@ ggplot(data = mean_exp_by_time_sex,
 
 
 > ## Challenge
+<<<<<<< HEAD
 >
 > Use what you just learned to create a plot that depicts how the average expression
 > of each chromosome changes through the duration of infection.
 >
 > > ## Solution
 > >
+=======
+> 
+> Use what you just learned to create a plot that depicts how the average expression
+> of each chromosome changes through the duration of infection.
+> 
+> > ## Solution
+> > 
+>>>>>>> main
 > > 
 > > ~~~
 > > mean_exp_by_chromosome <- rna %>%
@@ -829,7 +1059,11 @@ ggplot(data = mean_exp_by_time_sex,
   theme(panel.grid = element_blank()) +
   labs(title = "Mean gene expression by duration of the infection",
        x = "Duration of the infection (in days)",
+<<<<<<< HEAD
        y = "Mean gene expression")
+=======
+       y = "Mean gene expression")  
+>>>>>>> main
 ~~~
 {: .language-r}
 
@@ -905,6 +1139,7 @@ ggplot(rna, aes(x = expression_log)) +
 <img src="../fig/rmd-mean_exp-time-with-right-labels-xfont-1.png" title="plot of chunk mean_exp-time-with-right-labels-xfont" alt="plot of chunk mean_exp-time-with-right-labels-xfont" width="612" style="display: block; margin: auto;" />
 
 > ## Challenge
+<<<<<<< HEAD
 >
 > With all of this information in hand, try to create the most ugly plot that
 > you can think about. You can use one  of the plots generated in this exercise 
@@ -913,10 +1148,99 @@ ggplot(rna, aes(x = expression_log)) +
 > sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 > for inspiration. Here are some ideas:
 >
+=======
+> 
+> With all of this information in hand, please take another five minutes
+> to either improve one of the plots generated in this exercise or
+> create a beautiful graph of your own. Use the RStudio [**`ggplot2`**
+> cheat
+> sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+> for inspiration. Here are some ideas:
+> 
+>>>>>>> main
 > - See if you can change the thickness of the lines.
 > - Can you find a way to change the name of the legend? What about its labels? (hint: look for a ggplot function starting with `scale_`)
 > - Try using a different color palette or manually specifying the colors for the lines (see
 >   [http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)).
+<<<<<<< HEAD
+=======
+> 
+> > ## Solution
+> > For example, based on this plot:
+> > 
+> > 
+> > ~~~
+> > ggplot(data = mean_exp_by_time_sex,
+> >        mapping = aes(x = time, y = mean_exp, color = sex)) +
+> >   geom_line() +
+> >   facet_wrap(~ gene, scales = "free_y") +
+> >   theme_bw() +
+> >   theme(panel.grid = element_blank())
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
+> > 
+> > 
+> > We can customize it the following ways:
+> > 
+> > ~~~
+> > # change the thickness of the lines
+> > ggplot(data = mean_exp_by_time_sex,
+> >        mapping = aes(x = time, y = mean_exp, color = sex)) +
+> >   geom_line(size=1.5) +
+> >   facet_wrap(~ gene, scales = "free_y") +
+> >   theme_bw() +
+> >   theme(panel.grid = element_blank())
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
+> > 
+> > ~~~
+> > # change the name of the legend and the labels
+> > ggplot(data = mean_exp_by_time_sex,
+> >        mapping = aes(x = time, y = mean_exp, color = sex)) +
+> >   geom_line() +
+> >   facet_wrap(~ gene, scales = "free_y") +
+> >   theme_bw() +
+> >   theme(panel.grid = element_blank()) +
+> >   scale_color_discrete(name = "Gender", labels = c("F", "M"))
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-14-2.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
+> > 
+> > ~~~
+> > # using a different color palette
+> > ggplot(data = mean_exp_by_time_sex,
+> >        mapping = aes(x = time, y = mean_exp, color = sex)) +
+> >   geom_line() +
+> >   facet_wrap(~ gene, scales = "free_y") +
+> >   theme_bw() +
+> >   theme(panel.grid = element_blank()) +
+> >   scale_color_brewer(name = "Gender", labels = c("F", "M"), palette = "Dark2")
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-14-3.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
+> > 
+> > ~~~
+> > # manually specifying the colors
+> > ggplot(data = mean_exp_by_time_sex,
+> >        mapping = aes(x = time, y = mean_exp, color = sex)) +
+> >   geom_line() +
+> >   facet_wrap(~ gene, scales = "free_y") +
+> >   theme_bw() +
+> >   theme(panel.grid = element_blank()) +
+> >   scale_color_manual(name = "Gender",  labels = c("F", "M"), 
+> >                      values = c("royalblue", "deeppink"))
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-14-4.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
+> {: .solution}
+>>>>>>> main
 {: .challenge}
 
 ## Composing plots
@@ -982,11 +1306,31 @@ install.packages("patchwork")
 
 ~~~
 library("patchwork")
+<<<<<<< HEAD
+=======
+~~~
+{: .language-r}
+
+
+
+~~~
+Warning: package 'patchwork' was built under R version 4.0.2
+~~~
+{: .warning}
+
+
+
+~~~
+>>>>>>> main
 count_gene_chromosome + exp_boxplot_sex
 ~~~
 {: .language-r}
 
+<<<<<<< HEAD
 <img src="../fig/rmd-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+=======
+<img src="../fig/rmd-unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
+>>>>>>> main
 
 ~~~
 ## or count_gene_chromosome | exp_boxplot_sex
@@ -999,7 +1343,11 @@ count_gene_chromosome / exp_boxplot_sex
 ~~~
 {: .language-r}
 
+<<<<<<< HEAD
 <img src="../fig/rmd-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+=======
+<img src="../fig/rmd-unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="612" style="display: block; margin: auto;" />
+>>>>>>> main
 
 We can combine further control the layout of the final composition
 with `plot_layout` to create more complex layouts:
@@ -1010,7 +1358,11 @@ count_gene_chromosome + exp_boxplot_sex + plot_layout(ncol = 1)
 ~~~
 {: .language-r}
 
+<<<<<<< HEAD
 <img src="../fig/rmd-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
+=======
+<img src="../fig/rmd-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
+>>>>>>> main
 
 
 ~~~
@@ -1021,7 +1373,11 @@ count_gene_chromosome +
 ~~~
 {: .language-r}
 
+<<<<<<< HEAD
 <img src="../fig/rmd-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
+=======
+<img src="../fig/rmd-unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="612" style="display: block; margin: auto;" />
+>>>>>>> main
 
 The last plot can also be created using the `|` and `/` composers:
 
@@ -1033,7 +1389,11 @@ count_gene_chromosome /
 ~~~
 {: .language-r}
 
+<<<<<<< HEAD
 <img src="../fig/rmd-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
+=======
+<img src="../fig/rmd-unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" width="612" style="display: block; margin: auto;" />
+>>>>>>> main
 
 Learn more about `patchwork` on its
 [webpage](https://patchwork.data-imaginist.com/) or in this
@@ -1103,6 +1463,12 @@ ggsave("fig_output/combo_plot_chromosome_sex.png", combo_plot,
 
 Note: The parameters `width` and `height` also determine the font size in the saved plot.
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> main
 ## Other packages for visualisation
 
 `ggplot2` is a very powerful package that fits very nicely in our
@@ -1172,3 +1538,7 @@ faceting. `lattice` however isn't based on the grammar of graphics
 and has a more convoluted interface.
 
 A good reference for the `lattice` package is @latticebook.
+<<<<<<< HEAD
+=======
+
+>>>>>>> main

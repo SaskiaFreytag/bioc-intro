@@ -532,6 +532,7 @@ sessionInfo()
 
 
 ~~~
+<<<<<<< HEAD
 R version 4.1.3 (2022-03-10)
 Platform: aarch64-apple-darwin20 (64-bit)
 Running under: macOS Monterey 12.2.1
@@ -542,16 +543,36 @@ LAPACK: /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRlap
 
 locale:
 [1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
+=======
+R version 4.0.1 (2020-06-06)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS  10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+
+locale:
+[1] C
+>>>>>>> main
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
+<<<<<<< HEAD
 [1] knitr_1.39
 
 loaded via a namespace (and not attached):
 [1] compiler_4.1.3 magrittr_2.0.3 tools_4.1.3    stringi_1.7.6  highr_0.9     
 [6] stringr_1.4.0  xfun_0.30      evaluate_0.15 
+=======
+[1] knitr_1.36
+
+loaded via a namespace (and not attached):
+[1] compiler_4.0.1 magrittr_2.0.1 tools_4.0.1    stringi_1.7.5  highr_0.9     
+[6] stringr_1.4.0  xfun_0.28      evaluate_0.14 
+>>>>>>> main
 ~~~
 {: .output}
 
