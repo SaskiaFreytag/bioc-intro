@@ -1,3 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
 *.pyc
 *~
 .DS_Store
@@ -5,8 +9,6 @@
 .sass-cache
 .jekyll-cache/
 .jekyll-metadata
-__pycache__
-_site
 .Rproj.user
 .Rhistory
 .RData

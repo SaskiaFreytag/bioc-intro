@@ -23,7 +23,7 @@ keypoints:
 
 
 
-# Creating objects in R
+## Creating objects in R
 
 You can get output from R simply by typing math in the console:
 
@@ -79,7 +79,7 @@ keystroke in a PC, while typing <kbd>Option</kbd> + <kbd>-</kbd> (push
 <kbd>Option</kbd> at the same time as the <kbd>-</kbd> key) does the
 same in a Mac.
 
-## Naming variables {-}
+### Naming variables {-}
 
 Objects can be given any name such as `x`, `current_temperature`, or
 `subject_id`. You want your object names to be explicit and not too
@@ -207,7 +207,7 @@ weight_kg <- 100
 {: .challenge}
 
 
-# Comments
+## Comments
 
 The comment character in R is `#`, anything to the right of a `#` in a
 script will be ignored by R. It is useful to leave notes, and
@@ -237,7 +237,7 @@ press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd>.
 {: .challenge}
 
 
-# Functions and their arguments
+## Functions and their arguments
 
 Functions are "canned scripts" that automate more complicated sets of commands
 including operations assignments, etc. Many functions are predefined, or can be
@@ -363,13 +363,15 @@ It's good practice to put the non-optional arguments (like the number you're
 rounding) first in your function call, and to specify the names of all optional
 arguments.  If you don't, someone reading your code might have to look up the
 definition of a function with unfamiliar arguments to understand what you're
-doing.
+doing. By specifying the name of the arguments you are also safeguarding 
+against possible future changes in the function interface, which may 
+potentially add new arguments in between the existing ones. 
 
-# Vectors and data types
+## Vectors and data types
 
 A vector is the most common and basic data type in R, and is pretty much
-the workhorse of R. A vector is composed by a series of values, which can be
-either numbers or characters. We can assign a series of values to a vector using
+the workhorse of R. A vector is composed by a series of values, such as 
+numbers or characters. We can assign a series of values to a vector using
 the `c()` function. For example we can create a vector of animal weights and assign
 it to a new object `weight_g`:
 
@@ -573,7 +575,7 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > tricky <- c(1, 2, 3, "4")
 > ~~~
 > {: .language-r}
-> > Solution
+> > ## Solution
 > >
 > > 
 > > ~~~
@@ -636,7 +638,7 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > ## Challenge:
 >
 > Why do you think it happens?
-> > Solution
+> > ## Solution
 > > Vectors can be of only one data type. R tries to convert (coerce)
 > > the content of this vector to find a *common denominator* that
 > > doesn't lose any information.
@@ -644,7 +646,7 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 {: .challenge}
 
 
-> ## Challenge:
+> ## Homework Challenge:
 >
 > How many values in `combined_logical` are `"TRUE"` (as a character)
 > in the following example:
@@ -656,6 +658,27 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > combined_logical <- c(num_logical, char_logical)
 > ~~~
 > {: .language-r}
+<<<<<<< HEAD
+{: .challenge}
+
+
+> ## Homework Challenge:
+>
+> In R, we call converting objects from one class into another class
+> _coercion_. These conversions happen according to a hierarchy,
+> whereby some types get preferentially coerced into other types. Can
+> you draw a diagram that represents the hierarchy of how these data
+> types are coerced?
+{: .challenge}
+
+
+
+
+## Subsetting vectors
+
+If we want to extract one or several values from a vector, we must
+provide one or several indices in square brackets. For instance:
+=======
 > > Solution
 > >
 > > Only one. There is no memory of past data types, and the coercion
@@ -691,6 +714,7 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > >Error: attempt to use zero-length variable name
 > >~~~
 > >{: .error}
+>>>>>>> main
 
 
 ~~~
@@ -740,7 +764,7 @@ molecules[-c(1, 3)] ## all but 1st/3rd ones
 molecules[c(-1, -3)] ## all but 1st/3rd ones
 ```
 
-# Conditional subsetting
+## Conditional subsetting
 
 Another common way of subsetting is by using a logical vector. `TRUE` will
 select the element with the same index, while `FALSE` will not:
@@ -807,13 +831,25 @@ A common task is to search for certain strings in a vector.  One could
 use the "or" operator `|` to test for equality to multiple values, but
 this can quickly become tedious. The function `%in%` allows you to
 test if any of the elements of a search vector are found:
+<<<<<<< HEAD
+
+
+~~~
+molecules <- c("dna", "rna", "protein", "peptide")
+molecules[molecules == "rna" | molecules == "dna"] # returns both rna and dna
+=======
+>>>>>>> main
 ~~~
 {: .language-r}
 
 
 
 ~~~
+<<<<<<< HEAD
+[1] "dna" "rna"
+=======
 Error: attempt to use zero-length variable name
+>>>>>>> main
 ~~~
 {: .error}
 
@@ -821,8 +857,21 @@ Error: attempt to use zero-length variable name
 molecules <- c("dan", "rna", "protein", "peptide")
 molecules[molecules == "rna" | molecules == "dna"] # returns both rna and dna
 molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")
+<<<<<<< HEAD
+~~~
+{: .language-r}
+
+
+
+~~~
+[1]  TRUE  TRUE FALSE  TRUE
+~~~
+{: .output}
+
+=======
 molecules[molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")]
 ```
+>>>>>>> main
 
 
 > ## Challenge:
@@ -836,6 +885,25 @@ molecules[molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")]
 
 
 ~~~
+<<<<<<< HEAD
+[1] "dna"     "rna"     "peptide"
+~~~
+{: .output}
+
+
+> ## Homework Challenge:
+>
+> Can you figure out why `"four" > "five"` returns `TRUE`?
+{: .challenge}
+
+
+## Names
+
+It is possible to name each element of a vector. The code chunk below
+show a initial vector without any names, how names are set, and
+retrieved.
+
+=======
 Error: attempt to use zero-length variable name
 ~~~
 {: .error}
@@ -865,6 +933,7 @@ Error: attempt to use zero-length variable name
 > > Error: attempt to use zero-length variable name
 > > ~~~
 > > {: .error}
+>>>>>>> main
 
 ~~~
 x <- c(1, 5, 3, 5, 10)
@@ -890,7 +959,7 @@ x[c(1, 3)]
 x[c("A", "C")]
 ```
 
-# Missing data
+## Missing data
 
 As R was designed to analyze datasets, it includes the concept of
 missing data (which is uncommon in other programming
@@ -958,16 +1027,24 @@ heights[complete.cases(heights)]
 
 
 
+<<<<<<< HEAD
+> ## Homework Challenge:
+>
+> 1. Using this vector of heights in inches, create a new vector with the NAs removed.
+=======
 ~~~
 Error: attempt to use zero-length variable name
 ~~~
 {: .error}
+>>>>>>> main
 > 
 > ~~~
 > heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
 > ```
 > 2. Use the function `median()` to calculate the median of the `heights` vector.
 > 3. Use R to figure out how many people in the set are taller than 67 inches.
+<<<<<<< HEAD
+=======
 > 
 >  Solution
 > ~~~
@@ -1047,17 +1124,18 @@ Error: attempt to use zero-length variable name
 > >~~~
 > >{: .error}
 > {: .solution}
+>>>>>>> main
 {: .challenge}
 
 
-# Generating vectors {#sec:genvec}
+## Generating vectors {#sec:genvec}
 
 
 
 ### Constructors {-}
 
 There exists some functions to generate vectors of different type. To
-generate a vector of numerics, one can use the `numerics()`
+generate a vector of numerics, one can use the `numeric()`
 constructor, providing the length of the output vector as
 parameter. The values will be initialised with 0.
 
@@ -1107,41 +1185,12 @@ numeric(0)
 There are similar constructors for characters and logicals, named
 `character()` and `logical()` respectively.
 
-> ## Challenge:
+> ## Homework Challenge:
 >
 > What are the defaults for character and logical vectors?
->
-> > Solution
-> > 
-> > ~~~
-> > character(2) ## the empty charater
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > [1] "" ""
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > logical(2)   ## FALSE
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > [1] FALSE FALSE
-> > ~~~
-> > {: .output}
-> {: .solution}
 {: .challenge}
 
-## Replicate elements
+### Replicate elements
 
 The `rep` function allow to repeat a value a certain number of
 times. If we want to initiate a vector of numerics of length 5 with
@@ -1194,43 +1243,14 @@ rep(c(1, 2, 3), 5)
 ~~~
 {: .output}
 
-> ## Challenge:
+> ## Homework Challenge:
 >
 > What if we wanted to repeat the values 1, 2 and 3 five times, but
 > obtain five 1s, five 2s and five 3s in that order? There are two
 > possibilities - see `?rep` or `?sort` for help.
->
-> > Solution
-> > 
-> > ~~~
-> > rep(c(1, 2, 3), each = 5)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > sort(rep(c(1, 2, 3), 5))
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
-> > ~~~
-> > {: .output}
-> {: .solution}
 {: .challenge}
 
-## Sequence generation
+### Sequence generation
 
 Another very useful function is `seq`, to generate a sequence of
 numbers. For example, to generate a sequence of integers from 1 to 20
@@ -1310,12 +1330,12 @@ seq(from = 1, to = 20, length.out = 3)
 ~~~
 {: .output}
 
-## Random samples and permutations
+### Random samples and permutations
 
 A last group of useful functions are those that generate random
 data. The first one, `sample`, generates a random permutation of
 another vector. For example, to draw a random order to 10 students
-oral example, I first assign each student a number from 1 to then (for
+oral exam, I first assign each student a number from 1 to then (for
 instance based on the alphabetic order of their name) and then:
 
 
@@ -1366,7 +1386,7 @@ sample(1:5, 10, replace = TRUE)
 ~~~
 {: .output}
 
-> ## Challenge:
+> ## Homework Challenge:
 >
 > When trying the functions above out, you will have realised that the
 > samples are indeed random and that one doesn't get the same
@@ -1382,108 +1402,16 @@ sample(1:5, 10, replace = TRUE)
 >   random draw. Observe that you now get the same random draws.
 >
 > - Repeat by setting a different seed.
-> > Solution
-> > Different permutations
-> >
-> > 
-> > ~~~
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  9  1  4  3  6  2  5  8 10  7
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  4  9  7  6  1 10  8  3  2  5
-> > ~~~
-> > {: .output}
-> >
-> > Same permutations with seed 123
-> >
-> > 
-> > ~~~
-> > set.seed(123)
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  3 10  2  8  6  9  1  7  5  4
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > set.seed(123)
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  3 10  2  8  6  9  1  7  5  4
-> > ~~~
-> > {: .output}
-> >
-> > A different seed
-> >
-> > 
-> > ~~~
-> > set.seed(1)
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  9  4  7  1  2  5  3 10  6  8
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > set.seed(1)
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  9  4  7  1  2  5  3 10  6  8
-> > ~~~
-> > {: .output}
-> {: .solution}
 {: .challenge}
 
-## Drawing samples from a normal distribution
+### Homework reading: Drawing samples from a normal distribution
 
 The last function we are going to see is `rnorm`, that draws a random
 sample from a normal distribution. Two normal distributions of means 0
 and 100 and standard deviations 1 and 5, noted noted *N(0, 1)* and
 *N(100, 5)*, are shown below
 
-<img src="../fig/rmd-unnamed-chunk-61-1.png" title="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." alt="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-51-1.png" title="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." alt="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." width="864" style="display: block; margin: auto;" />
 
 The three arguments, `n`, `mean` and `sd`, define the size of the
 sample, and the parameters of the normal distribution, i.e the mean
@@ -1499,7 +1427,7 @@ rnorm(5)
 
 
 ~~~
-[1]  0.69641761  0.05351568 -1.31028350 -2.12306606 -0.20807859
+[1]  2.10852833  0.79639367 -2.67386790 -0.22818998  0.05282286
 ~~~
 {: .output}
 
@@ -1513,7 +1441,7 @@ rnorm(5, 2, 2)
 
 
 ~~~
-[1]  1.3744268 -0.1164714  2.8344472  1.3690969  3.6510983
+[1] 2.331643 1.671234 6.444116 3.560545 3.809048
 ~~~
 {: .output}
 
@@ -1527,7 +1455,7 @@ rnorm(5, 100, 5)
 
 
 ~~~
-[1] 106.45636  96.87448  95.62427 100.71678 107.12595
+[1]  93.53500  89.60985 103.81396  91.15669  89.53736
 ~~~
 {: .output}
 

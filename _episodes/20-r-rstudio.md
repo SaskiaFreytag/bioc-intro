@@ -18,7 +18,7 @@ keypoints:
 
 
 
-# What is R? What is RStudio?
+## What is R? What is RStudio?
 
 The term [R](https://www.r-project.org/) is used to refer to both the
 *programming language*, the *environment for statistical computing*
@@ -39,9 +39,9 @@ Sheet](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)
 provides much more information that will be covered here, but can be
 useful to learn keyboard shortcuts and discover new features.
 
-# Why learn R?
+## Why learn R?
 
-## R does not involve lots of pointing and clicking, and that's a good thing
+### R does not involve lots of pointing and clicking, and that's a good thing
 
 The learning curve might be steeper than with other software, but with
 R, the results of your analysis do not rely on remembering a
@@ -59,22 +59,22 @@ Working with scripts forces you to have a deeper understanding of what
 you are doing, and facilitates your learning and comprehension of the
 methods you use.
 
-## R code is great for reproducibility
+### R code is great for reproducibility
 
-Reproducibility is when someone else (including your future self) can
+Reproducibility means that someone else (including your future self) can
 obtain the same results from the same dataset when using the same
-analysis.
+analysis code.
 
-R integrates with other tools to generate manuscripts from your
+R integrates with other tools to generate manuscripts or reports from your
 code. If you collect more data, or fix a mistake in your dataset, the
-figures and the statistical tests in your manuscript are updated
+figures and the statistical tests in your manuscript or report are updated
 automatically.
 
 An increasing number of journals and funding agencies expect analyses
 to be reproducible, so knowing R will give you an edge with these
 requirements.
 
-## R is interdisciplinary and extensible
+### R is interdisciplinary and extensible
 
 With 10000+ packages[^whatarepkgs] that can be installed to extend its
 capabilities, R provides a framework that allows you to combine
@@ -88,7 +88,7 @@ genetics, and a lot more.
 
 <img src="../fig/cran.png" title="Exponential increase of the number of packages available on [CRAN](https://cran.r-project.org/), the Comprehensive R Archive Network. From the R Journal, Volume 10/2, December 2018." alt="Exponential increase of the number of packages available on [CRAN](https://cran.r-project.org/), the Comprehensive R Archive Network. From the R Journal, Volume 10/2, December 2018." style="display: block; margin: auto;" />
 
-## R works on data of all shapes and sizes
+### R works on data of all shapes and sizes
 
 The skills you learn with R scale easily with the size of your
 dataset. Whether your dataset has hundreds or millions of lines, it
@@ -102,14 +102,14 @@ R can connect to spreadsheets, databases, and many other data formats,
 on your computer or on the web.
 
 
-## R produces high-quality graphics
+### R produces high-quality graphics
 
-The plotting functionalities in R are endless, and allow you to adjust
+The plotting functionalities in R are extensive, and allow you to adjust
 any aspect of your graph to convey most effectively the message from
 your data.
 
 
-## R has a large and welcoming community
+### R has a large and welcoming community
 
 Thousands of people use R daily. Many of them are willing to help you
 through mailing lists and websites such as [Stack
@@ -118,13 +118,13 @@ community](https://community.rstudio.com/). These broad user community
 extends to specialised areas such as bioinformatics.
 
 
-## Not only is R free, but it is also open-source and cross-platform
+### Not only is R free, but it is also open-source and cross-platform
 
 Anyone can inspect the source code to see how R works. Because of this
 transparency, there is less chance for mistakes, and if you (or
 someone else) find some, you can report and fix bugs.
 
-# Knowing your way around RStudio
+## Knowing your way around RStudio
 
 Let's start by learning about [RStudio](https://www.rstudio.com/),
 which is an Integrated Development Environment (IDE) for working with
@@ -135,7 +135,7 @@ Public License (AGPL) v3](https://www.gnu.org/licenses/agpl-3.0.en.html).
 The RStudio IDE is also available with a commercial license and
 priority email support from RStudio, Inc.
 
-We will use RStudio IDE to write code, navigate the files on our
+We will use the RStudio IDE to write code, navigate the files on our
 computer, inspect the variables we are going to create, and visualize
 the plots we will generate. RStudio can also be used for other things
 (e.g., version control, developing packages, writing Shiny apps) that
@@ -144,7 +144,7 @@ we will not cover during the workshop.
 
 <img src="../fig/rstudio-screenshot.png" title="RStudio interface screenshot. Clockwise from top left: Source, Environment/History, Files/Plots/Packages/Help/Viewer, Console." alt="RStudio interface screenshot. Clockwise from top left: Source, Environment/History, Files/Plots/Packages/Help/Viewer, Console." width="100%" style="display: block; margin: auto;" />
 
-RStudio is divided into 4 "Panes":
+The RStudio window is divided into 4 "Panes":
 
 - the **Source** for your scripts and documents (top-left, in the
   default layout)
@@ -161,7 +161,7 @@ many shortcuts, **autocompletion**, and **highlighting** for the major
 file types you use while developing in R, RStudio will make typing
 easier and less error-prone.
 
-# Getting set up
+## Getting set up
 
 It is good practice to keep a set of related data, analyses, and text
 self-contained in a single folder, called the **working
@@ -185,7 +185,7 @@ tutorial below.
   `New project`.
 3. Enter a name for this new folder (or "directory"), and choose a
    convenient location for it. This will be your **working directory**
-   for this session (or whole course) (e.g., `wsbim1207`).
+   for this session (or whole course) (e.g., `bioc-intro`).
 4. Click on `Create project`.
 5. (Optional) Set Preferences to 'Never' save workspace in RStudio.
 
@@ -203,7 +203,7 @@ going to set UTF-8 by default:
 
 <img src="../fig/utf8.png" title="Set the default text encoding to UTF-8 to save us headache in the coming future. (Figure from the link above)." alt="Set the default text encoding to UTF-8 to save us headache in the coming future. (Figure from the link above)." width="70%" style="display: block; margin: auto;" />
 
-## Organizing your working directory
+### Organizing your working directory
 
 Using a consistent folder structure across your projects will help keep things
 organized, and will also make it easy to find/file things in the future. This
@@ -255,46 +255,7 @@ Your working directory should now look like this:
 
 <img src="../fig/r-starting-how-it-should-look-like.png" title="How it should look like at the beginning of this lesson" alt="How it should look like at the beginning of this lesson" width="100%" style="display: block; margin: auto;" />
 
-**Project management** is also applicable to bioinformatics projects,
-of course[^bioindatascience]. William Noble (@Noble:2009) proposes the
-following directory structure:
-
-[^bioindatascience]: In this course, we consider bioinformatics as
-    data science applied to biological or bio-medical data.
-
-> Directory names are in large typeface, and filenames are in smaller
-> typeface. Only a subset of the files are shown here. Note that the
-> dates are formatted `<year>-<month>-<day>` so that they can be
-> sorted in chronological order. The source code `src/ms-analysis.c`
-> is compiled to create `bin/ms-analysis` and is documented in
-> `doc/ms-analysis.html`. The `README` files in the data directories
-> specify who downloaded the data files from what URL on what
-> date. The driver script `results/2009-01-15/runall` automatically
-> generates the three subdirectories split1, split2, and split3,
-> corresponding to three cross-validation splits. The
-> `bin/parse-sqt.py` script is called by both of the `runall` driver
-> scripts.
-
-
-<img src="../fig/noble-bioinfo-project.png" title="Directory structure for a sample bioinformatics project." alt="Directory structure for a sample bioinformatics project." width="100%" style="display: block; margin: auto;" />
-
-The most important aspect of a well defined and well documented
-project directory is to enable someone unfamiliar with the
-project[^futureself] to
-
-1. understand what the project is about, what data are available, what
-   analyses were run, and what results were produced and, most
-   importantly to
-
-2. repeat the analysis over again - with new data, or changing some
-   analysis parameters.
-
-[^futureself]: That someone could be, and very likely will be your
-    future self, a couple of months or years after the analyses were
-    run.
-
-
-## The working directory
+### The working directory
 
 The working directory is an important concept to understand. It is the
 place from where R will be looking for and saving the files. When you
@@ -324,14 +285,14 @@ bioc-intro/data/
 ```
 
 If we were in the working directory, we could refer to the `fig1.pdf`
-file using the relative path `wsbim1207/fig_output/fig1.pdf` or the
-absolute path `/home/user/wsbim1207/fig_output/fig1.pdf`.
+file using the relative path `bioc-intro/fig_output/fig1.pdf` or the
+absolute path `/home/user/bioc-intro/fig_output/fig1.pdf`.
 
 If we were in the `data` directory, we would use the relative path
 `../fig_output/fig1.pdf` or the same absolute path
-`/home/user/wsbim1207/fig_output/fig1.pdf`.
+`/home/user/bioc-intro/fig_output/fig1.pdf`.
 
-# Interacting with R
+## Interacting with R
 
 The basis of programming is that we write down instructions for the
 computer to follow, and then we tell the computer to follow those
@@ -353,7 +314,9 @@ Because we want our code and workflow to be reproducible, it is better
 to type the commands we want in the script editor, and save the
 script. This way, there is a complete record of what we did, and
 anyone (including our future selves!)  can easily replicate the
-results on their computer.
+results on their computer. Note, however, that merely typing the commands 
+in the script does not automatically *run* them - they still need to 
+be sent to the console for execution. 
 
 RStudio allows you to execute commands directly from the script editor
 by using the `Ctrl` + `Enter` shortcut (on Macs, `Cmd` + `Return` will
@@ -388,7 +351,7 @@ window and press `Esc`; this will cancel the incomplete command and
 return you to the `>` prompt.
 
 
-# How to learn more during and after the course?
+## How to learn more during and after the course?
 
 The material we cover during this course will give you an initial
 taste of how you can use R to analyse data for your own
@@ -407,9 +370,9 @@ suit your purpose might make it easier for you to get started.
 
 <img src="../fig/kitten-try-things.jpg" title="plot of chunk kitten" alt="plot of chunk kitten" width="400px" style="display: block; margin: auto;" />
 
-# Seeking help
+## Seeking help
 
-## Use the built-in RStudio help interface to search for more information on R functions
+### Use the built-in RStudio help interface to search for more information on R functions
 
 <img src="../fig/rstudiohelp.png" title="RStudio help interface." alt="RStudio help interface." width="70%" style="display: block; margin: auto;" />
 
@@ -420,7 +383,7 @@ panel of RStudio. As seen in the screenshot, by typing the word
 might be interested in. The description is then shown in the display
 window.
 
-## I know the name of the function I want to use, but I'm not sure how to use it
+### I know the name of the function I want to use, but I'm not sure how to use it
 
 If you need help with a specific function, let's say `barplot()`, you
 can type:
@@ -439,7 +402,7 @@ args(lm)
 ~~~
 {: .language-r}
 
-## I want to use a function that does X, there must be a function for it but I don't know which one...
+### I want to use a function that does X, there must be a function for it but I don't know which one...
 
 If you are looking for a function to do a particular task, you can use the
 `help.search()` function, which is called by the double question mark `??`.
@@ -460,7 +423,7 @@ Finally, a generic Google or internet search "R \<task\>" will often either send
 you to the appropriate package documentation or a helpful forum where someone
 else has already asked your question.
 
-## I am stuck... I get an error message that I don't understand
+### I am stuck... I get an error message that I don't understand
 
 Start by googling the error message. However, this doesn't always work very well
 because often, package developers rely on the error catching provided by R. You
@@ -569,6 +532,18 @@ sessionInfo()
 
 
 ~~~
+<<<<<<< HEAD
+R version 4.1.3 (2022-03-10)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.2.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
+=======
 R version 4.0.1 (2020-06-06)
 Platform: x86_64-apple-darwin17.0 (64-bit)
 Running under: macOS  10.16
@@ -579,20 +554,29 @@ LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dy
 
 locale:
 [1] C
+>>>>>>> main
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
+<<<<<<< HEAD
+[1] knitr_1.39
+
+loaded via a namespace (and not attached):
+[1] compiler_4.1.3 magrittr_2.0.3 tools_4.1.3    stringi_1.7.6  highr_0.9     
+[6] stringr_1.4.0  xfun_0.30      evaluate_0.15 
+=======
 [1] knitr_1.36
 
 loaded via a namespace (and not attached):
 [1] compiler_4.0.1 magrittr_2.0.1 tools_4.0.1    stringi_1.7.5  highr_0.9     
 [6] stringr_1.4.0  xfun_0.28      evaluate_0.14 
+>>>>>>> main
 ~~~
 {: .output}
 
-## Where to ask for help?
+### Where to ask for help?
 
 * The person sitting next to you during the course. Don't hesitate to
   talk to your neighbour during the workshop, compare your answers,
@@ -625,7 +609,7 @@ loaded via a namespace (and not attached):
   phylogenetics, etc...), the complete list is
   [here](http://www.r-project.org/mail.html).
 
-## More resources
+### More resources
 
 - The [Posting Guide](http://www.r-project.org/posting-guide.html) for
   the R mailing lists.
@@ -646,9 +630,9 @@ loaded via a namespace (and not attached):
   recording](https://vimeo.com/208749032)) includes a presentation of
   the reprex package and of its philosophy.
 
-# R packages
+## R packages
 
-## Loading packages
+### Loading packages
 
 As we have seen above, R packages play a fundamental role in R. The
 make use of a package's functionality, assuming it is installed, we
@@ -661,7 +645,7 @@ library("ggplot2")
 ~~~
 {: .language-r}
 
-## Installing packages
+### Installing packages
 
 The default package repository is The *Comprehensive R Archive
 Network* (CRAN), and any package that is available on CRAN can be

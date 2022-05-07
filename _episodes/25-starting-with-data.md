@@ -30,7 +30,7 @@ effect of upper-respiratory infection on transcriptomic changes in the
 CNS*. The goal of the study was to determine the effect of an
 upper-respiratory infection on changes in RNA transcription occuring
 in the cerebellum and spinal cord post infection. Gender matched eight
-week old C57BL/6 mice were inoculated saline or with Influenza A by
+week old C57BL/6 mice were inoculated with saline or with Influenza A by
 intranasal route and transcriptomic changes in the cerebellum and
 spinal cord tissues were evaluated by RNA-seq at days 0
 (non-infected), 4 and 8.
@@ -54,33 +54,16 @@ columns represent:
 | tissue     | The tissue that was used for the gene expression experiment, i.e. cerebellum or spinal cord. |
 | mouse      | The mouse unique identifier.                                                                 |
 
-We are going to use the R function `download.file()` to download the
-CSV file that contains the gene expression data, and we will use
-`read.csv()` to load into memory the content of the CSV file as an
-object of class `data.frame`.  Inside the `download.file` command, the
-first entry is a character string with the source URL. This source URL
-downloads a CSV file from a GitHub repository. The text after the
-comma (`"data/rnaseq.csv"`) is the destination of the file on your
-local machine. You'll need to have a folder on your machine called
-`"data"` where you'll download the file. So this command downloads the
-remote file, names it `"rnaseq.csv"` and adds it to a preexisting
-folder named `"data"`.
-
-
-
-~~~
-if (!file.exists("data/rnaseq.csv"))
-    download.file(url = "https://raw.githubusercontent.com/UCLouvain-CBIO/WSBIM1207/scrnadata/data/rnaseq.csv",
-                  destfile = "data/rnaseq.csv")
-~~~
-{: .language-r}
+We have already downloaded the data and it can be found in the directory
+`course-data/data/GSE96870/`. 
 
 You are now ready to load the data:
 
 
 
+
 ~~~
-rna <- read.csv("data/rnaseq.csv")
+rna <- read.csv("course-data/data/GSE96870/rnaseq.csv")
 ~~~
 {: .language-r}
 
@@ -122,6 +105,15 @@ head(rna)
 4 Cerebellum    14    19144
 5 Cerebellum    14    80891
 6 Cerebellum    14    20528
+<<<<<<< HEAD
+                                                                       product
+1                               argininosuccinate lyase, transcript variant X1
+2                                       apolipoprotein D, transcript variant 3
+3 cytochrome P450, family 2, subfamily d, polypeptide 22, transcript variant 2
+4                         kallikrein related-peptidase 6, transcript variant 2
+5                Fc receptor-like S, scavenger receptor, transcript variant X1
+6          solute carrier family 2 (facilitated glucose transporter), member 4
+=======
                                                                    product
 1                            argininosuccinate lyase transcript variant X1
 2                                    apolipoprotein D transcript variant 3
@@ -129,6 +121,7 @@ head(rna)
 4                      kallikrein related-peptidase 6 transcript variant 2
 5              Fc receptor-like S scavenger receptor transcript variant X1
 6       solute carrier family 2 (facilitated glucose transporter) member 4
+>>>>>>> main
      ensembl_gene_id external_synonym chromosome_name   gene_biotype
 1 ENSMUSG00000025533    2510006M18Rik               5 protein_coding
 2 ENSMUSG00000022548             <NA>              16 protein_coding
@@ -148,7 +141,11 @@ head(rna)
 2                                  APOD
 3                                CYP2D6
 4                                  KLK6
+<<<<<<< HEAD
+5                                 FCRL2
+=======
 5                                 FCRL4
+>>>>>>> main
 6                                SLC2A4
 ~~~
 {: .output}
@@ -171,15 +168,17 @@ behaves exactly like `read.csv()` but uses different parameters for
 the decimal and the field separators. If you are working with another
 format, they can be both specified by the user. Check out the help for
 `read.csv()` by typing `?read.csv` to learn more. There is also the
-`read.delim()` for in tab separated data files. It is important to
+`read.delim()` function for reading tab separated data files. It is important to
 note that all of these functions are actually wrapper functions for
 the main `read.table()` function with different arguments.  As such,
 the data above could have also been loaded by using `read.table()`
 with the separation argument as `,`. The code is as follows:
 
 
+
+
 ~~~
-rna <- read.table(file = "data/rnaseq.csv",
+rna <- read.table(file = "course-data/data/GSE96870/rnaseq.csv",
                   sep = ",",
                   header = TRUE)
 ~~~
@@ -240,7 +239,11 @@ str(rna)
  $ tissue                               : chr  "Cerebellum" "Cerebellum" "Cerebellum" "Cerebellum" ...
  $ mouse                                : int  14 14 14 14 14 14 14 14 14 14 ...
  $ ENTREZID                             : int  109900 11815 56448 19144 80891 20528 97827 118454 18823 14696 ...
+<<<<<<< HEAD
+ $ product                              : chr  "argininosuccinate lyase, transcript variant X1" "apolipoprotein D, transcript variant 3" "cytochrome P450, family 2, subfamily d, polypeptide 22, transcript variant 2" "kallikrein related-peptidase 6, transcript variant 2" ...
+=======
  $ product                              : chr  "argininosuccinate lyase transcript variant X1" "apolipoprotein D transcript variant 3" "cytochrome P450 family 2 subfamily d polypeptide 22 transcript variant 2" "kallikrein related-peptidase 6 transcript variant 2" ...
+>>>>>>> main
  $ ensembl_gene_id                      : chr  "ENSMUSG00000025533" "ENSMUSG00000022548" "ENSMUSG00000061740" "ENSMUSG00000050063" ...
  $ external_synonym                     : chr  "2510006M18Rik" NA "2D22" "Bssp" ...
  $ chromosome_name                      : chr  "5" "16" "15" "7" ...
@@ -404,7 +407,7 @@ correct names of the columns.
 > > rna_head <- rna[-(7:n_rows), ]
 > > ~~~
 > > {: .language-r}
-> > {: .solution}
+> {: .solution}
 {: .challenge}
 
 
@@ -600,11 +603,13 @@ plot(sex)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
 
-> ## Challenge:
+> ## Homework Challenge:
 >
 > - Rename "female" and "male" to "Female" and "Male" respectively.
+>
+{: .challenge }
 
 > ## Challenge:
 >
@@ -621,16 +626,10 @@ plot(sex)
 >        weight = c(45, 8 1.1, 0.8))
 > ~~~
 > {: .language-r}
-> > Solution
-> >
-> > - missing quotations around the names of the animals
-> > - missing one entry in the "feel" column (probably for one of the furry animals)
-> > - missing one comma in the weight column
-> {: .solution}
 {: .challenge}
 
 
-> ## Challenge:
+> ## Homework Challenge:
 >
 > Can you predict the class for each of the columns in the following
 > example?
@@ -698,34 +697,14 @@ m
 ~~~
 {: .output}
 
-[^ncol]: Either the number of rows or columns are enough, as the other
-one can be deduced from the length of the values. Try out what happens
-if the values and number of rows/columns don't add up.
+[^ncol]: Either the number of rows or columns are enough, as the other one can be deduced from the length of the values. Try out what happens if the values and number of rows/columns don't add up.
 
 
-> ## Challenge:
+> ## Homework Challenge:
 >
 > Using the function `installed.packages()`, create a `character` matrix
 > containing the information about all packages currently installed on
 > your computer. Explore it.
->
-> > Solution:
-> >
-> > 
-> > ~~~
-> > ## create the matrix
-> > ip <- installed.packages()
-> > head(ip)
-> > ## try also View(ip)
-> > ## number of package
-> > nrow(ip)
-> > ## names of all installed packages
-> > rownames(ip)
-> > ## type of information we have about each package
-> > colnames(ip)
-> > ~~~
-> > {: .language-r}
-> {: .solution}
 {: .challenge}
 
 It is often useful to create large random data matrices as test
@@ -734,50 +713,14 @@ data drawn from a normal distribution of mean 0 and standard deviation
 1, which can be done with the `rnorm()` function.
 
 
-> ## Challenge:
+> ## Homework Challenge:
 >
 > Construct a matrix of dimension 1000 by 3 of normally distributed data
 > (mean 0, standard deviation 1)
->
-> > Solution
-> >
-> > 
-> > ~~~
-> > set.seed(123)
-> > m <- matrix(rnorm(3000), ncol = 3)
-> > dim(m)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > [1] 1000    3
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > head(m)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >             [,1]        [,2]       [,3]
-> > [1,] -0.56047565 -0.99579872 -0.5116037
-> > [2,] -0.23017749 -1.03995504  0.2369379
-> > [3,]  1.55870831 -0.01798024 -0.5415892
-> > [4,]  0.07050839 -0.13217513  1.2192276
-> > [5,]  0.12928774 -2.54934277  0.1741359
-> > [6,]  1.71506499  1.04057346 -0.6152683
-> > ~~~
-> > {: .output}
-> {: .solution}
 {: .challenge}
 
+<<<<<<< HEAD
+=======
 
 
 ## Formatting Dates
@@ -998,6 +941,7 @@ dmy(paste(x$day, x$month, x$month, sep = "-"))
 
 `lubdridate` has many functions to address all date variations.
 
+>>>>>>> main
 ## Summary of R objects
 
 So far, we have seen several types of R object varying in the number
@@ -1050,9 +994,15 @@ str(l)
 List of 5
  $ : int [1:10] 1 2 3 4 5 6 7 8 9 10
  $ : chr [1:26] "a" "b" "c" "d" ...
+<<<<<<< HEAD
+ $ : chr [1:397, 1:16] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:397] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
+=======
  $ : chr [1:795, 1:16] "BiocManager" "Hmisc" "R.utils" "RApiSerialize" ...
   ..- attr(*, "dimnames")=List of 2
   .. ..$ : chr [1:795] "BiocManager" "Hmisc" "R.utils" "RApiSerialize" ...
+>>>>>>> main
   .. ..$ : chr [1:16] "Package" "LibPath" "Version" "Priority" ...
  $ :'data.frame':	50 obs. of  2 variables:
   ..$ speed: num [1:50] 4 4 7 7 8 9 10 10 10 11 ...

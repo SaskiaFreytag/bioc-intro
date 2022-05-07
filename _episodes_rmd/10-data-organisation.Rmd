@@ -91,16 +91,6 @@ formatted as tables is also the main theme of this chapter, and we
 will see how to organise data into tables in a standardised way to
 ensure efficient downstream analysis.
 
-> ## Challenge: Discuss the following points with your neighbour
->
-> - Have you used spreadsheets, in your research, courses,
->   or at home?
-> - What kind of operations do you do in spreadsheets?
-> - Which ones do you think spreadsheets are good for?
-> - Have you accidentally done something in a spreadsheet program that made you
->   frustrated or sad?
-{: .challenge}
-
 ### Problems with Spreadsheets
 
 Spreadsheets are good for data entry, but in reality we tend to
@@ -292,13 +282,13 @@ used for variables** and **rows are used for observations**:
 >
 > **Important:** Do not forget our first piece of advice: to create a
 > new file (or tab) for the cleaned data, never modify your original
-> (raw) data.
+> (raw) data. However in this case we will have taken care of this for you!
 {: .challenge}
 
 After you go through this exercise, we'll discuss as a group what was wrong
 with this data and how you would fix it.
 
-- Take about 10 minutes to work on this exercise.
+- Take about 7 minutes to work on this exercise.
 - All the mistakes in the *common mistakes* section below are present
   in the messy dataset. If the exercise is done during a workshop, ask
   people what they saw as wrong with the data. As they bring up

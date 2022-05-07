@@ -17,6 +17,8 @@ keypoints:
 source("../bin/chunk-options.R")
 ```
 
+<<<<<<< HEAD
+=======
 ```{r loaddata_dplyr, echo=FALSE, purl=FALSE, message=FALSE}
 if (!file.exists("data/rnaseq.csv"))
 download.file(url = "https://raw.githubusercontent.com/Bioconductor/bioconductor-teaching/master/data/GSE96870/rnaseq.csv",
@@ -24,6 +26,7 @@ download.file(url = "https://raw.githubusercontent.com/Bioconductor/bioconductor
 ```
 
 
+>>>>>>> main
 
 ## Data Manipulation using **`dplyr`** and **`tidyr`**
 
@@ -79,13 +82,25 @@ Instead of `read.csv()`, we will read in our data using the `read_csv()` functio
 tidyverse package **`readr`**, .
 
 
+<<<<<<< HEAD
+```{r, message = FALSE, purl = FALSE, eval=FALSE}
+rna <- read_csv("course-data/data/GSE96870/rnaseq.csv")
+=======
 ```{r, message = FALSE, purl = FALSE}
 rna <- read_csv("data/rnaseq.csv")
+>>>>>>> main
 
 ## view the data
 rna
 ```
 
+<<<<<<< HEAD
+```{r, message = FALSE, purl = FALSE, include=FALSE}
+rna <- read_csv("data/rnaseq.csv")
+```
+
+=======
+>>>>>>> main
 Notice that the class of the data is now referred to as a "tibble".
 
 Tibbles tweak some of the behaviors of the data frame objects we introduced in the
@@ -227,12 +242,18 @@ rna3
 ```
 
 
+<<<<<<< HEAD
+> ## Homework Challenge:
+=======
 > ## Challenge:
+>>>>>>> main
 >
 > Using pipes, subset the `rna` data to keep genes with an expression higher
 > than 50000 in female mice at time 0, and retain only the columns `gene`,
 > `sample`, `time`, `expression` and `age`
 >
+<<<<<<< HEAD
+=======
 > > ## Solution
 > >
 > > ```{r}
@@ -244,6 +265,7 @@ rna3
 > > ```
 > >
 > {: .solution}
+>>>>>>> main
 {: .challenge}
 
 
@@ -271,9 +293,13 @@ rna %>%
 ```
 
 
+<<<<<<< HEAD
+> ## Homework Challenge
+=======
 
 
 > ## Challenge
+>>>>>>> main
 >
 > Create a new data frame from the `rna` data that meets the following criteria:
 > contains only the `gene`, `chromosome_name`, `phenotype_description`, `sample`,
@@ -284,6 +310,8 @@ rna %>%
 > this data frame!
 >
 >
+<<<<<<< HEAD
+=======
 > > ## Solution
 > >
 > > ```{r, eval=TRUE, purl=FALSE}
@@ -295,6 +323,7 @@ rna %>%
 > > ```
 > >
 > {: .solution}
+>>>>>>> main
 {: .challenge}
 
 ## Split-apply-combine data analysis
@@ -732,11 +761,17 @@ so every replicate has the same composition.
 {: .challenge}
 
 
+<<<<<<< HEAD
+> ## Homework Question
+=======
 > ## Question
+>>>>>>> main
 >
 > Use the `rna` dataset to create an expression matrix were each row represents
 > the mean expression levels of genes and columns represent the different timepoints.
 >
+<<<<<<< HEAD
+=======
 > > # Solution
 > >
 > > Let's first calculate the mean expression by gene and by time
@@ -795,18 +830,25 @@ so every replicate has the same composition.
 > > ```
 > >
 > {: .solution}
+>>>>>>> main
 {: .challenge}
 
 
 
 
+<<<<<<< HEAD
+> ## Homeowrk Question
+=======
 > ## Question
+>>>>>>> main
 >
 > Use the previous data frame containing mean expression levels per timepoint and create
 > a new column containing fold-changes between timepoint 8 and timepoint 0, and fold-changes
 > between timepoint 8 and timepoint 4.
 > Convert this table in a long-format table gathering the foldchanges calculated.
 >
+<<<<<<< HEAD
+=======
 > > ## Solution
 > >
 > > starting from the rna_time tibble:
@@ -831,6 +873,7 @@ so every replicate has the same composition.
 > >                time_8_vs_0:time_8_vs_4)
 > > ```
 > >
+>>>>>>> main
 > {: .solution}
 {: .challenge}
 
