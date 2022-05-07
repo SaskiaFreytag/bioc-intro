@@ -61,25 +61,11 @@ You are now ready to load the data:
 
 
 
+
 ~~~
 rna <- read.csv("course-data/data/GSE96870/rnaseq.csv")
 ~~~
 {: .language-r}
-
-
-
-~~~
-Warning in file(file, "rt"): cannot open file 'course-data/data/GSE96870/
-rnaseq.csv': No such file or directory
-~~~
-{: .warning}
-
-
-
-~~~
-Error in file(file, "rt"): cannot open the connection
-~~~
-{: .error}
 
 This statement doesn't produce any output because, as you might
 recall, assignments don't display anything. If we want to check that
@@ -105,9 +91,50 @@ head(rna)
 
 
 ~~~
-Error in head(rna): object 'rna' not found
+     gene     sample expression     organism age    sex  infection  strain time
+1     Asl GSM2545336       1170 Mus musculus   8 Female InfluenzaA C57BL/6    8
+2    Apod GSM2545336      36194 Mus musculus   8 Female InfluenzaA C57BL/6    8
+3 Cyp2d22 GSM2545336       4060 Mus musculus   8 Female InfluenzaA C57BL/6    8
+4    Klk6 GSM2545336        287 Mus musculus   8 Female InfluenzaA C57BL/6    8
+5   Fcrls GSM2545336         85 Mus musculus   8 Female InfluenzaA C57BL/6    8
+6  Slc2a4 GSM2545336        782 Mus musculus   8 Female InfluenzaA C57BL/6    8
+      tissue mouse ENTREZID
+1 Cerebellum    14   109900
+2 Cerebellum    14    11815
+3 Cerebellum    14    56448
+4 Cerebellum    14    19144
+5 Cerebellum    14    80891
+6 Cerebellum    14    20528
+                                                                       product
+1                               argininosuccinate lyase, transcript variant X1
+2                                       apolipoprotein D, transcript variant 3
+3 cytochrome P450, family 2, subfamily d, polypeptide 22, transcript variant 2
+4                         kallikrein related-peptidase 6, transcript variant 2
+5                Fc receptor-like S, scavenger receptor, transcript variant X1
+6          solute carrier family 2 (facilitated glucose transporter), member 4
+     ensembl_gene_id external_synonym chromosome_name   gene_biotype
+1 ENSMUSG00000025533    2510006M18Rik               5 protein_coding
+2 ENSMUSG00000022548             <NA>              16 protein_coding
+3 ENSMUSG00000061740             2D22              15 protein_coding
+4 ENSMUSG00000050063             Bssp               7 protein_coding
+5 ENSMUSG00000015852    2810439C17Rik               3 protein_coding
+6 ENSMUSG00000018566           Glut-4              11 protein_coding
+                            phenotype_description
+1           abnormal circulating amino acid level
+2                      abnormal lipid homeostasis
+3                        abnormal skin morphology
+4                         abnormal cytokine level
+5 decreased CD8-positive alpha-beta T cell number
+6              abnormal circulating glucose level
+  hsapiens_homolog_associated_gene_name
+1                                   ASL
+2                                  APOD
+3                                CYP2D6
+4                                  KLK6
+5                                 FCRL2
+6                                SLC2A4
 ~~~
-{: .error}
+{: .output}
 
 
 
@@ -134,27 +161,14 @@ the data above could have also been loaded by using `read.table()`
 with the separation argument as `,`. The code is as follows:
 
 
+
+
 ~~~
 rna <- read.table(file = "course-data/data/GSE96870/rnaseq.csv",
                   sep = ",",
                   header = TRUE)
 ~~~
 {: .language-r}
-
-
-
-~~~
-Warning in file(file, "rt"): cannot open file 'course-data/data/GSE96870/
-rnaseq.csv': No such file or directory
-~~~
-{: .warning}
-
-
-
-~~~
-Error in file(file, "rt"): cannot open the connection
-~~~
-{: .error}
 
 The header argument has to be set to TRUE to be able to read the
 headers as by default `read.table()` has the header argument set to
@@ -191,9 +205,28 @@ str(rna)
 
 
 ~~~
-Error in str(rna): object 'rna' not found
+'data.frame':	32428 obs. of  19 variables:
+ $ gene                                 : chr  "Asl" "Apod" "Cyp2d22" "Klk6" ...
+ $ sample                               : chr  "GSM2545336" "GSM2545336" "GSM2545336" "GSM2545336" ...
+ $ expression                           : int  1170 36194 4060 287 85 782 1619 288 43217 1071 ...
+ $ organism                             : chr  "Mus musculus" "Mus musculus" "Mus musculus" "Mus musculus" ...
+ $ age                                  : int  8 8 8 8 8 8 8 8 8 8 ...
+ $ sex                                  : chr  "Female" "Female" "Female" "Female" ...
+ $ infection                            : chr  "InfluenzaA" "InfluenzaA" "InfluenzaA" "InfluenzaA" ...
+ $ strain                               : chr  "C57BL/6" "C57BL/6" "C57BL/6" "C57BL/6" ...
+ $ time                                 : int  8 8 8 8 8 8 8 8 8 8 ...
+ $ tissue                               : chr  "Cerebellum" "Cerebellum" "Cerebellum" "Cerebellum" ...
+ $ mouse                                : int  14 14 14 14 14 14 14 14 14 14 ...
+ $ ENTREZID                             : int  109900 11815 56448 19144 80891 20528 97827 118454 18823 14696 ...
+ $ product                              : chr  "argininosuccinate lyase, transcript variant X1" "apolipoprotein D, transcript variant 3" "cytochrome P450, family 2, subfamily d, polypeptide 22, transcript variant 2" "kallikrein related-peptidase 6, transcript variant 2" ...
+ $ ensembl_gene_id                      : chr  "ENSMUSG00000025533" "ENSMUSG00000022548" "ENSMUSG00000061740" "ENSMUSG00000050063" ...
+ $ external_synonym                     : chr  "2510006M18Rik" NA "2D22" "Bssp" ...
+ $ chromosome_name                      : chr  "5" "16" "15" "7" ...
+ $ gene_biotype                         : chr  "protein_coding" "protein_coding" "protein_coding" "protein_coding" ...
+ $ phenotype_description                : chr  "abnormal circulating amino acid level" "abnormal lipid homeostasis" "abnormal skin morphology" "abnormal cytokine level" ...
+ $ hsapiens_homolog_associated_gene_name: chr  "ASL" "APOD" "CYP2D6" "KLK6" ...
 ~~~
-{: .error}
+{: .output}
 
 ## Inspecting `data.frame` Objects
 
@@ -339,75 +372,16 @@ correct names of the columns.
 > > ~~~
 > > ## 1.
 > > rna_200 <- rna[200, ]
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in eval(expr, envir, enclos): object 'rna' not found
-> > ~~~
-> > {: .error}
-> > 
-> > 
-> > 
-> > ~~~
 > > ## 2.
 > > ## Saving `n_rows` to improve readability and reduce duplication
 > > n_rows <- nrow(rna)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in nrow(rna): object 'rna' not found
-> > ~~~
-> > {: .error}
-> > 
-> > 
-> > 
-> > ~~~
 > > rna_last <- rna[n_rows, ]
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in eval(expr, envir, enclos): object 'rna' not found
-> > ~~~
-> > {: .error}
-> > 
-> > 
-> > 
-> > ~~~
 > > ## 3.
 > > rna_middle <- rna[n_rows / 2, ]
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in eval(expr, envir, enclos): object 'rna' not found
-> > ~~~
-> > {: .error}
-> > 
-> > 
-> > 
-> > ~~~
 > > ## 4.
 > > rna_head <- rna[-(7:n_rows), ]
 > > ~~~
 > > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Error in eval(expr, envir, enclos): object 'rna' not found
-> > ~~~
-> > {: .error}
 > {: .solution}
 {: .challenge}
 
@@ -604,7 +578,7 @@ plot(sex)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
 
 > ## Homework Challenge:
 >
@@ -772,9 +746,9 @@ str(l)
 List of 5
  $ : int [1:10] 1 2 3 4 5 6 7 8 9 10
  $ : chr [1:26] "a" "b" "c" "d" ...
- $ : chr [1:371, 1:16] "abind" "annotate" "AnnotationDbi" "ape" ...
+ $ : chr [1:397, 1:16] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:371] "abind" "annotate" "AnnotationDbi" "ape" ...
+  .. ..$ : chr [1:397] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
   .. ..$ : chr [1:16] "Package" "LibPath" "Version" "Priority" ...
  $ :'data.frame':	50 obs. of  2 variables:
   ..$ speed: num [1:50] 4 4 7 7 8 9 10 10 10 11 ...

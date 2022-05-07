@@ -337,7 +337,7 @@ the context of an organism package.
 > > ## Solution
 > > 
 > > 
-> > ```{r, message=FALSE}
+> > ```{r, message=FALSE, eval=FALSE}
 > > library(org.Hs.eg.db)
 > > uniKeys <- head(keys(org.Hs.eg.db, keytype="UNIPROT"))
 > > cols <- c("SYMBOL", "PATH")
@@ -365,7 +365,7 @@ comes from.
 > > ## Solution
 > > 
 > > 
-> > ```{r, message=FALSE}
+> > ```{r, message=FALSE, eval=FALSE}
 > > library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 > > keys <- head(keys(txdb, keytype="GENEID"))
 > > cols <- c("TXID", "TXSTART")
