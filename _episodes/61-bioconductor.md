@@ -499,7 +499,7 @@ of an org package is always of the form org.<Ab>.<id>.db (e.g. org.Sc.sgd.db)
 where <Ab> is a 2-letter abbreviation of the organism (e.g. Sc for Saccharomyces
 cerevisiae) and <id> is an abbreviation (in lower-case) describing the type of central identifier (e.g. sgd for gene identifiers assigned by the Saccharomyces Genome
 Database, or eg for Entrez Gene ids).
-Just as the chip packages load a *ChipDb* object, the org packages will load a *OrgDb*
+Just as the chip packages load a **ChipDb** object, the org packages will load a **OrgDb**
 object. The following exercise should acquaint you with the use of these methods in
 the context of an organism package.
 
@@ -550,6 +550,7 @@ comes from.
 > > 
 > > ~~~
 > > library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+> > txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 > > keys <- head(keys(txdb, keytype="GENEID"))
 > > cols <- c("TXID", "TXSTART")
 > > select(txdb, keys=keys, columns=cols, keytype="GENEID")
