@@ -11,6 +11,7 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 
 ## About this course
 
+This course was designed by the Bioconductor Education and modified for the purposes of Australian Biocommons teaching.
 
 > ## Prerequisites
 > - Familiarity with tabular data and spreadsheets.
