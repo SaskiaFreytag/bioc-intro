@@ -658,28 +658,6 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > combined_logical <- c(num_logical, char_logical)
 > ~~~
 > {: .language-r}
-<<<<<<< HEAD
-=======
-> > ## Solution
-> >
-> > Only one. There is no memory of past data types, and the coercion
-> > happens the first time the vector is evaluated. Therefore, the `TRUE`
-> > in `num_logical` gets converted into a `1` before it gets converted
-> > into `"1"` in `combined_logical`.
-> >
-> >~~~
-> > combined_logical
-> >~~~
-> >{: .language-r}
-> >
-> >
-> >
-> >~~~
-> >[1] "1"    "2"    "3"    "1"    "a"    "b"    "c"    "TRUE"
-> >~~~
-> >{: .output}
-> {: .solution}
->>>>>>> main
 {: .challenge}
 
 
@@ -1447,7 +1425,7 @@ sample from a normal distribution. Two normal distributions of means 0
 and 100 and standard deviations 1 and 5, noted noted *N(0, 1)* and
 *N(100, 5)*, are shown below
 
-<img src="../fig/rmd-unnamed-chunk-52-1.png" title="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." alt="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-51-1.png" title="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." alt="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." width="864" style="display: block; margin: auto;" />
 
 The three arguments, `n`, `mean` and `sd`, define the size of the
 sample, and the parameters of the normal distribution, i.e the mean

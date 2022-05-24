@@ -899,16 +899,10 @@ ggplot(rna, aes(x = expression_log)) +
 
 > ## Challenge
 >
-<<<<<<< HEAD
 > With all of this information in hand, try to create the most ugly plot that
 > you can think about. You can use one  of the plots generated in this exercise 
 > as a starting point. Use the RStudio [**`ggplot2`**
-=======
-> With all of this information in hand, please take another five minutes
-> to either improve one of the plots generated in this exercise or
-> create a beautiful graph of your own. Use the RStudio [**`ggplot2`**
-> cheat
-> sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+> cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 > for inspiration. Here are some ideas:
 >
 > - See if you can change the thickness of the lines.
@@ -1101,12 +1095,6 @@ ggsave("fig_output/combo_plot_chromosome_sex.png", combo_plot,
 
 Note: The parameters `width` and `height` also determine the font size in the saved plot.
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> main
 ## Other packages for visualisation
 
 `ggplot2` is a very powerful package that fits very nicely in our
