@@ -61,23 +61,6 @@ if (!require("rWSBIM1207"))
 
 ~~~
 library("rWSBIM1207")
-<<<<<<< HEAD
-=======
-~~~
-{: .language-r}
-
-
-
-~~~
-
-This is 'rWSBIM1207' version 0.1.15 
-~~~
-{: .output}
-
-
-
-~~~
->>>>>>> 8373998dfe8b1bac38884701bad82eb8463114ba
 data(jdf)
 ~~~
 {: .language-r}
