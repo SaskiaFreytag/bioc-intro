@@ -57,6 +57,7 @@ columns represent:
 We have already downloaded the data and it can be found in the directory
 `course-data/data/GSE96870/`. 
 
+
 You are now ready to load the data:
 
 
@@ -105,7 +106,6 @@ head(rna)
 4 Cerebellum    14    19144
 5 Cerebellum    14    80891
 6 Cerebellum    14    20528
-<<<<<<< HEAD
                                                                        product
 1                               argininosuccinate lyase, transcript variant X1
 2                                       apolipoprotein D, transcript variant 3
@@ -113,15 +113,6 @@ head(rna)
 4                         kallikrein related-peptidase 6, transcript variant 2
 5                Fc receptor-like S, scavenger receptor, transcript variant X1
 6          solute carrier family 2 (facilitated glucose transporter), member 4
-=======
-                                                                   product
-1                            argininosuccinate lyase transcript variant X1
-2                                    apolipoprotein D transcript variant 3
-3 cytochrome P450 family 2 subfamily d polypeptide 22 transcript variant 2
-4                      kallikrein related-peptidase 6 transcript variant 2
-5              Fc receptor-like S scavenger receptor transcript variant X1
-6       solute carrier family 2 (facilitated glucose transporter) member 4
->>>>>>> main
      ensembl_gene_id external_synonym chromosome_name   gene_biotype
 1 ENSMUSG00000025533    2510006M18Rik               5 protein_coding
 2 ENSMUSG00000022548             <NA>              16 protein_coding
@@ -141,11 +132,7 @@ head(rna)
 2                                  APOD
 3                                CYP2D6
 4                                  KLK6
-<<<<<<< HEAD
 5                                 FCRL2
-=======
-5                                 FCRL4
->>>>>>> main
 6                                SLC2A4
 ~~~
 {: .output}
@@ -183,13 +170,6 @@ rna <- read.table(file = "course-data/data/GSE96870/rnaseq.csv",
                   header = TRUE)
 ~~~
 {: .language-r}
-
-
-
-~~~
-Error in scan(file = file, what = what, sep = sep, quote = quote, dec = dec, : line 104 did not have 19 elements
-~~~
-{: .error}
 
 The header argument has to be set to TRUE to be able to read the
 headers as by default `read.table()` has the header argument set to
@@ -239,11 +219,7 @@ str(rna)
  $ tissue                               : chr  "Cerebellum" "Cerebellum" "Cerebellum" "Cerebellum" ...
  $ mouse                                : int  14 14 14 14 14 14 14 14 14 14 ...
  $ ENTREZID                             : int  109900 11815 56448 19144 80891 20528 97827 118454 18823 14696 ...
-<<<<<<< HEAD
  $ product                              : chr  "argininosuccinate lyase, transcript variant X1" "apolipoprotein D, transcript variant 3" "cytochrome P450, family 2, subfamily d, polypeptide 22, transcript variant 2" "kallikrein related-peptidase 6, transcript variant 2" ...
-=======
- $ product                              : chr  "argininosuccinate lyase transcript variant X1" "apolipoprotein D transcript variant 3" "cytochrome P450 family 2 subfamily d polypeptide 22 transcript variant 2" "kallikrein related-peptidase 6 transcript variant 2" ...
->>>>>>> main
  $ ensembl_gene_id                      : chr  "ENSMUSG00000025533" "ENSMUSG00000022548" "ENSMUSG00000061740" "ENSMUSG00000050063" ...
  $ external_synonym                     : chr  "2510006M18Rik" NA "2D22" "Bssp" ...
  $ chromosome_name                      : chr  "5" "16" "15" "7" ...
@@ -626,6 +602,13 @@ plot(sex)
 >        weight = c(45, 8 1.1, 0.8))
 > ~~~
 > {: .language-r}
+> > ## Solution
+> >
+> > - missing quotations around the names of the animals
+> > - missing one entry in the "feel" column (probably for one of the furry animals)
+> > - missing one comma in the weight column
+> >
+> {: .solution}
 {: .challenge}
 
 
@@ -705,6 +688,7 @@ m
 > Using the function `installed.packages()`, create a `character` matrix
 > containing the information about all packages currently installed on
 > your computer. Explore it.
+>
 {: .challenge}
 
 It is often useful to create large random data matrices as test
@@ -717,231 +701,9 @@ data drawn from a normal distribution of mean 0 and standard deviation
 >
 > Construct a matrix of dimension 1000 by 3 of normally distributed data
 > (mean 0, standard deviation 1)
+>
 {: .challenge}
 
-<<<<<<< HEAD
-=======
-
-
-## Formatting Dates
-
-One of the most common issues that new (and experienced!) R users have
-is converting date and time information into a variable that is
-appropriate and usable during analyses.
-
-### Note on dates in spreadsheet programs {-}
-
-Dates in spreadsheets are generally stored in a single column. While
-this seems the most natural way to record dates, it actually is not
-best practice. A spreadsheet application will display the dates in a
-seemingly correct way (to a human observer) but how it actually
-handles and stores the dates may be problematic. It is often much
-safer to store dates with YEAR, MONTH and DAY in separate columns or
-as YEAR and DAY-OF-YEAR in separate columns.
-
-Spreadsheet programs such as LibreOffice, Microsoft Excel, OpenOffice,
-Gnumeric, ... have different (and often incompatible) ways of encoding
-dates (even for the same program between versions and operating
-systems). Additionally, Excel can [turn things that aren't dates into
-dates](https://nsaunders.wordpress.com/2012/10/22/gene-name-errors-and-excel-lessons-not-learned/)
-(@Zeeberg:2004), for example names or identifiers like MAR1, DEC1,
-OCT4. So if you're avoiding the date format overall, it's easier to
-identify these issues.
-
-The [Dates as
-data](https://datacarpentry.org/spreadsheet-ecology-lesson/03-dates-as-data/index.html)
-section of the Data Carpentry lesson provides additional insights
-about pitfalls of dates with spreadsheets.
-
-
-We are going to use the `ymd()` function from the package
-**`lubridate`** (which belongs to the **`tidyverse`**; learn more
-[here](https://www.tidyverse.org/)). . **`lubridate`** gets installed
-as part as the **`tidyverse`** installation. When you load the
-**`tidyverse`** (`library(tidyverse)`), the core packages (the
-packages used in most data analyses) get loaded. **`lubridate`**
-however does not belong to the core tidyverse, so you have to load it
-explicitly with `library(lubridate)`
-
-Start by loading the required package:
-
-
-~~~
-library("lubridate")
-~~~
-{: .language-r}
-
-
-
-~~~
-Warning: package 'lubridate' was built under R version 4.0.2
-~~~
-{: .warning}
-
-`ymd()` takes a vector representing year, month, and day, and converts
-it to a `Date` vector. `Date` is a class of data recognized by R as
-being a date and can be manipulated as such. The argument that the
-function requires is flexible, but, as a best practice, is a character
-vector formatted as "YYYY-MM-DD".
-
-
-Let's create a date object and inspect the structure:
-
-
-~~~
-my_date <- ymd("2015-01-01")
-str(my_date)
-~~~
-{: .language-r}
-
-
-
-~~~
- Date[1:1], format: "2015-01-01"
-~~~
-{: .output}
-
-Now let's paste the year, month, and day separately - we get the same result:
-
-
-~~~
-# sep indicates the character to use to separate each component
-my_date <- ymd(paste("2015", "1", "1", sep = "-"))
-str(my_date)
-~~~
-{: .language-r}
-
-
-
-~~~
- Date[1:1], format: "2015-01-01"
-~~~
-{: .output}
-
-Let's now familiarise ourselves with a typical date manipulation
-pipeline. The small data below has stored dates in different `year`,
-`month` and `day` columns.
-
-
-~~~
-x <- data.frame(year = c(1996, 1992, 1987, 1986, 2000, 1990, 2002, 1994, 1997, 1985),
-                month = c(2,  3,  3, 10,  1,  8,  3,  4,  5,  5),
-                day = c(24,  8,  1,  5,  8, 17, 13, 10, 11, 24),
-                value = c(4,  5,  1,  9,  3,  8, 10,  2,  6,  7))
-x
-~~~
-{: .language-r}
-
-
-
-~~~
-   year month day value
-1  1996     2  24     4
-2  1992     3   8     5
-3  1987     3   1     1
-4  1986    10   5     9
-5  2000     1   8     3
-6  1990     8  17     8
-7  2002     3  13    10
-8  1994     4  10     2
-9  1997     5  11     6
-10 1985     5  24     7
-~~~
-{: .output}
-
-Now we apply this function to the `x` dataset. We first dreate a
-character vector from the `year`, `month`, and `day` columns of `x`
-using `paste()`:
-
-
-~~~
-paste(x$year, x$month, x$day, sep = "-")
-~~~
-{: .language-r}
-
-
-
-~~~
- [1] "1996-2-24" "1992-3-8"  "1987-3-1"  "1986-10-5" "2000-1-8"  "1990-8-17"
- [7] "2002-3-13" "1994-4-10" "1997-5-11" "1985-5-24"
-~~~
-{: .output}
-
-This character vector can be used as the argument for `ymd()`:
-
-
-~~~
-ymd(paste(x$year, x$month, x$day, sep = "-"))
-~~~
-{: .language-r}
-
-
-
-~~~
- [1] "1996-02-24" "1992-03-08" "1987-03-01" "1986-10-05" "2000-01-08"
- [6] "1990-08-17" "2002-03-13" "1994-04-10" "1997-05-11" "1985-05-24"
-~~~
-{: .output}
-
-The resulting `Date` vector can be added to `x` as a new column called `date`:
-
-
-~~~
-x$date <- ymd(paste(x$year, x$month, x$day, sep = "-"))
-str(x) # notice the new column, with 'date' as the class
-~~~
-{: .language-r}
-
-
-
-~~~
-'data.frame':	10 obs. of  5 variables:
- $ year : num  1996 1992 1987 1986 2000 ...
- $ month: num  2 3 3 10 1 8 3 4 5 5
- $ day  : num  24 8 1 5 8 17 13 10 11 24
- $ value: num  4 5 1 9 3 8 10 2 6 7
- $ date : Date, format: "1996-02-24" "1992-03-08" ...
-~~~
-{: .output}
-
-Let's make sure everything worked correctly. One way to inspect the
-new column is to use `summary()`:
-
-
-~~~
-summary(x$date)
-~~~
-{: .language-r}
-
-
-
-~~~
-        Min.      1st Qu.       Median         Mean      3rd Qu.         Max. 
-"1985-05-24" "1988-01-11" "1993-03-24" "1993-03-18" "1997-01-20" "2002-03-13" 
-~~~
-{: .output}
-
-Note that `ymd()` expects to have the year, month and day, in that
-order. If you have for instance day, month and year, you would need
-`dmy()`.
-
-
-~~~
-dmy(paste(x$day, x$month, x$month, sep = "-"))
-~~~
-{: .language-r}
-
-
-
-~~~
- [1] "2002-02-24" "2003-03-08" "2003-03-01" "2010-10-05" "2001-01-08"
- [6] "2008-08-17" "2003-03-13" "2004-04-10" "2005-05-11" "2005-05-24"
-~~~
-{: .output}
-
-`lubdridate` has many functions to address all date variations.
-
->>>>>>> main
 ## Summary of R objects
 
 So far, we have seen several types of R object varying in the number
@@ -994,15 +756,9 @@ str(l)
 List of 5
  $ : int [1:10] 1 2 3 4 5 6 7 8 9 10
  $ : chr [1:26] "a" "b" "c" "d" ...
-<<<<<<< HEAD
- $ : chr [1:397, 1:16] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
+ $ : chr [1:398, 1:16] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:397] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
-=======
- $ : chr [1:795, 1:16] "BiocManager" "Hmisc" "R.utils" "RApiSerialize" ...
-  ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:795] "BiocManager" "Hmisc" "R.utils" "RApiSerialize" ...
->>>>>>> main
+  .. ..$ : chr [1:398] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
   .. ..$ : chr [1:16] "Package" "LibPath" "Version" "Priority" ...
  $ :'data.frame':	50 obs. of  2 variables:
   ..$ speed: num [1:50] 4 4 7 7 8 9 10 10 10 11 ...
