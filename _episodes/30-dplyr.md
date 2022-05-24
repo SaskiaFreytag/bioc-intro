@@ -17,12 +17,6 @@ keypoints:
 
 
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> main
 
 ## Data Manipulation using **`dplyr`** and **`tidyr`**
 
@@ -82,7 +76,6 @@ Instead of `read.csv()`, we will read in our data using the `read_csv()` functio
 tidyverse package **`readr`**, .
 
 
-<<<<<<< HEAD
 
 ~~~
 rna <- read_csv("course-data/data/GSE96870/rnaseq.csv")
@@ -92,7 +85,6 @@ rna <- read_csv("course-data/data/GSE96870/rnaseq.csv")
 
 ~~~
 rna <- read_csv("data/rnaseq.csv")
->>>>>>> main
 
 ## view the data
 rna
@@ -102,18 +94,28 @@ rna
 
 
 ~~~
-Error: <text>:2:1: unexpected '>'
-1: rna <- read_csv("data/rnaseq.csv")
-2: >
-   ^
+# A tibble: 32,428 × 19
+   gene    sample  expression organism   age sex   infection strain  time tissue
+   <chr>   <chr>        <dbl> <chr>    <dbl> <chr> <chr>     <chr>  <dbl> <chr> 
+ 1 Asl     GSM254…       1170 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+ 2 Apod    GSM254…      36194 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+ 3 Cyp2d22 GSM254…       4060 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+ 4 Klk6    GSM254…        287 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+ 5 Fcrls   GSM254…         85 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+ 6 Slc2a4  GSM254…        782 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+ 7 Exd2    GSM254…       1619 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+ 8 Gjc2    GSM254…        288 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+ 9 Plp1    GSM254…      43217 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+10 Gnb4    GSM254…       1071 Mus mus…     8 Fema… Influenz… C57BL…     8 Cereb…
+# … with 32,418 more rows, and 9 more variables: mouse <dbl>, ENTREZID <dbl>,
+#   product <chr>, ensembl_gene_id <chr>, external_synonym <chr>,
+#   chromosome_name <chr>, gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>
 ~~~
-{: .error}
-
-<<<<<<< HEAD
+{: .output}
 
 
-=======
->>>>>>> main
+
 Notice that the class of the data is now referred to as a "tibble".
 
 Tibbles tweak some of the behaviors of the data frame objects we introduced in the
@@ -488,52 +490,13 @@ rna3
 {: .output}
 
 
-<<<<<<< HEAD
+
 > ## Homework Challenge:
-=======
-> ## Challenge:
->>>>>>> main
 >
 > Using pipes, subset the `rna` data to keep genes with an expression higher
 > than 50000 in female mice at time 0, and retain only the columns `gene`,
-> `sample`, `time`, `expression` and `age`
+> `sample`, `time`, `expression` and `age`.
 >
-<<<<<<< HEAD
-=======
-> > ## Solution
-> >
-> > 
-> > ~~~
-> > rna %>%
-> >   filter(expression > 50000,
-> >          sex == "Female",
-> >          time == 0 ) %>%
-> >   select(gene, sample, time, expression, age)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 9 × 5
-> >   gene   sample      time expression   age
-> >   <chr>  <chr>      <dbl>      <dbl> <dbl>
-> > 1 Plp1   GSM2545337     0     101241     8
-> > 2 Atp1b1 GSM2545337     0      53260     8
-> > 3 Plp1   GSM2545338     0      96534     8
-> > 4 Atp1b1 GSM2545338     0      50614     8
-> > 5 Plp1   GSM2545348     0     102790     8
-> > 6 Atp1b1 GSM2545348     0      59544     8
-> > 7 Plp1   GSM2545353     0      71237     8
-> > 8 Glul   GSM2545353     0      52451     8
-> > 9 Atp1b1 GSM2545353     0      61451     8
-> > ~~~
-> > {: .output}
-> >
-> {: .solution}
->>>>>>> main
-{: .challenge}
-
 
 ## Mutate
 
@@ -603,13 +566,8 @@ rna %>%
 {: .output}
 
 
-<<<<<<< HEAD
+
 > ## Homework Challenge
-=======
-
-
-> ## Challenge
->>>>>>> main
 >
 > Create a new data frame from the `rna` data that meets the following criteria:
 > contains only the `gene`, `chromosome_name`, `phenotype_description`, `sample`,
@@ -619,43 +577,6 @@ rna %>%
 > **Hint**: think about how the commands should be ordered to produce
 > this data frame!
 >
->
-<<<<<<< HEAD
-=======
-> > ## Solution
-> >
-> > 
-> > ~~~
-> > rna %>%
-> >   filter(chromosome_name != "X", chromosome_name != "Y") %>%
-> >   mutate(log_expression = log(expression)) %>%
-> >   select(gene, chromosome_name, phenotype_description, sample, log_expression) %>%
-> >   filter(!is.na(phenotype_description))
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 21,054 × 5
-> >    gene    chromosome_name phenotype_description           sample log_expression
-> >    <chr>   <chr>           <chr>                           <chr>           <dbl>
-> >  1 Asl     5               abnormal circulating amino aci… GSM25…           7.06
-> >  2 Apod    16              abnormal lipid homeostasis      GSM25…          10.5 
-> >  3 Cyp2d22 15              abnormal skin morphology        GSM25…           8.31
-> >  4 Klk6    7               abnormal cytokine level         GSM25…           5.66
-> >  5 Fcrls   3               decreased CD8-positive alpha-b… GSM25…           4.44
-> >  6 Slc2a4  11              abnormal circulating glucose l… GSM25…           6.66
-> >  7 Gjc2    11              Purkinje cell degeneration      GSM25…           5.66
-> >  8 Gnb4    3               decreased anxiety-related resp… GSM25…           6.98
-> >  9 Tnc     4               abnormal CNS synaptic transmis… GSM25…           5.39
-> > 10 Trf     9               abnormal circulating phosphate… GSM25…           9.18
-> > # … with 21,044 more rows
-> > ~~~
-> > {: .output}
-> >
-> {: .solution}
->>>>>>> main
 {: .challenge}
 
 ## Split-apply-combine data analysis
@@ -1783,355 +1704,21 @@ so every replicate has the same composition.
 {: .challenge}
 
 
-<<<<<<< HEAD
 > ## Homework Question
-=======
-> ## Question
->>>>>>> main
 >
 > Use the `rna` dataset to create an expression matrix were each row represents
 > the mean expression levels of genes and columns represent the different timepoints.
 >
-<<<<<<< HEAD
-=======
-> > # Solution
-> >
-> > Let's first calculate the mean expression by gene and by time
-> > 
-> > ~~~
-> > rna %>%
-> >   group_by(gene, time) %>%
-> >   summarize(mean_exp = mean(expression))
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > `summarise()` has grouped output by 'gene'. You can override using the
-> > `.groups` argument.
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 4,422 × 3
-> > # Groups:   gene [1,474]
-> >    gene     time mean_exp
-> >    <chr>   <dbl>    <dbl>
-> >  1 Aamp        0  4603.  
-> >  2 Aamp        4  4870   
-> >  3 Aamp        8  4763.  
-> >  4 Abca12      0     5.29
-> >  5 Abca12      4     4.25
-> >  6 Abca12      8     4.14
-> >  7 Abcc8       0  2576.  
-> >  8 Abcc8       4  2609.  
-> >  9 Abcc8       8  2292.  
-> > 10 Abhd14a     0   591.  
-> > # … with 4,412 more rows
-> > ~~~
-> > {: .output}
-> >
-> > before using the pivot_wider() function
-> >
-> > 
-> > ~~~
-> > rna_time <- rna %>%
-> >   group_by(gene, time) %>%
-> >   summarize(mean_exp = mean(expression)) %>%
-> >   pivot_wider(names_from = time,
-> >               values_from = mean_exp)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > `summarise()` has grouped output by 'gene'. You can override using the
-> > `.groups` argument.
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > rna_time
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 1,474 × 4
-> > # Groups:   gene [1,474]
-> >    gene        `0`     `4`     `8`
-> >    <chr>     <dbl>   <dbl>   <dbl>
-> >  1 Aamp    4603.   4870    4763.  
-> >  2 Abca12     5.29    4.25    4.14
-> >  3 Abcc8   2576.   2609.   2292.  
-> >  4 Abhd14a  591.    547.    432.  
-> >  5 Abi2    4881.   4903.   4945.  
-> >  6 Abi3bp  1175.   1061.    762.  
-> >  7 Abl2    2170.   2078.   2131.  
-> >  8 Acadl   2059.   2099    1995.  
-> >  9 Acap3   3745    3446.   3431.  
-> > 10 Acbd4   1219.   1410.   1668.  
-> > # … with 1,464 more rows
-> > ~~~
-> > {: .output}
-> >
-> > Notice that this generates a tibble with some column names starting by a number.
-> > If we wanted to select the column corresponding to the timepoints,
-> > we could not use the column names directly... What happens when we select the colum 4?
-> >
-> > 
-> > ~~~
-> > rna %>%
-> >   group_by(gene, time) %>%
-> >   summarize(mean_exp = mean(expression)) %>%
-> >   pivot_wider(names_from = time,
-> >               values_from = mean_exp) %>%
-> >   select(gene, 4)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > `summarise()` has grouped output by 'gene'. You can override using the
-> > `.groups` argument.
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 1,474 × 2
-> > # Groups:   gene [1,474]
-> >    gene        `8`
-> >    <chr>     <dbl>
-> >  1 Aamp    4763.  
-> >  2 Abca12     4.14
-> >  3 Abcc8   2292.  
-> >  4 Abhd14a  432.  
-> >  5 Abi2    4945.  
-> >  6 Abi3bp   762.  
-> >  7 Abl2    2131.  
-> >  8 Acadl   1995.  
-> >  9 Acap3   3431.  
-> > 10 Acbd4   1668.  
-> > # … with 1,464 more rows
-> > ~~~
-> > {: .output}
-> >
-> > To select the timepoint 4, we would have to quote the column name, with backticks "`"
-> >
-> > 
-> > ~~~
-> > rna %>%
-> >   group_by(gene, time) %>%
-> >   summarize(mean_exp = mean(expression)) %>%
-> >   pivot_wider(names_from = time,
-> >               values_from = mean_exp) %>%
-> >   select(gene, `4`)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > `summarise()` has grouped output by 'gene'. You can override using the
-> > `.groups` argument.
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 1,474 × 2
-> > # Groups:   gene [1,474]
-> >    gene        `4`
-> >    <chr>     <dbl>
-> >  1 Aamp    4870   
-> >  2 Abca12     4.25
-> >  3 Abcc8   2609.  
-> >  4 Abhd14a  547.  
-> >  5 Abi2    4903.  
-> >  6 Abi3bp  1061.  
-> >  7 Abl2    2078.  
-> >  8 Acadl   2099   
-> >  9 Acap3   3446.  
-> > 10 Acbd4   1410.  
-> > # … with 1,464 more rows
-> > ~~~
-> > {: .output}
-> >
-> > Another possibility would be to rename the column,
-> > choosing a name that doesn't start by a number :
-> >
-> > 
-> > ~~~
-> > rna %>%
-> >   group_by(gene, time) %>%
-> >   summarize(mean_exp = mean(expression)) %>%
-> >   pivot_wider(names_from = time,
-> >               values_from = mean_exp) %>%
-> >   rename("time0" = `0`, "time4" = `4`, "time8" = `8`) %>%
-> >   select(gene, time4)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > `summarise()` has grouped output by 'gene'. You can override using the
-> > `.groups` argument.
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 1,474 × 2
-> > # Groups:   gene [1,474]
-> >    gene      time4
-> >    <chr>     <dbl>
-> >  1 Aamp    4870   
-> >  2 Abca12     4.25
-> >  3 Abcc8   2609.  
-> >  4 Abhd14a  547.  
-> >  5 Abi2    4903.  
-> >  6 Abi3bp  1061.  
-> >  7 Abl2    2078.  
-> >  8 Acadl   2099   
-> >  9 Acap3   3446.  
-> > 10 Acbd4   1410.  
-> > # … with 1,464 more rows
-> > ~~~
-> > {: .output}
-> >
-> {: .solution}
->>>>>>> main
 {: .challenge}
 
-
-
-
-<<<<<<< HEAD
 > ## Homeowrk Question
-=======
-> ## Question
->>>>>>> main
 >
 > Use the previous data frame containing mean expression levels per timepoint and create
 > a new column containing fold-changes between timepoint 8 and timepoint 0, and fold-changes
 > between timepoint 8 and timepoint 4.
 > Convert this table in a long-format table gathering the foldchanges calculated.
 >
-<<<<<<< HEAD
-=======
-> > ## Solution
-> >
-> > starting from the rna_time tibble:
-> > 
-> > ~~~
-> > rna_time
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 1,474 × 4
-> > # Groups:   gene [1,474]
-> >    gene        `0`     `4`     `8`
-> >    <chr>     <dbl>   <dbl>   <dbl>
-> >  1 Aamp    4603.   4870    4763.  
-> >  2 Abca12     5.29    4.25    4.14
-> >  3 Abcc8   2576.   2609.   2292.  
-> >  4 Abhd14a  591.    547.    432.  
-> >  5 Abi2    4881.   4903.   4945.  
-> >  6 Abi3bp  1175.   1061.    762.  
-> >  7 Abl2    2170.   2078.   2131.  
-> >  8 Acadl   2059.   2099    1995.  
-> >  9 Acap3   3745    3446.   3431.  
-> > 10 Acbd4   1219.   1410.   1668.  
-> > # … with 1,464 more rows
-> > ~~~
-> > {: .output}
-> >
-> > Calculate FoldChanges:
-> >
-> > 
-> > ~~~
-> > rna_time %>%
-> >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 1,474 × 6
-> > # Groups:   gene [1,474]
-> >    gene        `0`     `4`     `8` time_8_vs_0 time_8_vs_4
-> >    <chr>     <dbl>   <dbl>   <dbl>       <dbl>       <dbl>
-> >  1 Aamp    4603.   4870    4763.         1.03        0.978
-> >  2 Abca12     5.29    4.25    4.14       0.784       0.975
-> >  3 Abcc8   2576.   2609.   2292.         0.889       0.878
-> >  4 Abhd14a  591.    547.    432.         0.731       0.791
-> >  5 Abi2    4881.   4903.   4945.         1.01        1.01 
-> >  6 Abi3bp  1175.   1061.    762.         0.649       0.719
-> >  7 Abl2    2170.   2078.   2131.         0.982       1.03 
-> >  8 Acadl   2059.   2099    1995.         0.969       0.950
-> >  9 Acap3   3745    3446.   3431.         0.916       0.996
-> > 10 Acbd4   1219.   1410.   1668.         1.37        1.18 
-> > # … with 1,464 more rows
-> > ~~~
-> > {: .output}
-> >
-> > And use the pivot_longer() function:
-> >
-> > 
-> > ~~~
-> > rna_time %>%
-> >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`) %>%
-> >   pivot_longer(names_to = "comparisons",
-> >                values_to = "Fold_changes",
-> >                time_8_vs_0:time_8_vs_4)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > # A tibble: 2,948 × 6
-> > # Groups:   gene [1,474]
-> >    gene        `0`     `4`     `8` comparisons Fold_changes
-> >    <chr>     <dbl>   <dbl>   <dbl> <chr>              <dbl>
-> >  1 Aamp    4603.   4870    4763.   time_8_vs_0        1.03 
-> >  2 Aamp    4603.   4870    4763.   time_8_vs_4        0.978
-> >  3 Abca12     5.29    4.25    4.14 time_8_vs_0        0.784
-> >  4 Abca12     5.29    4.25    4.14 time_8_vs_4        0.975
-> >  5 Abcc8   2576.   2609.   2292.   time_8_vs_0        0.889
-> >  6 Abcc8   2576.   2609.   2292.   time_8_vs_4        0.878
-> >  7 Abhd14a  591.    547.    432.   time_8_vs_0        0.731
-> >  8 Abhd14a  591.    547.    432.   time_8_vs_4        0.791
-> >  9 Abi2    4881.   4903.   4945.   time_8_vs_0        1.01 
-> > 10 Abi2    4881.   4903.   4945.   time_8_vs_4        1.01 
-> > # … with 2,938 more rows
-> > ~~~
-> > {: .output}
-> >
->>>>>>> main
-> {: .solution}
 {: .challenge}
-
-
-
-
 
 ## Exporting data
 
