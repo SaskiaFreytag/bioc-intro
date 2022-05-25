@@ -275,7 +275,7 @@ this line because it will fail on someone else's computer.
 
 **Example**
 
-The shema below represents the working directory `bioc-intro` with the
+The schema below represents the working directory `bioc-intro` with the
 `data` and `fig_output` sub-directories, and 2 files in the latter:
 
 ```
@@ -285,7 +285,7 @@ bioc-intro/data/
 ```
 
 If we were in the working directory, we could refer to the `fig1.pdf`
-file using the relative path `bioc-intro/fig_output/fig1.pdf` or the
+file using the relative path `fig_output/fig1.pdf` or the
 absolute path `/home/user/bioc-intro/fig_output/fig1.pdf`.
 
 If we were in the `data` directory, we would use the relative path
@@ -313,10 +313,10 @@ commands, but they will be forgotten when you close the session.
 Because we want our code and workflow to be reproducible, it is better
 to type the commands we want in the script editor, and save the
 script. This way, there is a complete record of what we did, and
-anyone (including our future selves!)  can easily replicate the
+anyone (including our future selves!) can easily replicate the
 results on their computer. Note, however, that merely typing the commands 
 in the script does not automatically *run* them - they still need to 
-be sent to the console for execution. 
+be sent to the console for execution. To open a new script navigate to `File -> New File -> R Script`. In the `File` menu you will also be able to Save the file, for example as `script.R`.
 
 RStudio allows you to execute commands directly from the script editor
 by using the `Ctrl` + `Enter` shortcut (on Macs, `Cmd` + `Return` will

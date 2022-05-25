@@ -1132,8 +1132,8 @@ rna %>%
 > > 
 > > 
 > > ~~~
-> > `summarise()` has grouped output by 'gene'. You can override using the
-> > `.groups` argument.
+> > `summarise()` has grouped output by 'gene'. You can override using the `.groups`
+> > argument.
 > > ~~~
 > > {: .output}
 > > 

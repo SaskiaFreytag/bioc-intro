@@ -588,8 +588,8 @@ mean_exp_by_time <- sub_rna %>%
 
 
 ~~~
-`summarise()` has grouped output by 'gene'. You can override using the
-`.groups` argument.
+`summarise()` has grouped output by 'gene'. You can override using the `.groups`
+argument.
 ~~~
 {: .output}
 
