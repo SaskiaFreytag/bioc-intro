@@ -71,19 +71,17 @@ library("tidyverse")
 Instead of `read.csv()`, we will read in our data using the `read_csv()` function, from the
 tidyverse package **`readr`**, .
 
+```{r, message = FALSE, purl = FALSE, include=FALSE}
+rna <- read_csv("data/rnaseq.csv")
+```
 
 ```{r, message = FALSE, purl = FALSE, eval=FALSE}
 rna <- read_csv("course-data/data/GSE96870/rnaseq.csv")
-=======
-```{r, message = FALSE, purl = FALSE}
-rna <- read_csv("data/rnaseq.csv")
-
-## view the data
-rna
 ```
 
-```{r, message = FALSE, purl = FALSE, include=FALSE}
-rna <- read_csv("data/rnaseq.csv")
+```{r}
+## view the data
+rna
 ```
 
 Notice that the class of the data is now referred to as a "tibble".
