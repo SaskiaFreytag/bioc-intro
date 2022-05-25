@@ -135,7 +135,7 @@ columns are vectors, each column must contain a single type of data
 depicting a data frame comprising a numeric, a character, and a
 logical vector.
 
-![](./figs/data-frame.svg)
+![](../fig/data-frame.svg)
 
 
 We can see this when inspecting the <b>str</b>ucture of a data frame
