@@ -558,7 +558,3 @@ comes from.
 > > {: .language-r}
 > {: .solution}
 {: .challenge}
-
-[^Bioconductor]:The [Bioconductor](http://www.bioconductor.org) was initiated by Robert Gentleman, one of the two creators of the R language. Bioconductor provides  tools dedicated to omics data analysis. Bioconductor uses the R statistical programming language, and is open source and open development.
-
-

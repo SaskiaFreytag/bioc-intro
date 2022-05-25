@@ -698,7 +698,7 @@ seq(from = 1, to = 20, length.out = 3)
 A last group of useful functions are those that generate random
 data. The first one, `sample`, generates a random permutation of
 another vector. For example, to draw a random order to 10 students
-oral exam, I first assign each student a number from 1 to 10 (for
+oral exam, I first assign each student a number from 1 to then (for
 instance based on the alphabetic order of their name) and then:
 
 ```{r}

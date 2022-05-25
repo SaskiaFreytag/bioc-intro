@@ -191,7 +191,7 @@ columns are vectors, each column must contain a single type of data
 depicting a data frame comprising a numeric, a character, and a
 logical vector.
 
-![](./figs/data-frame.svg)
+![](../fig/data-frame.svg)
 
 
 We can see this when inspecting the <b>str</b>ucture of a data frame
@@ -756,9 +756,9 @@ str(l)
 List of 5
  $ : int [1:10] 1 2 3 4 5 6 7 8 9 10
  $ : chr [1:26] "a" "b" "c" "d" ...
- $ : chr [1:398, 1:16] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
+ $ : chr [1:159, 1:16] "AnnotationDbi" "askpass" "assertthat" "backports" ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:398] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
+  .. ..$ : chr [1:159] "AnnotationDbi" "askpass" "assertthat" "backports" ...
   .. ..$ : chr [1:16] "Package" "LibPath" "Version" "Priority" ...
  $ :'data.frame':	50 obs. of  2 variables:
   ..$ speed: num [1:50] 4 4 7 7 8 9 10 10 10 11 ...
@@ -822,8 +822,6 @@ l[1]   ## a list of length 1
 {: .output}
 ## Exporting and saving data {#sec:exportandsave}
 
-**TODO: use `rna` data below.**
-
 ### Exporting tabular data {-}
 
 We have seen how to read a text-based spreadsheet into R using the
@@ -831,12 +829,12 @@ We have seen how to read a text-based spreadsheet into R using the
 text-based spreadsheet, we can use the `write.table` set of functions
 (`write.csv`, `write.delim`, ...). They all take the variable to be
 exported and the file to be exported to. For example, to export the
-`surveys` data to the `my_surveys.csv` file in the `data_output`
+`rna` data to an `rna.csv` file in the `data_output`
 directory, we would execute:
 
 
 ~~~
-write.csv(surveys, file = "data_output/my_surveys.csv")
+write.csv(rna, file = "data_output/rna.csv")
 ~~~
 {: .language-r}
 This new csv file can now be shared with other collaborators who
@@ -859,10 +857,10 @@ function.
 
 
 ~~~
-save(surveys, file = "data_output/surveys.rda")
-rm(surveys)
-load("data_output/surveys.rda")
-head(surveys)
+save(rna, file = "data_output/rna.rda")
+rm(rna)
+load("data_output/rna.rda")
+head(rna)
 ~~~
 {: .language-r}
 
@@ -879,10 +877,10 @@ output of `readRDS` in a variable:
 
 
 ~~~
-saveRDS(surveys, file = "data_output/surveys.rds")
-rm(surveys)
-surveys <- readRDS("data_output/surveys.rds")
-head(surveys)
+saveRDS(rna, file = "data_output/rna.rds")
+rm(rna)
+rna <- readRDS("data_output/rna.rds")
+head(rna)
 ~~~
 {: .language-r}
 

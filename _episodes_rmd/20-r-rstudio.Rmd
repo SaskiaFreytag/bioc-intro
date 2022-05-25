@@ -249,17 +249,13 @@ and we will use `data_output/` for when we learn how to export data as
 CSV files, and `fig_output/` folder for the figures that we will save.
 
 > ## Challenge: create your project directory structure
->
+> Create an RStudio project for this workshop called e.g. bioc-intro, as described above under Getting set up, if you haven't already done that.
 > Under the `Files` tab on the right of the screen, click on `New Folder` and
 > create a folder named `data` within your newly created working directory
 > (e.g., `~/bioc-intro/data`). (Alternatively, type `dir.create("data")` at
 > your R console.) Repeat these operations to create a `data_output/` and a
 > `fig_output` folders.
 {: .challenge}
-
-We are going to keep the script in the root of our working directory
-because we are only going to use one file and it will make things
-easier.
 
 Your working directory should now look like this:
 
@@ -297,7 +293,7 @@ bioc-intro/data/
 ```
 
 If we were in the working directory, we could refer to the `fig1.pdf`
-file using the relative path `fig_output/fig1.pdf` or the
+file using the relative path `bioc-intro/fig_output/fig1.pdf` or the
 absolute path `/home/user/bioc-intro/fig_output/fig1.pdf`.
 
 If we were in the `data` directory, we would use the relative path
@@ -325,10 +321,10 @@ commands, but they will be forgotten when you close the session.
 Because we want our code and workflow to be reproducible, it is better
 to type the commands we want in the script editor, and save the
 script. This way, there is a complete record of what we did, and
-anyone (including our future selves!) can easily replicate the
+anyone (including our future selves!)  can easily replicate the
 results on their computer. Note, however, that merely typing the commands 
 in the script does not automatically *run* them - they still need to 
-be sent to the console for execution. To open a new script navigate to `File -> New File -> R Script`. In the `File` menu you will also be able to Save the file, for example as `script.R`.
+be sent to the console for execution. 
 
 RStudio allows you to execute commands directly from the script editor
 by using the `Ctrl` + `Enter` shortcut (on Macs, `Cmd` + `Return` will
@@ -608,7 +604,7 @@ namely `BiocManager`, that can be installed from CRAN with
 install.packages("BiocManager")
 ```
 
-Individuals package such as `SummarizedExperiment` (we will use it
+Individual packages such as `SummarizedExperiment` (we will use it
 later), `DESeq2` (for RNA-Seq analysis), and many more can then be
 installed with `BiocManager::install`.
 

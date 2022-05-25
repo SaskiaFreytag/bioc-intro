@@ -155,11 +155,7 @@ rna_plot + geom_histogram()
 ~~~
 {: .language-r}
 
-<<<<<<< HEAD
 > ## Homework Challenge
-=======
-> ## Challenge
->>>>>>> main
 >
 > You have probably noticed an automatic message that appears when
 > drawing the histogram:
@@ -428,12 +424,31 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 > > 
 > > ~~~
 > > library("hexbin")
+> > ~~~
+> > {: .language-r}
 > > 
+> > 
+> > 
+> > ~~~
+> > Error in library("hexbin"): there is no package called 'hexbin'
+> > ~~~
+> > {: .error}
+> > 
+> > 
+> > 
+> > ~~~
 > > ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
 > >   geom_hex() +
 > >   geom_abline(intercept = 0)
 > > ~~~
 > > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Warning: Computation failed in `stat_binhex()`:
+> > ~~~
+> > {: .warning}
 > > 
 > > <img src="../fig/rmd-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 > {: .solution}
@@ -588,8 +603,8 @@ mean_exp_by_time <- sub_rna %>%
 
 
 ~~~
-`summarise()` has grouped output by 'gene'. You can override using the `.groups`
-argument.
+`summarise()` has grouped output by 'gene'. You can override using the
+`.groups` argument.
 ~~~
 {: .output}
 
@@ -901,8 +916,7 @@ ggplot(rna, aes(x = expression_log)) +
 >
 > With all of this information in hand, try to create the most ugly plot that
 > you can think about. You can use one  of the plots generated in this exercise 
-> as a starting point. Use the RStudio [**`ggplot2`**
-> cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+> as a starting point. Use the RStudio [**`ggplot2`** cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 > for inspiration. Here are some ideas:
 >
 > - See if you can change the thickness of the lines.
@@ -1094,6 +1108,8 @@ ggsave("fig_output/combo_plot_chromosome_sex.png", combo_plot,
 {: .language-r}
 
 Note: The parameters `width` and `height` also determine the font size in the saved plot.
+
+
 
 ## Other packages for visualisation
 

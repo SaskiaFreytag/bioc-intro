@@ -239,17 +239,13 @@ and we will use `data_output/` for when we learn how to export data as
 CSV files, and `fig_output/` folder for the figures that we will save.
 
 > ## Challenge: create your project directory structure
->
+> Create an RStudio project for this workshop called e.g. bioc-intro, as described above under Getting set up, if you haven't already done that.
 > Under the `Files` tab on the right of the screen, click on `New Folder` and
 > create a folder named `data` within your newly created working directory
 > (e.g., `~/bioc-intro/data`). (Alternatively, type `dir.create("data")` at
 > your R console.) Repeat these operations to create a `data_output/` and a
 > `fig_output` folders.
 {: .challenge}
-
-We are going to keep the script in the root of our working directory
-because we are only going to use one file and it will make things
-easier.
 
 Your working directory should now look like this:
 
@@ -285,7 +281,7 @@ bioc-intro/data/
 ```
 
 If we were in the working directory, we could refer to the `fig1.pdf`
-file using the relative path `fig_output/fig1.pdf` or the
+file using the relative path `bioc-intro/fig_output/fig1.pdf` or the
 absolute path `/home/user/bioc-intro/fig_output/fig1.pdf`.
 
 If we were in the `data` directory, we would use the relative path
@@ -313,10 +309,10 @@ commands, but they will be forgotten when you close the session.
 Because we want our code and workflow to be reproducible, it is better
 to type the commands we want in the script editor, and save the
 script. This way, there is a complete record of what we did, and
-anyone (including our future selves!) can easily replicate the
+anyone (including our future selves!)  can easily replicate the
 results on their computer. Note, however, that merely typing the commands 
 in the script does not automatically *run* them - they still need to 
-be sent to the console for execution. To open a new script navigate to `File -> New File -> R Script`. In the `File` menu you will also be able to Save the file, for example as `script.R`.
+be sent to the console for execution. 
 
 RStudio allows you to execute commands directly from the script editor
 by using the `Ctrl` + `Enter` shortcut (on Macs, `Cmd` + `Return` will
@@ -489,7 +485,7 @@ structure(list(Sepal.Length = c(5.1, 4.9, 4.7, 4.6, 5, 5.4),
     Sepal.Width = c(3.5, 3, 3.2, 3.1, 3.6, 3.9), Petal.Length = c(1.4, 
     1.4, 1.3, 1.5, 1.4, 1.7), Petal.Width = c(0.2, 0.2, 0.2, 
     0.2, 0.2, 0.4), Species = structure(c(1L, 1L, 1L, 1L, 1L, 
-    1L), .Label = c("setosa", "versicolor", "virginica"), class = "factor")), row.names = c(NA, 
+    1L), levels = c("setosa", "versicolor", "virginica"), class = "factor")), row.names = c(NA, 
 6L), class = "data.frame")
 ~~~
 {: .output}
@@ -532,16 +528,19 @@ sessionInfo()
 
 
 ~~~
-R version 4.1.3 (2022-03-10)
-Platform: aarch64-apple-darwin20 (64-bit)
-Running under: macOS Monterey 12.2.1
+R version 4.2.0 (2022-04-22)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 20.04.4 LTS
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRlapack.dylib
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 
 locale:
-[1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
+ [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -550,7 +549,7 @@ other attached packages:
 [1] knitr_1.39
 
 loaded via a namespace (and not attached):
-[1] compiler_4.1.3 magrittr_2.0.3 tools_4.1.3    stringi_1.7.6  highr_0.9     
+[1] compiler_4.2.0 magrittr_2.0.3 tools_4.2.0    stringi_1.7.6  highr_0.9     
 [6] stringr_1.4.0  xfun_0.31      evaluate_0.15 
 ~~~
 {: .output}
@@ -650,7 +649,7 @@ install.packages("BiocManager")
 ~~~
 {: .language-r}
 
-Individuals package such as `SummarizedExperiment` (we will use it
+Individual packages such as `SummarizedExperiment` (we will use it
 later), `DESeq2` (for RNA-Seq analysis), and many more can then be
 installed with `BiocManager::install`.
 

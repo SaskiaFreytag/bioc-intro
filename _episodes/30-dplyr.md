@@ -77,15 +77,14 @@ tidyverse package **`readr`**, .
 
 
 
+
 ~~~
 rna <- read_csv("course-data/data/GSE96870/rnaseq.csv")
-=======
 ~~~
 {: .language-r}
 
-~~~
-rna <- read_csv("data/rnaseq.csv")
 
+~~~
 ## view the data
 rna
 ~~~
@@ -113,8 +112,6 @@ rna
 #   hsapiens_homolog_associated_gene_name <chr>
 ~~~
 {: .output}
-
-
 
 Notice that the class of the data is now referred to as a "tibble".
 
@@ -1132,8 +1129,8 @@ rna %>%
 > > 
 > > 
 > > ~~~
-> > `summarise()` has grouped output by 'gene'. You can override using the `.groups`
-> > argument.
+> > `summarise()` has grouped output by 'gene'. You can override using the
+> > `.groups` argument.
 > > ~~~
 > > {: .output}
 > > 
@@ -1589,7 +1586,7 @@ so every replicate has the same composition.
 
 
 
-> ## Question
+> ## Challenge
 >
 > Subset genes located on X and Y chromosomes from the `rna` data frame and
 > spread the data frame with `sex` as columns, `chromosome_name` as
@@ -1704,19 +1701,13 @@ so every replicate has the same composition.
 {: .challenge}
 
 
-> ## Homework Question
+> ## Homework Challenge
 >
-> Use the `rna` dataset to create an expression matrix were each row represents
+> 1. Use the `rna` dataset to create an expression table where each row represents
 > the mean expression levels of genes and columns represent the different timepoints.
->
-{: .challenge}
-
-> ## Homeowrk Question
->
-> Use the previous data frame containing mean expression levels per timepoint and create
+> 2. Use the previous table containing mean expression levels per timepoint and create
 > a new column containing fold-changes between timepoint 8 and timepoint 0, and fold-changes
-> between timepoint 8 and timepoint 4.
-> Convert this table in a long-format table gathering the foldchanges calculated.
+> between timepoint 8 and timepoint 4. Convert this table into a long-format table gathering the foldchanges calculated.
 >
 {: .challenge}
 
