@@ -393,19 +393,6 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > char_logical <- c("a", "b", "c", TRUE)
 > combined_logical <- c(num_logical, char_logical)
 > ```
-<<<<<<< HEAD
-=======
-> > ## Solution
-> >
-> > Only one. There is no memory of past data types, and the coercion
-> > happens the first time the vector is evaluated. Therefore, the `TRUE`
-> > in `num_logical` gets converted into a `1` before it gets converted
-> > into `"1"` in `combined_logical`.
-> >```{r}
-> > combined_logical
-> > ```
-> {: .solution}
->>>>>>> main
 {: .challenge}
 
 
