@@ -249,17 +249,13 @@ and we will use `data_output/` for when we learn how to export data as
 CSV files, and `fig_output/` folder for the figures that we will save.
 
 > ## Challenge: create your project directory structure
->
+> Create an RStudio project for this workshop called e.g. bioc-intro, as described above under Getting set up, if you haven't already done that.
 > Under the `Files` tab on the right of the screen, click on `New Folder` and
 > create a folder named `data` within your newly created working directory
 > (e.g., `~/bioc-intro/data`). (Alternatively, type `dir.create("data")` at
 > your R console.) Repeat these operations to create a `data_output/` and a
 > `fig_output` folders.
 {: .challenge}
-
-We are going to keep the script in the root of our working directory
-because we are only going to use one file and it will make things
-easier.
 
 Your working directory should now look like this:
 
@@ -287,7 +283,7 @@ this line because it will fail on someone else's computer.
 
 **Example**
 
-The shema below represents the working directory `bioc-intro` with the
+The schema below represents the working directory `bioc-intro` with the
 `data` and `fig_output` sub-directories, and 2 files in the latter:
 
 ```
