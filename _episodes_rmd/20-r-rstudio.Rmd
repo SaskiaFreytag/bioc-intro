@@ -604,7 +604,7 @@ namely `BiocManager`, that can be installed from CRAN with
 install.packages("BiocManager")
 ```
 
-Individuals package such as `SummarizedExperiment` (we will use it
+Individual packages such as `SummarizedExperiment` (we will use it
 later), `DESeq2` (for RNA-Seq analysis), and many more can then be
 installed with `BiocManager::install`.
 
