@@ -61,11 +61,16 @@ Objects of the class SummarizedExperiment contain :
 - A **feature metadata** slot containing feature co-variates, stored as
   data frame. The rows of this dataframe's match exactly the rows of the
   expression data.
+  
+
+### Benefits of SummarizedExperiment format
+
+
+#### Coordination of samples and features
 
 The coordinated nature of the SummarizedExperiment guarantees that
-during data manipulation, the
-dimensions of the different slots will always match (i.e the columns
-in the expression data and then rows in the sample metadata, as well
+during data manipulation, the dimensions of the different slots will always match (i.e the columns
+in the expression data and the rows in the sample metadata, as well
 as the rows in the expression data and feature metadata) during data
 manipulation. For example, if we had to exclude one sample from the assay,
 it would be automatically removed from the sample metadata in the same operation.
@@ -73,9 +78,11 @@ it would be automatically removed from the sample metadata in the same operation
 The metadata slots can grow additional co-variates
 (columns) without affecting the other structures.
 
-There are a lot of R packages that make use of SummarizedExperiment format. If you follow a training focused on RNA sequencing analysis, you may learn to
-use the Bioconductor `DESeq2` package to do some differential expression analyses.
-`DESeq2`'s whole analysis is handled in a `SummarizedExperiment`. You can see packages making use of SummarizedExperiment format (Depend or Import) on the [SummarizedExperiment homepage](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html), some shown in the screenshot below.
+#### Interoperability between packages
+
+There are a lot of R packages that make use of SummarizedExperiment format. If you follow a training focused on RNA sequencing analysis, you may learn to use the Bioconductor `DESeq2` package to do some differential expression analyses. `DESeq2`'s whole analysis is handled in a `SummarizedExperiment`. Or if you perform RNA sequencing analysis following tidy principles with the [tidybulk](https://stemangiola.github.io/tidybulk/) package you can input your data in SummarizedExperiment format. 
+
+You can see packages making use of SummarizedExperiment (Depend/Import) on the [SummarizedExperiment homepage](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html), some shown in the screenshot below.
 
 
 ```{r SE-packages,  echo=FALSE, out.width = '80%'}
@@ -329,7 +336,22 @@ library("tidySummarizedExperiment")
 se
 ```
 
-It's still a SummarizedExperiment object, so maintains the efficient structure, but now we can view it as a tibble. Note the first line of the output says this, it's a SummarizedExperiment-tibble abstraction. We can also see in the second line of the output the number of transcripts and samples. We can now use tidyverse commands to interact with the SummarizedExperiment object.
+It's still a SummarizedExperiment object, so maintains the efficient structure, but now we can view it as a tibble. Note the first line of the output says this, it's a SummarizedExperiment-tibble abstraction. We can also see in the second line of the output the number of transcripts and samples. 
+
+If we want to revert to the standard SummarizedExperiment view we can do that.
+```{r}
+options("restore_SummarizedExperiment_show" = TRUE)
+se
+```
+
+But here we will use the tibble view.
+
+```{r}
+options("restore_SummarizedExperiment_show" = FALSE)
+se
+```
+
+We can now use tidyverse commands to interact with the SummarizedExperiment object.
 
 We can use `slice` to choose rows by number e.g. to choose the first row.
 
@@ -439,7 +461,7 @@ knitr::include_graphics("https://bioconductor.org/books/release/OSCA.intro/image
 
 The [Orchestrating Single-Cell Analysis with Bioconductor book](https://bioconductor.org/books/release/OSCA/) is a great resource for single cell analysis that describes using SingleCellExperiment.
 
-There is [tidySingleCellExperiment](https://stemangiola.github.io/tidySingleCellExperiment/) for interacting with SingleCellExperiment objects.
+As there is tidySummarizedExperiment for interacting with SummarizedExperiment objects using tidyverse commands, there is equivalently the [tidySingleCellExperiment](https://stemangiola.github.io/tidySingleCellExperiment/) package for SingleCellExperiment objects.
 
 ### Interactive exploration
 
