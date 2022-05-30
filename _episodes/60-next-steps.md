@@ -11,14 +11,14 @@ objectives:
 - Introduce the notion of data containers
 - Give an overview of the `SummarizedExperiment`, extensively used in omics analyses
 keypoints:
-- "Tabular data in R"
+- "`SummarizedExperiment` represent an efficient way to store and to handle omics data"
+- "SummarizedExperiment is used in many Bioconductor packages"
+- "We can use tidySummarizedExperiment to interact with SummarizedExperiment using tidyverse commands"
 ---
 
 
 
 ## Next steps
-
-
 
 Data in bioinformatics is often complex.
 To deal with this, developers define specialised
@@ -29,7 +29,7 @@ This aspect is central to the **Bioconductor**[^Bioconductor] project which
 uses the same **core data infrastructure** across packages. This certainly contributed
 to Bioconductor's success. Bioconductor package developers are advised to make
 use of existing infrastructure to provide coherence, interoperability and stability to
-the project as a whole.
+the project as a whole. You will learn more about Bioconductor in the next episode.
 
 
 [^Bioconductor]:The [Bioconductor](http://www.bioconductor.org) was initiated by Robert Gentleman, one of the two creators of the R language. Bioconductor provides  tools dedicated to omics data analysis. Bioconductor uses the R statistical programming language, and is open source and open development.
@@ -59,11 +59,16 @@ Objects of the class SummarizedExperiment contain :
 - A **feature metadata** slot containing feature co-variates, stored as
   data frame. The rows of this dataframe's match exactly the rows of the
   expression data.
+  
+
+### Benefits of SummarizedExperiment format
+
+
+#### Coordination of samples and features
 
 The coordinated nature of the SummarizedExperiment guarantees that
-during data manipulation, the
-dimensions of the different slots will always match (i.e the columns
-in the expression data and then rows in the sample metadata, as well
+during data manipulation, the dimensions of the different slots will always match (i.e the columns
+in the expression data and the rows in the sample metadata, as well
 as the rows in the expression data and feature metadata) during data
 manipulation. For example, if we had to exclude one sample from the assay,
 it would be automatically removed from the sample metadata in the same operation.
@@ -71,20 +76,58 @@ it would be automatically removed from the sample metadata in the same operation
 The metadata slots can grow additional co-variates
 (columns) without affecting the other structures.
 
+#### Interoperability between packages
 
+There are a lot of R packages that make use of SummarizedExperiment format. If you follow a training focused on RNA sequencing analysis, you may learn to use the Bioconductor `DESeq2` package to do some differential expression analyses. `DESeq2`'s whole analysis is handled in a `SummarizedExperiment`. Or if you perform RNA sequencing analysis following tidy principles with the [tidybulk](https://stemangiola.github.io/tidybulk/) package you can input your data in SummarizedExperiment format. 
+
+You can see packages making use of SummarizedExperiment (Depend/Import) on the [SummarizedExperiment homepage](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html), some shown in the screenshot below.
+
+
+<img src="../fig/summarizedexperiment_packages.png" title="plot of chunk SE-packages" alt="plot of chunk SE-packages" width="80%" style="display: block; margin: auto;" />
 
 ### Creating a SummarizedExperiment
 
+We will demonstrate what SummarizedExperiment is by creating one. We will use the `rna` dataset again.
+
+We start by loading the tidyverse packages which we will use to import and format the data.
 
 
-Remember the `rna` dataset that we have used previously.
+~~~
+library("tidyverse")
+~~~
+{: .language-r}
 
-From this table we have already created 3 different tables.
 
+
+Load the `rna` data.
+
+
+~~~
+rna <- read_csv("course-data/data/GSE96870/rnaseq.csv")
+~~~
+{: .language-r}
+
+From this table we will create the 3 different tables we need to create a SummarizedExperiment.
+ 
 - **An expression matrix**
 
 
 ~~~
+# Select the columns needed and convert to wide format
+counts <- rna %>%
+  select(gene, sample, expression) %>%
+  pivot_wider(names_from = sample,
+              values_from = expression)
+
+# Convert to matrix format
+count_matrix <- counts %>% 
+    select(-gene) %>% 
+    as.matrix()
+
+# Set gene ids as rownames
+rownames(count_matrix) <- counts$gene
+
+# Take a look
 count_matrix[1:5, ]
 ~~~
 {: .language-r}
@@ -133,11 +176,18 @@ dim(count_matrix)
 ~~~
 {: .output}
 
-
 - **A table describing the samples**
 
 
 ~~~
+# Select the columns needed 
+sample_metadata <- rna %>%
+  select(sample, organism, age, sex, infection, strain, time, tissue, mouse)
+
+# Remove redundancy
+sample_metadata <- unique(sample_metadata)
+
+# Take a look
 sample_metadata
 ~~~
 {: .language-r}
@@ -166,6 +216,14 @@ sample_metadata
 
 
 ~~~
+# Select the columns needed 
+gene_metadata <- rna %>%
+    select(gene, ENTREZID, product, ensembl_gene_id, external_synonym, chromosome_name, gene_biotype, phenotype_description, hsapiens_homolog_associated_gene_name)
+
+# Remove redundancy
+gene_metadata <- unique(gene_metadata)
+
+# Take a look
 gene_metadata
 ~~~
 {: .language-r}
@@ -209,9 +267,11 @@ library("SummarizedExperiment")
 ~~~
 {: .language-r}
 
+To create the `SummarizedExperiment` object we need to provide inputs for the arguments `assays` (count matrix), `colData` (sample metadata) and `rowData` (gene metadata). Because `assays` can accept multiple assays (e.g. raw counts, log normalized) we put them in a list (SimpleList) and give each assay a name (we'll use counts). We can see we need to do this in the help for the SummarizedExperiment function `?SummarizedExperiment `.
+
 
 ~~~
-se <- SummarizedExperiment(assays = count_matrix,
+se <- SummarizedExperiment(assays = SimpleList(counts=count_matrix),
                            colData = sample_metadata,
                            rowData = gene_metadata)
 se
@@ -224,7 +284,7 @@ se
 class: SummarizedExperiment 
 dim: 1474 22 
 metadata(0):
-assays(1): ''
+assays(1): counts
 rownames(1474): Asl Apod ... Lmx1a Pbx1
 rowData names(9): gene ENTREZID ... phenotype_description
   hsapiens_homolog_associated_gene_name
@@ -233,11 +293,51 @@ colData names(9): sample organism ... tissue mouse
 ~~~
 {: .output}
 
+We will save this SummarizedExperiment object in case we need it later.
+
+
+~~~
+save(se, file = "data/SE.rda")
+~~~
+{: .language-r}
+
+### Exploring a SummarizedExperiment
+
+If we check size of our data in tabular format
+
+
+~~~
+print(object.size(rna), units = "MB")
+~~~
+{: .language-r}
+
+
+
+~~~
+5.2 Mb
+~~~
+{: .output}
+
+And compare to our data in SummarizedExperiment format
+
+
+~~~
+print(object.size(se), units = "MB")
+~~~
+{: .language-r}
+
+
+
+~~~
+1.1 Mb
+~~~
+{: .output}
+
+We can see SummarizedExperiment format has reduced the size ~ 5 fold, providing a very efficient way to store the data.
 
 
 Using this data structure, we can access the expression matrix with
 the `assay` function:
-
 
 
 ~~~
@@ -405,10 +505,117 @@ dim(rowData(se))
 ### Subsetting a SummarizedExperiment
 
 SummarizedExperiment can be subset just like with data frames,
-with numerics or with characters of logicals.
+with numerics, characters or logicals. 
 
-Below, we create a new instance of class SummarizedExperiment that contains only
-the 5 first features for the 3 first samples.
+Importantly, the sample and feature are coordinated. If we need to exclude one sample from the assay, it will be automatically removed from the sample metadata in the same operation. 
+
+Let's try that. Imagine we've discovered we need to exclude GSM2545336 as it's a failed sample. We can do that with below.
+
+
+~~~
+se_good <- se[, se$sample != "GSM2545336"]
+~~~
+{: .language-r}
+
+We can check the dimensions and see that we now have 21 samples instead of 22.
+
+
+~~~
+dim(se_good)
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 1474   21
+~~~
+{: .output}
+
+If we take a look at the sample metadata we can see GSM2545336 is no longer there.
+
+
+~~~
+colData(se_good)
+~~~
+{: .language-r}
+
+
+
+~~~
+DataFrame with 21 rows and 9 columns
+                sample     organism       age         sex   infection
+           <character>  <character> <numeric> <character> <character>
+GSM2545337  GSM2545337 Mus musculus         8      Female NonInfected
+GSM2545338  GSM2545338 Mus musculus         8      Female NonInfected
+GSM2545339  GSM2545339 Mus musculus         8      Female  InfluenzaA
+GSM2545340  GSM2545340 Mus musculus         8        Male  InfluenzaA
+GSM2545341  GSM2545341 Mus musculus         8        Male  InfluenzaA
+...                ...          ...       ...         ...         ...
+GSM2545353  GSM2545353 Mus musculus         8      Female NonInfected
+GSM2545354  GSM2545354 Mus musculus         8        Male NonInfected
+GSM2545362  GSM2545362 Mus musculus         8      Female  InfluenzaA
+GSM2545363  GSM2545363 Mus musculus         8        Male  InfluenzaA
+GSM2545380  GSM2545380 Mus musculus         8      Female  InfluenzaA
+                strain      time      tissue     mouse
+           <character> <numeric> <character> <numeric>
+GSM2545337     C57BL/6         0  Cerebellum         9
+GSM2545338     C57BL/6         0  Cerebellum        10
+GSM2545339     C57BL/6         4  Cerebellum        15
+GSM2545340     C57BL/6         4  Cerebellum        18
+GSM2545341     C57BL/6         8  Cerebellum         6
+...                ...       ...         ...       ...
+GSM2545353     C57BL/6         0  Cerebellum         4
+GSM2545354     C57BL/6         0  Cerebellum         2
+GSM2545362     C57BL/6         4  Cerebellum        20
+GSM2545363     C57BL/6         4  Cerebellum        12
+GSM2545380     C57BL/6         8  Cerebellum        19
+~~~
+{: .output}
+
+If we take a look at the counts we can see GSM2545336 is no longer there.
+
+
+~~~
+head(assay(se_good))
+~~~
+{: .language-r}
+
+
+
+~~~
+        GSM2545337 GSM2545338 GSM2545339 GSM2545340 GSM2545341 GSM2545342
+Asl            361        400        586        626        988        836
+Apod         10347       9173      10620      13021      29594      24959
+Cyp2d22       1616       1603       1901       2171       3349       3122
+Klk6           629        641        578        448        195        186
+Fcrls          233        244        237        180         38         68
+Slc2a4         231        248        265        313        786        528
+        GSM2545343 GSM2545344 GSM2545345 GSM2545346 GSM2545347 GSM2545348
+Asl            535        586        597        938       1035        494
+Apod         13668      13230      15868      27769      34301      11258
+Cyp2d22       2008       2254       2277       2985       3452       1883
+Klk6          1101        537        567        327        233        742
+Fcrls          375        199        177         89         67        300
+Slc2a4         249        266        357        654        693        271
+        GSM2545349 GSM2545350 GSM2545351 GSM2545352 GSM2545353 GSM2545354
+Asl            481        666        937        803        541        473
+Apod         11812      15816      29242      20415      13682      11088
+Cyp2d22       2014       2417       3678       2920       2216       1821
+Klk6           881        828        250        798        710        894
+Fcrls          233        231         81        303        285        248
+Slc2a4         304        349        715        513        320        248
+        GSM2545362 GSM2545363 GSM2545380
+Asl            748        576       1192
+Apod         15916      11166      38148
+Cyp2d22       2842       2011       4019
+Klk6           501        598        259
+Fcrls          179        184         68
+Slc2a4         350        317        796
+~~~
+{: .output}
+
+To make a smaller dataset to examine further, we will subset our `se` object. We will create a new instance of class SummarizedExperiment that contains only the first 5 features (genes) for the first 3 samples.
 
 
 ~~~
@@ -423,7 +630,7 @@ se1
 class: SummarizedExperiment 
 dim: 5 3 
 metadata(0):
-assays(1): ''
+assays(1): counts
 rownames(5): Asl Apod Cyp2d22 Klk6 Fcrls
 rowData names(9): gene ENTREZID ... phenotype_description
   hsapiens_homolog_associated_gene_name
@@ -490,7 +697,6 @@ Fcrls                                   FCRL2
 ~~~
 {: .output}
 
-
 We can also use the `colData()` function to subset on something from the sample metadata, or the `rowData()` to subset on something from the feature metadata.
 For example, here we keep only miRNAs and the non infected samples:
 
@@ -508,7 +714,7 @@ se1
 class: SummarizedExperiment 
 dim: 7 7 
 metadata(0):
-assays(1): ''
+assays(1): counts
 rownames(7): Mir1901 Mir378a ... Mir128-1 Mir7682
 rowData names(9): gene ENTREZID ... phenotype_description
   hsapiens_homolog_associated_gene_name
@@ -620,24 +826,9 @@ Mir7682                                     NA
 {: .output}
 
 
-
-
-For the following exercise, you should download the SE.rda object
-(that contains the `se` object), and open the file using the
-'load()' function.
-
-
-~~~
-download.file(url = "https://raw.githubusercontent.com/UCLouvain-CBIO/bioinfo-training-01-intro-r/master/data/SE.rda",
-              destfile = "data/SE.rda")
-
-load(file = "data/SE.rda")
-~~~
-{: .language-r}
-
 > ## Challenge
 >
-> Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8.
+> Extract the gene expression levels of the first 3 genes in samples at time 0 and at time 8.
 >
 > > ## Solution
 > >
@@ -742,15 +933,526 @@ GSM2545380     C57BL/6         8  Cerebellum        19 University of Illinois
 This illustrates that the metadata slots can grow indefinitely without affecting
 the other structures!
 
+## tidySummarizedExperiment
+
+You may be wondering, can we use tidyverse commands to interact with SummarizedExperiment objects. The answer is yes, we can with the tidySummarizedExperiment package.
+
+Remember what our SummarizedExperiment object looks like.
 
 
-**Take-home message**
+~~~
+se
+~~~
+{: .language-r}
 
 
-- `SummarizedExperiment` represent an efficient way to store and to handle omics data.
 
-- They are used in many Bioconductor packages.
+~~~
+class: SummarizedExperiment 
+dim: 1474 22 
+metadata(0):
+assays(1): counts
+rownames(1474): Asl Apod ... Lmx1a Pbx1
+rowData names(9): gene ENTREZID ... phenotype_description
+  hsapiens_homolog_associated_gene_name
+colnames(22): GSM2545336 GSM2545337 ... GSM2545363 GSM2545380
+colData names(10): sample organism ... mouse center
+~~~
+{: .output}
 
-If you follow next training focused on RNA sequencing analysis, you will learn to
-use the Bioconductor `DESeq2` package to do some differential expression analyses.
-`DESeq2`'s whole analysis is handled in a `SummarizedExperiment`.
+Load tidySummarizedExperiment and then take a look at the se object again.
+
+
+~~~
+#BiocManager::install("tidySummarizedExperiment")
+library("tidySummarizedExperiment")
+
+se
+~~~
+{: .language-r}
+
+
+
+~~~
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts sample organism   age sex   infection strain  time
+   <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+ 1 Asl      GSM2545336   1170 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 2 Apod     GSM2545336  36194 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 3 Cyp2d22  GSM2545336   4060 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 4 Klk6     GSM2545336    287 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 5 Fcrls    GSM2545336     85 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 6 Slc2a4   GSM2545336    782 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 7 Exd2     GSM2545336   1619 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 8 Gjc2     GSM2545336    288 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 9 Plp1     GSM2545336  43217 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+10 Gnb4     GSM2545336   1071 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+# … with 40 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+#   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>
+~~~
+{: .output}
+
+It's still a SummarizedExperiment object, so maintains the efficient structure, but now we can view it as a tibble. Note the first line of the output says this, it's a SummarizedExperiment-tibble abstraction. We can also see in the second line of the output the number of transcripts and samples. 
+
+If we want to revert to the standard SummarizedExperiment view we can do that.
+
+~~~
+options("restore_SummarizedExperiment_show" = TRUE)
+se
+~~~
+{: .language-r}
+
+
+
+~~~
+class: SummarizedExperiment 
+dim: 1474 22 
+metadata(0):
+assays(1): counts
+rownames(1474): Asl Apod ... Lmx1a Pbx1
+rowData names(9): gene ENTREZID ... phenotype_description
+  hsapiens_homolog_associated_gene_name
+colnames(22): GSM2545336 GSM2545337 ... GSM2545363 GSM2545380
+colData names(10): sample organism ... mouse center
+~~~
+{: .output}
+
+But here we will use the tibble view.
+
+
+~~~
+options("restore_SummarizedExperiment_show" = FALSE)
+se
+~~~
+{: .language-r}
+
+
+
+~~~
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts sample organism   age sex   infection strain  time
+   <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+ 1 Asl      GSM2545336   1170 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 2 Apod     GSM2545336  36194 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 3 Cyp2d22  GSM2545336   4060 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 4 Klk6     GSM2545336    287 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 5 Fcrls    GSM2545336     85 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 6 Slc2a4   GSM2545336    782 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 7 Exd2     GSM2545336   1619 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 8 Gjc2     GSM2545336    288 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 9 Plp1     GSM2545336  43217 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+10 Gnb4     GSM2545336   1071 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+# … with 40 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+#   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>
+~~~
+{: .output}
+
+We can now use tidyverse commands to interact with the SummarizedExperiment object.
+
+We can use `slice` to choose rows by number e.g. to choose the first row.
+
+
+~~~
+se %>% 
+    slice(1)
+~~~
+{: .language-r}
+
+
+
+~~~
+# A SummarizedExperiment-tibble abstraction: 1 × 1
+# [90mFeatures=1 | Samples=1 | Assays=counts[0m
+  .feature .sample    counts sample  organism   age sex   infection strain  time
+  <chr>    <chr>       <dbl> <chr>   <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+1 Asl      GSM2545336   1170 GSM254… Mus mus…     8 Fema… Influenz… C57BL…     8
+# … with 12 more variables: tissue <chr>, mouse <dbl>, center <chr>,
+#   gene <chr>, ENTREZID <dbl>, product <chr>, ensembl_gene_id <chr>,
+#   external_synonym <chr>, chromosome_name <chr>, gene_biotype <chr>,
+#   phenotype_description <chr>, hsapiens_homolog_associated_gene_name <chr>
+~~~
+{: .output}
+
+We can use `filter` to filter for rows using a condition e.g. to remove a failed sample.
+
+
+~~~
+se %>% 
+    filter(.sample != "GSM2545336")
+~~~
+{: .language-r}
+
+
+
+~~~
+# A SummarizedExperiment-tibble abstraction: 30,954 × 21
+# [90mFeatures=1474 | Samples=21 | Assays=counts[0m
+   .feature .sample    counts sample organism   age sex   infection strain  time
+   <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+ 1 Asl      GSM2545337    361 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 2 Apod     GSM2545337  10347 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 3 Cyp2d22  GSM2545337   1616 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 4 Klk6     GSM2545337    629 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 5 Fcrls    GSM2545337    233 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 6 Slc2a4   GSM2545337    231 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 7 Exd2     GSM2545337   2288 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 8 Gjc2     GSM2545337    595 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 9 Plp1     GSM2545337 101241 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+10 Gnb4     GSM2545337   1791 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+# … with 40 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+#   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>
+~~~
+{: .output}
+
+We can use `select` to specify columns we want to view. 
+
+
+~~~
+se %>% 
+    select(.sample)
+~~~
+{: .language-r}
+
+
+
+~~~
+tidySummarizedExperiment says: Key columns are missing. A data frame is returned for independent data analysis.
+~~~
+{: .output}
+
+
+
+~~~
+# A tibble: 32,428 × 1
+   .sample   
+   <chr>     
+ 1 GSM2545336
+ 2 GSM2545336
+ 3 GSM2545336
+ 4 GSM2545336
+ 5 GSM2545336
+ 6 GSM2545336
+ 7 GSM2545336
+ 8 GSM2545336
+ 9 GSM2545336
+10 GSM2545336
+# … with 32,418 more rows
+~~~
+{: .output}
+
+
+~~~
+se %>%
+    count(.sample)
+~~~
+{: .language-r}
+
+
+
+~~~
+tidySummarizedExperiment says: A data frame is returned for independent data analysis.
+~~~
+{: .output}
+
+
+
+~~~
+# A tibble: 22 × 2
+   .sample        n
+   <chr>      <int>
+ 1 GSM2545336  1474
+ 2 GSM2545337  1474
+ 3 GSM2545338  1474
+ 4 GSM2545339  1474
+ 5 GSM2545340  1474
+ 6 GSM2545341  1474
+ 7 GSM2545342  1474
+ 8 GSM2545343  1474
+ 9 GSM2545344  1474
+10 GSM2545345  1474
+# … with 12 more rows
+~~~
+{: .output}
+
+We can use `distinct` to see what distinct sample information we have.
+
+
+~~~
+se %>%
+    distinct(.sample, infection, sex)
+~~~
+{: .language-r}
+
+
+
+~~~
+tidySummarizedExperiment says: A data frame is returned for independent data analysis.
+~~~
+{: .output}
+
+
+
+~~~
+# A tibble: 22 × 3
+   .sample    sex    infection  
+   <chr>      <chr>  <chr>      
+ 1 GSM2545336 Female InfluenzaA 
+ 2 GSM2545337 Female NonInfected
+ 3 GSM2545338 Female NonInfected
+ 4 GSM2545339 Female InfluenzaA 
+ 5 GSM2545340 Male   InfluenzaA 
+ 6 GSM2545341 Male   InfluenzaA 
+ 7 GSM2545342 Female InfluenzaA 
+ 8 GSM2545343 Male   NonInfected
+ 9 GSM2545344 Female InfluenzaA 
+10 GSM2545345 Male   InfluenzaA 
+# … with 12 more rows
+~~~
+{: .output}
+
+We can use `mutate` to add metadata info.
+
+
+~~~
+se %>%
+    mutate(center = "University of Melbourne")
+~~~
+{: .language-r}
+
+
+
+~~~
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts sample organism   age sex   infection strain  time
+   <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+ 1 Asl      GSM2545336   1170 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 2 Apod     GSM2545336  36194 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 3 Cyp2d22  GSM2545336   4060 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 4 Klk6     GSM2545336    287 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 5 Fcrls    GSM2545336     85 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 6 Slc2a4   GSM2545336    782 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 7 Exd2     GSM2545336   1619 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 8 Gjc2     GSM2545336    288 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 9 Plp1     GSM2545336  43217 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+10 Gnb4     GSM2545336   1071 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+# … with 40 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+#   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>
+~~~
+{: .output}
+
+We can use `unite` to combine multiple columns into a single column.
+
+
+~~~
+se %>%
+    unite("group", c(infection, time))
+~~~
+{: .language-r}
+
+
+
+~~~
+tidySummarizedExperiment says: Key columns are missing. A data frame is returned for independent data analysis.
+~~~
+{: .output}
+
+
+
+~~~
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample counts sample organism   age sex   group strain tissue mouse
+   <chr>    <chr>    <dbl> <chr>  <chr>    <dbl> <chr> <chr> <chr>  <chr>  <dbl>
+ 1 Asl      GSM254…   1170 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 2 Apod     GSM254…  36194 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 3 Cyp2d22  GSM254…   4060 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 4 Klk6     GSM254…    287 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 5 Fcrls    GSM254…     85 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 6 Slc2a4   GSM254…    782 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 7 Exd2     GSM254…   1619 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 8 Gjc2     GSM254…    288 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 9 Plp1     GSM254…  43217 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+10 Gnb4     GSM254…   1071 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+# … with 40 more rows, and 10 more variables: center <chr>, gene <chr>,
+#   ENTREZID <dbl>, product <chr>, ensembl_gene_id <chr>,
+#   external_synonym <chr>, chromosome_name <chr>, gene_biotype <chr>,
+#   phenotype_description <chr>, hsapiens_homolog_associated_gene_name <chr>
+~~~
+{: .output}
+
+We can also combine commands with the tidyverse pipe `%>%`.
+
+For example, we could combine `group_by` and `summarise` to get the total counts for each sample.
+
+
+~~~
+se %>%
+    group_by(.sample) %>%
+    summarise(total_counts=sum(counts))
+~~~
+{: .language-r}
+
+
+
+~~~
+tidySummarizedExperiment says: A data frame is returned for independent data analysis.
+~~~
+{: .output}
+
+
+
+~~~
+# A tibble: 22 × 2
+   .sample    total_counts
+   <chr>             <dbl>
+ 1 GSM2545336      3039671
+ 2 GSM2545337      2602360
+ 3 GSM2545338      2458618
+ 4 GSM2545339      2500082
+ 5 GSM2545340      2479024
+ 6 GSM2545341      2413723
+ 7 GSM2545342      2349728
+ 8 GSM2545343      3105652
+ 9 GSM2545344      2524137
+10 GSM2545345      2506038
+# … with 12 more rows
+~~~
+{: .output}
+
+We can treat `se` as a normal tibble for plotting.
+
+Here we plot the distribution of counts per sample.
+
+
+~~~
+se %>%
+    ggplot(aes(counts + 1, group=.sample, color=infection)) +
+    geom_density() +
+    scale_x_log10() +
+    theme_bw()
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-tidySE-plot-1.png" title="plot of chunk tidySE-plot" alt="plot of chunk tidySE-plot" width="612" style="display: block; margin: auto;" />
+
+
+> ## Challenge
+> > 1. Extract the miRNA and NonInfected this time using tidyverse commands
+> >
+> > ## Solution
+> >
+> > 
+> > ~~~
+> > se %>% 
+> > filter(gene_biotype == "miRNA" & infection == "NonInfected")
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > # A SummarizedExperiment-tibble abstraction: 49 × 7
+> > # [90mFeatures=7 | Samples=7 | Assays=counts[0m
+> >    .feature .sample    counts sample organism   age sex   infection strain  time
+> >    <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+> >  1 Mir1901  GSM2545337     45 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  2 Mir378a  GSM2545337     11 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  3 Mir133b  GSM2545337      4 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  4 Mir30c-2 GSM2545337     10 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  5 Mir149   GSM2545337      1 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  6 Mir128-1 GSM2545337      4 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  7 Mir7682  GSM2545337      2 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  8 Mir1901  GSM2545338     44 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  9 Mir378a  GSM2545338      7 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> > 10 Mir133b  GSM2545338      6 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> > # … with 39 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+> > #   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+> > #   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+> > #   gene_biotype <chr>, phenotype_description <chr>,
+> > #   hsapiens_homolog_associated_gene_name <chr>
+> > ~~~
+> > {: .output}
+> {: .solution}
+> >
+> >
+> > 2. Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8 this time using tidyverse commands
+> >
+> > ## Solution
+> >
+> > 
+> > ~~~
+> > se %>% 
+> >   filter(time == 0 | time == 8) %>% 
+> >   group_by(.sample) %>% 
+> >   slice(1:3)
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > tidySummarizedExperiment says: A data frame is returned for independent data analysis.
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> > # A tibble: 42 × 22
+> > # Groups:   .sample [14]
+> >    .feature .sample    counts sample organism   age sex   infection strain  time
+> >    <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+> >  1 Asl      GSM2545336   1170 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+> >  2 Apod     GSM2545336  36194 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+> >  3 Cyp2d22  GSM2545336   4060 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+> >  4 Asl      GSM2545337    361 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  5 Apod     GSM2545337  10347 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  6 Cyp2d22  GSM2545337   1616 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  7 Asl      GSM2545338    400 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  8 Apod     GSM2545338   9173 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  9 Cyp2d22  GSM2545338   1603 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> > 10 Asl      GSM2545341    988 GSM25… Mus mus…     8 Male  Influenz… C57BL…     8
+> > # … with 32 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+> > #   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+> > #   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+> > #   gene_biotype <chr>, phenotype_description <chr>,
+> > #   hsapiens_homolog_associated_gene_name <chr>
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
+
+## Extensions to SummarizedExperiment
+
+### SingleCellExperiment
+
+The [SingleCellExperiment](https://bioconductor.org/packages/devel/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html) container extends SummarizedExperiment. It follows similar conventions but is for single-cell data. Rows represent features (genes, transcripts, genomic regions) and columns represent cells. It provides methods for storing dimensionality reduction results and data for alternative feature sets (e.g., synthetic spike-in transcripts, antibody-derived tags). It is the central data structure for Bioconductor single-cell packages.
+
+<img src="https://bioconductor.org/books/release/OSCA.intro/images/SingleCellExperiment.png" title="plot of chunk SCE" alt="plot of chunk SCE" width="80%" style="display: block; margin: auto;" />
+
+The [Orchestrating Single-Cell Analysis with Bioconductor book](https://bioconductor.org/books/release/OSCA/) is a great resource for single cell analysis that describes using SingleCellExperiment.
+
+As there is tidySummarizedExperiment for interacting with SummarizedExperiment objects using tidyverse commands, there is equivalently the [tidySingleCellExperiment](https://stemangiola.github.io/tidySingleCellExperiment/) package for SingleCellExperiment objects.
+
+### Interactive exploration
+
+[iSEE](https://bioconductor.org/packages/release/bioc/vignettes/iSEE/inst/doc/basic.html) is a Bioconductor package that provides an interactive graphical user interface for exploring data stored in SummarizedExperiment and SingleCellExperiment objects.
+
+<img src="https://raw.githubusercontent.com/iSEE/iSEE/master/vignettes/screenshots/basic-demo.png" title="plot of chunk iSEE" alt="plot of chunk iSEE" width="80%" style="display: block; margin: auto;" />
+
