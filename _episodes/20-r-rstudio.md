@@ -253,7 +253,7 @@ CSV files, and `fig_output/` folder for the figures that we will save.
 
 Your working directory should now look like this:
 
-<img src="../fig/r-starting-how-it-should-look-like.png" title="How it should look like at the beginning of this lesson" alt="How it should look like at the beginning of this lesson" width="100%" style="display: block; margin: auto;" />
+<img src="../fig/r-starting-how-it-should-look-like1.png" title="How it should look like at the beginning of this lesson" alt="How it should look like at the beginning of this lesson" width="100%" style="display: block; margin: auto;" />
 
 ### The working directory
 
