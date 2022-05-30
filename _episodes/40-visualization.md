@@ -424,31 +424,12 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 > > 
 > > ~~~
 > > library("hexbin")
-> > ~~~
-> > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > Error in library("hexbin"): there is no package called 'hexbin'
-> > ~~~
-> > {: .error}
-> > 
-> > 
-> > 
-> > ~~~
 > > ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
 > >   geom_hex() +
 > >   geom_abline(intercept = 0)
 > > ~~~
 > > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > Warning: Computation failed in `stat_binhex()`:
-> > ~~~
-> > {: .warning}
 > > 
 > > <img src="../fig/rmd-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 > {: .solution}

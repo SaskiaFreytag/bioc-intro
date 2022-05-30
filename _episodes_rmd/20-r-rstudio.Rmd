@@ -193,6 +193,10 @@ tutorial below.
 4. Click on `Create project`.
 5. (Optional) Set Preferences to 'Never' save workspace in RStudio.
 
+To finish off our project directory let's move the `course-data` into the project. Use the `...` to move into the directory that contains the `bioc-intro` project that we just created. Then locate the `course-data` folder and check the box next to the folder then click on `More` at the top of the files pane. In the `More` menu, find `Move` and choose to move the folder into the `bioc-intro` project. Let's also make a script by navigating to 
+`File` -> `New File` -> `R Script`, this will open an empty file called `Untitled.R`. Let's save this using `File` -> `Save` and choose the name `script.R` (this can also be achieved 
+using shortcuts). 
+
 RStudio's default preferences generally work well, but saving a workspace to
 .RData can be cumbersome, especially if you are working with larger datasets.
 To turn that off, go to Tools --> 'Global Options' and select the 'Never' option
@@ -251,9 +255,9 @@ CSV files, and `fig_output/` folder for the figures that we will save.
 > ## Challenge: create your project directory structure
 > Create an RStudio project for this workshop called e.g. bioc-intro, as described above under Getting set up, if you haven't already done that.
 > Under the `Files` tab on the right of the screen, click on `New Folder` and
-> create a folder named `data` within your newly created working directory
-> (e.g., `~/bioc-intro/data`). (Alternatively, type `dir.create("data")` at
-> your R console.) Repeat these operations to create a `data_output/` and a
+> create a folder named `data_output` within your newly created working directory
+> (e.g., `~/bioc-intro/data_output`). (Alternatively, type `dir.create("data_output")` at
+> your R console.) Repeat these operations to create a
 > `fig_output` folders.
 {: .challenge}
 
