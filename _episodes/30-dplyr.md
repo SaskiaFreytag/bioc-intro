@@ -495,6 +495,8 @@ rna3
 > than 50000 in female mice at time 0, and retain only the columns `gene`,
 > `sample`, `time`, `expression` and `age`.
 >
+{: .challenge}
+
 
 ## Mutate
 
@@ -1288,7 +1290,7 @@ rna_exp
 3. the `values_from`: the column whose values will fill the new
    columns.
 
-![](./figs/pivot_wider.png)
+![](../fig/spread_data_R.png)
 
 
 ~~~
@@ -1332,52 +1334,6 @@ one expression value, in GSM2545338 sample.
 
 
 
-
-
-~~~
-rna_with_missing_values
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 7 × 3
-  gene    sample     expression
-  <chr>   <chr>           <dbl>
-1 Asl     GSM2545336       1170
-2 Apod    GSM2545336      36194
-3 Asl     GSM2545337        361
-4 Apod    GSM2545337      10347
-5 Asl     GSM2545338        400
-6 Apod    GSM2545338       9173
-7 Cyp2d22 GSM2545338       1603
-~~~
-{: .output}
-
-By default, the `pivot_wider()` function will add `NA` for missing values.
-
-
-~~~
-rna_with_missing_values %>%
-  pivot_wider(names_from = sample,
-              values_from = expression)
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 3 × 4
-  gene    GSM2545336 GSM2545337 GSM2545338
-  <chr>        <dbl>      <dbl>      <dbl>
-1 Asl           1170        361        400
-2 Apod         36194      10347       9173
-3 Cyp2d22         NA         NA       1603
-~~~
-{: .output}
-
-
 ### Pivoting data into a longer format
 
 In the opposite situation we are using the column names and turning them into
@@ -1395,7 +1351,7 @@ associated with the column names.
 4. the names of the columns to be used to populate the `names_to` and
    `values_to` variables (or to drop).
 
-![](./figs/pivot_longer.png)
+![](../fig/gather_data_R.png)
 
 To recreate `rna_long` from `rna_long` we would create a key
 called `sample` and value called `expression` and use all columns
@@ -1502,89 +1458,6 @@ rna_wide %>%
 {: .output}
 
 
-
-Note that if we had missing values in the wide-format, the `NA` would be
-included in the new long format.
-
-Remember our previous fictive tibble containing missing values:
-
-
-~~~
-rna_with_missing_values
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 7 × 3
-  gene    sample     expression
-  <chr>   <chr>           <dbl>
-1 Asl     GSM2545336       1170
-2 Apod    GSM2545336      36194
-3 Asl     GSM2545337        361
-4 Apod    GSM2545337      10347
-5 Asl     GSM2545338        400
-6 Apod    GSM2545338       9173
-7 Cyp2d22 GSM2545338       1603
-~~~
-{: .output}
-
-
-
-~~~
-wide_with_NA <- rna_with_missing_values %>%
-  pivot_wider(names_from = sample,
-              values_from = expression)
-wide_with_NA
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 3 × 4
-  gene    GSM2545336 GSM2545337 GSM2545338
-  <chr>        <dbl>      <dbl>      <dbl>
-1 Asl           1170        361        400
-2 Apod         36194      10347       9173
-3 Cyp2d22         NA         NA       1603
-~~~
-{: .output}
-
-
-
-~~~
-wide_with_NA %>%
-    pivot_longer(names_to = "sample",
-                 values_to = "expression",
-                 -gene)
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 9 × 3
-  gene    sample     expression
-  <chr>   <chr>           <dbl>
-1 Asl     GSM2545336       1170
-2 Asl     GSM2545337        361
-3 Asl     GSM2545338        400
-4 Apod    GSM2545336      36194
-5 Apod    GSM2545337      10347
-6 Apod    GSM2545338       9173
-7 Cyp2d22 GSM2545336         NA
-8 Cyp2d22 GSM2545337         NA
-9 Cyp2d22 GSM2545338       1603
-~~~
-{: .output}
-
-Pivoting to wider and longer formats can be a useful way to balance out a dataset
-so every replicate has the same composition.
-
-
-
 > ## Challenge
 >
 > Subset genes located on X and Y chromosomes from the `rna` data frame and
@@ -1592,7 +1465,7 @@ so every replicate has the same composition.
 > rows, and the mean expression of genes located in each chromosome as the values,
 > as in the following tibble:
 >
-> ![](./figs/Exercise_pivot_W.png)
+> ![](../fig/Exercise_pivot_W.png)
 >
 > You will need to summarize before reshaping!
 >
