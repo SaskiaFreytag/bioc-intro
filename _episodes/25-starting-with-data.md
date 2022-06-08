@@ -280,7 +280,7 @@ objects besides `data.frame`.
 > >
 > > - class: data frame
 > > - how many rows: 32428, how many columns: 19
-> > - how many genes: 1477
+> > - how many genes: 1474
 > {: .solution}
 {: .challenge}
 
