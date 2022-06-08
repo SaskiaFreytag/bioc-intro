@@ -393,16 +393,6 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > char_logical <- c("a", "b", "c", TRUE)
 > combined_logical <- c(num_logical, char_logical)
 > ```
-> > ## Solution
-> >
-> > Only one. There is no memory of past data types, and the coercion
-> > happens the first time the vector is evaluated. Therefore, the `TRUE`
-> > in `num_logical` gets converted into a `1` before it gets converted
-> > into `"1"` in `combined_logical`.
-> >```{r}
-> > combined_logical
-> > ```
-> {: .solution}
 {: .challenge}
 
 
@@ -413,9 +403,7 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > whereby some types get preferentially coerced into other types. Can
 > you draw a diagram that represents the hierarchy of how these data
 > types are coerced?
-> > ## Solution
-> > logical &#8594; numeric &#8594; character &#8592; logical
-> {: .solution}
+>
 {: .challenge}
 
 
@@ -531,18 +519,8 @@ molecules[molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")]
 > ## Homework Challenge:
 >
 > Can you figure out why `"four" > "five"` returns `TRUE`?
-> > ## Solution
-> >
-> > ```{r}
-> > "four" > "five"
-> > ```
-> >
-> > When using `>` or `<` on strings, R compares their alphabetical order.
-> > Here `"four"` comes after `"five"`, and therefore is *greater than*
-> > it.
-> {: .solution}
+>
 {: .challenge}
-
 
 
 ## Names
@@ -617,23 +595,8 @@ heights[complete.cases(heights)]
 > 2. Use the function `median()` to calculate the median of the `heights` vector.
 > 3. Use R to figure out how many people in the set are taller than 67 inches.
 >
-> > ## Solution
-> >```{r}
-> >heights_no_na <- heights[!is.na(heights)]
-> >## or
-> >heights_no_na <- na.omit(heights)
-> >```
-> >
-> >```{r}
-> >median(heights, na.rm = TRUE)
-> >```
-> >
-> >```{r}
-> >heights_above_67 <- heights_no_na[heights_no_na > 67]
-> >length(heights_above_67)
-> >```
-> {: .solution}
 {: .challenge}
+
 
 ## Generating vectors {#sec:genvec}
 
@@ -667,12 +630,6 @@ There are similar constructors for characters and logicals, named
 >
 > What are the defaults for character and logical vectors?
 >
-> > ## Solution
-> > ```{r}
-> > character(2) ## the empty charater
-> > logical(2)   ## FALSE
-> > ```
-> {: .solution}
 {: .challenge}
 
 ### Replicate elements
@@ -707,12 +664,6 @@ rep(c(1, 2, 3), 5)
 > obtain five 1s, five 2s and five 3s in that order? There are two
 > possibilities - see `?rep` or `?sort` for help.
 >
-> > ## Solution
-> > ```{r}
-> > rep(c(1, 2, 3), each = 5)
-> > sort(rep(c(1, 2, 3), 5))
-> > ```
-> {: .solution}
 {: .challenge}
 
 ### Sequence generation
@@ -788,34 +739,7 @@ sample(1:5, 10, replace = TRUE)
 >
 > - Repeat by setting a different seed.
 >
-> > ## Solution
-> > Different permutations
-> >
-> > ```{r}
-> > sample(1:10)
-> > sample(1:10)
-> > ```
-> >
-> > Same permutations with seed 123
-> >
-> > ```{r}
-> > set.seed(123)
-> > sample(1:10)
-> > set.seed(123)
-> > sample(1:10)
-> > ```
-> >
-> > A different seed
-> >
-> > ```{r}
-> > set.seed(1)
-> > sample(1:10)
-> > set.seed(1)
-> > sample(1:10)
-> > ```
-> {: .solution}
 {: .challenge}
-
 
 ### Homework reading: Drawing samples from a normal distribution
 
