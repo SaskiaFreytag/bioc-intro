@@ -59,6 +59,7 @@ To install and load the **`tidyverse`** package type:
 
 ~~~
 BiocManager::install("tidyverse")
+# no need to run this command as it's already been installed for you
 ~~~
 {: .language-r}
 
@@ -1086,7 +1087,6 @@ rna %>%
 > > ## 3.
 > > rna %>%
 > >   filter(sample == "GSM2545336") %>%
-> >   group_by(gene_biotype) %>%
 > >   count(gene_biotype) %>%
 > >   arrange(desc(n))
 > > ~~~
@@ -1096,7 +1096,6 @@ rna %>%
 > > 
 > > ~~~
 > > # A tibble: 13 × 2
-> > # Groups:   gene_biotype [13]
 > >    gene_biotype                           n
 > >    <chr>                              <int>
 > >  1 protein_coding                      1321
@@ -1594,7 +1593,7 @@ Similar to the `read_csv()` function used for reading CSV files into R, there is
 a `write_csv()` function that generates CSV files from data frames.
 
 Before using `write_csv()`, we are going to create a new folder, `data_output`,
-in our working directory that will store this generated dataset. We don't want
+in our working directory (if we haven't already created it) that will store this generated dataset. We don't want
 to write generated datasets in the same directory as our raw data.
 It's good practice to keep them separate. The `data` folder should only contain
 the raw, unaltered data, and should be left alone to make sure we don't delete

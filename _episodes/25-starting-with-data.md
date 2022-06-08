@@ -279,7 +279,7 @@ objects besides `data.frame`.
 > > ## Solution
 > >
 > > - class: data frame
-> > - how many rows: 66465, how many columns: 11
+> > - how many rows: 32428, how many columns: 19
 > > - how many genes: 1477
 > {: .solution}
 {: .challenge}
@@ -323,7 +323,7 @@ You can also exclude certain indices of a data frame using the "`-`" sign:
 
 ~~~
 rna[, -1]          ## The whole data frame, except the first column
-rna[-c(7:66465), ] ## Equivalent to head(rna)
+rna[-c(7:32428), ] ## Equivalent to head(rna)
 ~~~
 {: .language-r}
 
@@ -870,9 +870,9 @@ directly in the global environment.
 
 There is also the `saveRDS` and `readRDS` functions that save R
 objects to binary files (using the `rds` extension here) and read
-these back into R. From a user's perspective, main different is that,
-`load` loads an object in the gloval environment while `readRDS` reads
-the data from disk and returns it. It is this necessary to store the
+these back into R. From a user's perspective, main difference is that,
+`load` loads an object in the global environment while `readRDS` reads
+the data from disk and returns it. It is thus necessary to store the
 output of `readRDS` in a variable:
 
 
