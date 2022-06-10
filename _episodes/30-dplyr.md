@@ -1290,7 +1290,7 @@ rna_exp
 3. the `values_from`: the column whose values will fill the new
    columns.
 
-![](../fig/spread_data_R.png)
+![](../fig/gatherspread_modified.jpeg)
 
 
 ~~~
@@ -1351,7 +1351,7 @@ associated with the column names.
 4. the names of the columns to be used to populate the `names_to` and
    `values_to` variables (or to drop).
 
-![](../fig/gather_data_R.png)
+![](../fig/gatherspread_modified.jpeg)
 
 To recreate `rna_long` from `rna_long` we would create a key
 called `sample` and value called `expression` and use all columns
