@@ -1157,6 +1157,8 @@ rna %>%
 
 ## Reshaping data
 
+![](../fig/gatherspread_modified.jpeg)
+
 In the `rna` tibble, the rows contain expression values (the unit) that are
 associated with a combination of 2 other variables: `gene` and `sample`.
 
@@ -1290,7 +1292,6 @@ rna_exp
 3. the `values_from`: the column whose values will fill the new
    columns.
 
-![](../fig/gatherspread_modified.jpeg)
 
 
 ~~~
@@ -1350,8 +1351,6 @@ associated with the column names.
    current values;
 4. the names of the columns to be used to populate the `names_to` and
    `values_to` variables (or to drop).
-
-![](../fig/gatherspread_modified.jpeg)
 
 To recreate `rna_long` from `rna_long` we would create a key
 called `sample` and value called `expression` and use all columns
