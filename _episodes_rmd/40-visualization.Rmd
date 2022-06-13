@@ -428,7 +428,15 @@ ggplot(data = rna,
 {: .challenge}
 
 > ## Homework Challenge
-> - Modify the violin plot to fill in the violins by `sex`.
+> Boxplots are useful summaries, but hide the *shape* of the
+> distribution. For example, if the distribution is bimodal, we would
+> not see it in a boxplot. An alternative to the boxplot is the violin
+> plot, where the shape (of the density of points) is drawn.
+>
+> 1. Replace the box plot with a violin plot; see `geom_violin()`. 
+> 2. Fill in the violins according to the time with the argument `fill`.
+> 3. Modify the violin plot to fill in the violins by `sex`.
+>
 {: .challenge}
 
 ## Line plots
