@@ -281,7 +281,7 @@ bioc-intro/data/
 ```
 
 If we were in the working directory, we could refer to the `fig1.pdf`
-file using the relative path `bioc-intro/fig_output/fig1.pdf` or the
+file using the relative path `fig_output/fig1.pdf` or the
 absolute path `/home/user/bioc-intro/fig_output/fig1.pdf`.
 
 If we were in the `data` directory, we would use the relative path
@@ -485,7 +485,7 @@ structure(list(Sepal.Length = c(5.1, 4.9, 4.7, 4.6, 5, 5.4),
     Sepal.Width = c(3.5, 3, 3.2, 3.1, 3.6, 3.9), Petal.Length = c(1.4, 
     1.4, 1.3, 1.5, 1.4, 1.7), Petal.Width = c(0.2, 0.2, 0.2, 
     0.2, 0.2, 0.4), Species = structure(c(1L, 1L, 1L, 1L, 1L, 
-    1L), levels = c("setosa", "versicolor", "virginica"), class = "factor")), row.names = c(NA, 
+    1L), .Label = c("setosa", "versicolor", "virginica"), class = "factor")), row.names = c(NA, 
 6L), class = "data.frame")
 ~~~
 {: .output}
@@ -528,19 +528,16 @@ sessionInfo()
 
 
 ~~~
-R version 4.2.0 (2022-04-22)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.4 LTS
+R version 4.1.3 (2022-03-10)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.2.1
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+BLAS:   /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRlapack.dylib
 
 locale:
- [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
- [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
- [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+[1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -549,7 +546,7 @@ other attached packages:
 [1] knitr_1.39
 
 loaded via a namespace (and not attached):
-[1] compiler_4.2.0 magrittr_2.0.3 tools_4.2.0    stringi_1.7.6  highr_0.9     
+[1] compiler_4.1.3 magrittr_2.0.3 tools_4.1.3    stringi_1.7.6  highr_0.9     
 [6] stringr_1.4.0  xfun_0.31      evaluate_0.15 
 ~~~
 {: .output}

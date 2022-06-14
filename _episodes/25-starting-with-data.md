@@ -689,6 +689,24 @@ m
 > containing the information about all packages currently installed on
 > your computer. Explore it.
 >
+> > ## Solution:
+> >
+> > 
+> > ~~~
+> > ## create the matrix
+> > ip <- installed.packages()
+> > head(ip)
+> > ## try also View(ip)
+> > ## number of package
+> > nrow(ip)
+> > ## names of all installed packages
+> > rownames(ip)
+> > ## type of information we have about each package
+> > colnames(ip)
+> > ~~~
+> > {: .language-r}
+> >
+> {: .solution}
 {: .challenge}
 
 It is often useful to create large random data matrices as test
@@ -702,6 +720,44 @@ data drawn from a normal distribution of mean 0 and standard deviation
 > Construct a matrix of dimension 1000 by 3 of normally distributed data
 > (mean 0, standard deviation 1)
 >
+> > ## Solution
+> >
+> > 
+> > ~~~
+> > set.seed(123)
+> > m <- matrix(rnorm(3000), ncol = 3)
+> > dim(m)
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > [1] 1000    3
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> > head(m)
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> >             [,1]        [,2]       [,3]
+> > [1,] -0.56047565 -0.99579872 -0.5116037
+> > [2,] -0.23017749 -1.03995504  0.2369379
+> > [3,]  1.55870831 -0.01798024 -0.5415892
+> > [4,]  0.07050839 -0.13217513  1.2192276
+> > [5,]  0.12928774 -2.54934277  0.1741359
+> > [6,]  1.71506499  1.04057346 -0.6152683
+> > ~~~
+> > {: .output}
+> >
+> {: .solution}
 {: .challenge}
 
 ## Summary of R objects
@@ -756,9 +812,9 @@ str(l)
 List of 5
  $ : int [1:10] 1 2 3 4 5 6 7 8 9 10
  $ : chr [1:26] "a" "b" "c" "d" ...
- $ : chr [1:166, 1:16] "AnnotationDbi" "askpass" "assertthat" "backports" ...
+ $ : chr [1:399, 1:16] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:166] "AnnotationDbi" "askpass" "assertthat" "backports" ...
+  .. ..$ : chr [1:399] "abind" "annotate" "AnnotationDbi" "AnnotationHub" ...
   .. ..$ : chr [1:16] "Package" "LibPath" "Version" "Priority" ...
  $ :'data.frame':	50 obs. of  2 variables:
   ..$ speed: num [1:50] 4 4 7 7 8 9 10 10 10 11 ...
