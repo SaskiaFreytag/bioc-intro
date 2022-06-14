@@ -489,6 +489,22 @@ m
 > containing the information about all packages currently installed on
 > your computer. Explore it.
 >
+> > ## Solution:
+> >
+> > ```{r pkg_sln, eval = FALSE}
+> > ## create the matrix
+> > ip <- installed.packages()
+> > head(ip)
+> > ## try also View(ip)
+> > ## number of package
+> > nrow(ip)
+> > ## names of all installed packages
+> > rownames(ip)
+> > ## type of information we have about each package
+> > colnames(ip)
+> > ```
+> >
+> {: .solution}
 {: .challenge}
 
 It is often useful to create large random data matrices as test
@@ -502,6 +518,16 @@ data drawn from a normal distribution of mean 0 and standard deviation
 > Construct a matrix of dimension 1000 by 3 of normally distributed data
 > (mean 0, standard deviation 1)
 >
+> > ## Solution
+> >
+> > ```{r rnormmat_sln}
+> > set.seed(123)
+> > m <- matrix(rnorm(3000), ncol = 3)
+> > dim(m)
+> > head(m)
+> > ```
+> >
+> {: .solution}
 {: .challenge}
 
 ## Summary of R objects

@@ -233,6 +233,17 @@ rna3
 > than 50000 in female mice at time 0, and retain only the columns `gene`,
 > `sample`, `time`, `expression` and `age`.
 >
+> > ## Solution
+> >
+> > ```{r}
+> > rna %>%
+> >   filter(expression > 50000,
+> >          sex == "Female",
+> >          time == 0 ) %>%
+> >   select(gene, sample, time, expression, age)
+> > ```
+> >
+> {: .solution}
 {: .challenge}
 
 
@@ -271,6 +282,17 @@ rna %>%
 > **Hint**: think about how the commands should be ordered to produce
 > this data frame!
 >
+> > ## Solution
+> >
+> > ```{r, eval=TRUE, purl=FALSE}
+> > rna %>%
+> >   filter(chromosome_name != "X", chromosome_name != "Y") %>%
+> >   mutate(log_expression = log(expression)) %>%
+> >   select(gene, chromosome_name, phenotype_description, sample, log_expression) %>%
+> >   filter(!is.na(phenotype_description))
+> > ```
+> >
+> {: .solution}
 {: .challenge}
 
 ## Split-apply-combine data analysis
@@ -427,9 +449,6 @@ rna %>%
   count(infection, time) %>%
   arrange(desc(n))
 ```
-
-
-
 
 > ## Challenge
 >
@@ -668,6 +687,81 @@ rna_wide %>%
 > a new column containing fold-changes between timepoint 8 and timepoint 0, and fold-changes
 > between timepoint 8 and timepoint 4. Convert this table into a long-format table gathering the foldchanges calculated.
 >
+> > # Solution
+> >
+> > Let's first calculate the mean expression by gene and by time
+> > ```{r}
+> > rna %>%
+> >   group_by(gene, time) %>%
+> >   summarize(mean_exp = mean(expression))
+> > ```
+> >
+> > before using the pivot_wider() function
+> >
+> > ```{r}
+> > rna_time <- rna %>%
+> >   group_by(gene, time) %>%
+> >   summarize(mean_exp = mean(expression)) %>%
+> >   pivot_wider(names_from = time,
+> >               values_from = mean_exp)
+> > rna_time
+> > ```
+> >
+> > Notice that this generates a tibble with some column names starting by a number.
+> > If we wanted to select the column corresponding to the timepoints,
+> > we could not use the column names directly... What happens when we select the colum 4?
+> >
+> > ```{r}
+> > rna %>%
+> >   group_by(gene, time) %>%
+> >   summarize(mean_exp = mean(expression)) %>%
+> >   pivot_wider(names_from = time,
+> >               values_from = mean_exp) %>%
+> >   select(gene, 4)
+> > ```
+> >
+> > To select the timepoint 4, we would have to quote the column name, with backticks "`"
+> >
+> > ```{r}
+> > rna %>%
+> >   group_by(gene, time) %>%
+> >   summarize(mean_exp = mean(expression)) %>%
+> >   pivot_wider(names_from = time,
+> >               values_from = mean_exp) %>%
+> >   select(gene, `4`)
+> > ```
+> >
+> > Another possibility would be to rename the column,
+> > choosing a name that doesn't start by a number :
+> >
+> > ```{r}
+> > rna_time <- rna %>%
+> >   group_by(gene, time) %>%
+> >   summarize(mean_exp = mean(expression)) %>%
+> >   pivot_wider(names_from = time,
+> >               values_from = mean_exp) %>%
+> >   rename("time0" = `0`, "time4" = `4`, "time8" = `8`) %>%
+> >   select(gene, time4)
+> > ```
+> >
+> > Calculate FoldChanges:
+> >
+> > ```{r}
+> > rna_time %>%
+> >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`)
+> > ```
+> >
+> > And use the pivot_longer() function:
+> >
+> > ```{r}
+> > rna_time %>%
+> >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`) %>%
+> >   pivot_longer(names_to = "comparisons",
+> >                values_to = "Fold_changes",
+> >                time_8_vs_0:time_8_vs_4)
+> > ```
+> >
+> {: .solution}
 {: .challenge}
 
 ## Exporting data
