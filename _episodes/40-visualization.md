@@ -42,7 +42,7 @@ rna <- read.csv("course-data/data/GSE96870/rnaseq.csv")
 {: .language-r}
 
 The [Data Visualization Cheat
-Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+Sheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf)
 will cover the basics and more advanced features of `ggplot2` and will
 help, in addition to serve as a reminder, getting an overview of the
 many data representations available in the package. The following
@@ -82,7 +82,7 @@ customization of plots.
 graph from the same 3 components: (1) a data set, (2) a coordinate system,
 and (3) geoms — i.e. visual marks that represent data points [^three_comp_ggplot2].
 
-[^three_comp_ggplot2]: Source: [Data Visualization Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf).
+[^three_comp_ggplot2]: Source: [Data Visualization Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf).
 
 To build a ggplot, we will use the following basic template that can
 be used for different types of plots:
@@ -424,12 +424,31 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 > > 
 > > ~~~
 > > library("hexbin")
+> > ~~~
+> > {: .language-r}
 > > 
+> > 
+> > 
+> > ~~~
+> > Error in library("hexbin"): there is no package called 'hexbin'
+> > ~~~
+> > {: .error}
+> > 
+> > 
+> > 
+> > ~~~
 > > ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
 > >   geom_hex() +
 > >   geom_abline(intercept = 0)
 > > ~~~
 > > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Warning: Computation failed in `stat_binhex()`:
+> > ~~~
+> > {: .warning}
 > > 
 > > <img src="../fig/rmd-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 > {: .solution}
@@ -558,7 +577,15 @@ ggplot(data = rna,
 {: .challenge}
 
 > ## Homework Challenge
-> - Modify the violin plot to fill in the violins by `sex`.
+> Boxplots are useful summaries, but hide the *shape* of the
+> distribution. For example, if the distribution is bimodal, we would
+> not see it in a boxplot. An alternative to the boxplot is the violin
+> plot, where the shape (of the density of points) is drawn.
+>
+> 1. Replace the box plot with a violin plot; see `geom_violin()`. 
+> 2. Fill in the violins according to the time with the argument `fill`.
+> 3. Modify the violin plot to fill in the violins by `sex`.
+>
 {: .challenge}
 
 ## Line plots
@@ -802,7 +829,7 @@ themes.
 Let's come back to the faceted plot of mean expression by time and gene, colored by sex.
 
 Take a look at the [**`ggplot2`** cheat
-sheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf),
+sheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf),
 and think of ways you could improve the plot.
 
 Now, we can change names of axes to something more informative than 'time'
@@ -897,7 +924,7 @@ ggplot(rna, aes(x = expression_log)) +
 >
 > With all of this information in hand, try to create the most ugly plot that
 > you can think about. You can use one  of the plots generated in this exercise 
-> as a starting point. Use the RStudio [**`ggplot2`** cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+> as a starting point. Use the RStudio [**`ggplot2`** cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf)
 > for inspiration. Here are some ideas:
 >
 > - See if you can change the thickness of the lines.

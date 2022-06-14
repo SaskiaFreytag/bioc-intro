@@ -658,25 +658,6 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > combined_logical <- c(num_logical, char_logical)
 > ~~~
 > {: .language-r}
-> > ## Solution
-> >
-> > Only one. There is no memory of past data types, and the coercion
-> > happens the first time the vector is evaluated. Therefore, the `TRUE`
-> > in `num_logical` gets converted into a `1` before it gets converted
-> > into `"1"` in `combined_logical`.
-> >
-> >~~~
-> > combined_logical
-> >~~~
-> >{: .language-r}
-> >
-> >
-> >
-> >~~~
-> >[1] "1"    "2"    "3"    "1"    "a"    "b"    "c"    "TRUE"
-> >~~~
-> >{: .output}
-> {: .solution}
 {: .challenge}
 
 
@@ -687,9 +668,7 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > whereby some types get preferentially coerced into other types. Can
 > you draw a diagram that represents the hierarchy of how these data
 > types are coerced?
-> > ## Solution
-> > logical &#8594; numeric &#8594; character &#8592; logical
-> {: .solution}
+>
 {: .challenge}
 
 
@@ -948,26 +927,9 @@ molecules[molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")]
 > ## Homework Challenge:
 >
 > Can you figure out why `"four" > "five"` returns `TRUE`?
-> > ## Solution
-> >
-> > 
-> > ~~~
-> > "four" > "five"
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > [1] TRUE
-> > ~~~
-> > {: .output}
-> >
-> > When using `>` or `<` on strings, R compares their alphabetical order.
-> > Here `"four"` comes after `"five"`, and therefore is *greater than*
-> > it.
-> {: .solution}
+>
 {: .challenge}
+
 
 ## Names
 
@@ -1174,42 +1136,6 @@ heights[complete.cases(heights)]
 > 2. Use the function `median()` to calculate the median of the `heights` vector.
 > 3. Use R to figure out how many people in the set are taller than 67 inches.
 >
-> > ## Solution
-> >
-> >~~~
-> >heights_no_na <- heights[!is.na(heights)]
-> >## or
-> >heights_no_na <- na.omit(heights)
-> >~~~
-> >{: .language-r}
-> >
-> >
-> >~~~
-> >median(heights, na.rm = TRUE)
-> >~~~
-> >{: .language-r}
-> >
-> >
-> >
-> >~~~
-> >[1] 64
-> >~~~
-> >{: .output}
-> >
-> >
-> >~~~
-> >heights_above_67 <- heights_no_na[heights_no_na > 67]
-> >length(heights_above_67)
-> >~~~
-> >{: .language-r}
-> >
-> >
-> >
-> >~~~
-> >[1] 6
-> >~~~
-> >{: .output}
-> {: .solution}
 {: .challenge}
 
 
@@ -1274,34 +1200,6 @@ There are similar constructors for characters and logicals, named
 >
 > What are the defaults for character and logical vectors?
 >
-> > ## Solution
-> > 
-> > ~~~
-> > character(2) ## the empty charater
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > [1] "" ""
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > logical(2)   ## FALSE
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> > [1] FALSE FALSE
-> > ~~~
-> > {: .output}
-> {: .solution}
 {: .challenge}
 
 ### Replicate elements
@@ -1363,34 +1261,6 @@ rep(c(1, 2, 3), 5)
 > obtain five 1s, five 2s and five 3s in that order? There are two
 > possibilities - see `?rep` or `?sort` for help.
 >
-> > ## Solution
-> > 
-> > ~~~
-> > rep(c(1, 2, 3), each = 5)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > sort(rep(c(1, 2, 3), 5))
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
-> > ~~~
-> > {: .output}
-> {: .solution}
 {: .challenge}
 
 ### Sequence generation
@@ -1546,98 +1416,6 @@ sample(1:5, 10, replace = TRUE)
 >
 > - Repeat by setting a different seed.
 >
-> > ## Solution
-> > Different permutations
-> >
-> > 
-> > ~~~
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  9  1  4  3  6  2  5  8 10  7
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  4  9  7  6  1 10  8  3  2  5
-> > ~~~
-> > {: .output}
-> >
-> > Same permutations with seed 123
-> >
-> > 
-> > ~~~
-> > set.seed(123)
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  3 10  2  8  6  9  1  7  5  4
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > set.seed(123)
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  3 10  2  8  6  9  1  7  5  4
-> > ~~~
-> > {: .output}
-> >
-> > A different seed
-> >
-> > 
-> > ~~~
-> > set.seed(1)
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  9  4  7  1  2  5  3 10  6  8
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
-> > set.seed(1)
-> > sample(1:10)
-> > ~~~
-> > {: .language-r}
-> > 
-> > 
-> > 
-> > ~~~
-> >  [1]  9  4  7  1  2  5  3 10  6  8
-> > ~~~
-> > {: .output}
-> {: .solution}
 {: .challenge}
 
 ### Homework reading: Drawing samples from a normal distribution
@@ -1647,7 +1425,7 @@ sample from a normal distribution. Two normal distributions of means 0
 and 100 and standard deviations 1 and 5, noted noted *N(0, 1)* and
 *N(100, 5)*, are shown below
 
-<img src="../fig/rmd-unnamed-chunk-61-1.png" title="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." alt="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." width="864" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-51-1.png" title="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." alt="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right." width="864" style="display: block; margin: auto;" />
 
 The three arguments, `n`, `mean` and `sd`, define the size of the
 sample, and the parameters of the normal distribution, i.e the mean
@@ -1663,7 +1441,7 @@ rnorm(5)
 
 
 ~~~
-[1]  0.69641761  0.05351568 -1.31028350 -2.12306606 -0.20807859
+[1]  2.10852833  0.79639367 -2.67386790 -0.22818998  0.05282286
 ~~~
 {: .output}
 
@@ -1677,7 +1455,7 @@ rnorm(5, 2, 2)
 
 
 ~~~
-[1]  1.3744268 -0.1164714  2.8344472  1.3690969  3.6510983
+[1] 2.331643 1.671234 6.444116 3.560545 3.809048
 ~~~
 {: .output}
 
@@ -1691,7 +1469,7 @@ rnorm(5, 100, 5)
 
 
 ~~~
-[1] 106.45636  96.87448  95.62427 100.71678 107.12595
+[1]  93.53500  89.60985 103.81396  91.15669  89.53736
 ~~~
 {: .output}
 

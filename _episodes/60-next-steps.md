@@ -975,7 +975,24 @@ se
 
 ~~~
 # A SummarizedExperiment-tibble abstraction: 32,428 × 22
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts sample organism   age sex   infection strain  time
+   <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+ 1 Asl      GSM2545336   1170 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 2 Apod     GSM2545336  36194 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 3 Cyp2d22  GSM2545336   4060 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 4 Klk6     GSM2545336    287 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 5 Fcrls    GSM2545336     85 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 6 Slc2a4   GSM2545336    782 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 7 Exd2     GSM2545336   1619 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 8 Gjc2     GSM2545336    288 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 9 Plp1     GSM2545336  43217 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+10 Gnb4     GSM2545336   1071 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+# … with 40 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+#   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>
 ~~~
 {: .output}
 
@@ -1017,7 +1034,24 @@ se
 
 ~~~
 # A SummarizedExperiment-tibble abstraction: 32,428 × 22
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts sample organism   age sex   infection strain  time
+   <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+ 1 Asl      GSM2545336   1170 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 2 Apod     GSM2545336  36194 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 3 Cyp2d22  GSM2545336   4060 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 4 Klk6     GSM2545336    287 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 5 Fcrls    GSM2545336     85 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 6 Slc2a4   GSM2545336    782 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 7 Exd2     GSM2545336   1619 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 8 Gjc2     GSM2545336    288 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 9 Plp1     GSM2545336  43217 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+10 Gnb4     GSM2545336   1071 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+# … with 40 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+#   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>
 ~~~
 {: .output}
 
@@ -1035,8 +1069,15 @@ se %>%
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 1 × 22
-[90m# Transcripts=1 | Samples=1 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 1 × 1
+# [90mFeatures=1 | Samples=1 | Assays=counts[0m
+  .feature .sample    counts sample  organism   age sex   infection strain  time
+  <chr>    <chr>       <dbl> <chr>   <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+1 Asl      GSM2545336   1170 GSM254… Mus mus…     8 Fema… Influenz… C57BL…     8
+# … with 12 more variables: tissue <chr>, mouse <dbl>, center <chr>,
+#   gene <chr>, ENTREZID <dbl>, product <chr>, ensembl_gene_id <chr>,
+#   external_synonym <chr>, chromosome_name <chr>, gene_biotype <chr>,
+#   phenotype_description <chr>, hsapiens_homolog_associated_gene_name <chr>
 ~~~
 {: .output}
 
@@ -1052,8 +1093,25 @@ se %>%
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 30,954 × 22
-[90m# Transcripts=1474 | Samples=21 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 30,954 × 21
+# [90mFeatures=1474 | Samples=21 | Assays=counts[0m
+   .feature .sample    counts sample organism   age sex   infection strain  time
+   <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+ 1 Asl      GSM2545337    361 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 2 Apod     GSM2545337  10347 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 3 Cyp2d22  GSM2545337   1616 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 4 Klk6     GSM2545337    629 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 5 Fcrls    GSM2545337    233 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 6 Slc2a4   GSM2545337    231 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 7 Exd2     GSM2545337   2288 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 8 Gjc2     GSM2545337    595 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+ 9 Plp1     GSM2545337 101241 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+10 Gnb4     GSM2545337   1791 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+# … with 40 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+#   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>
 ~~~
 {: .output}
 
@@ -1176,7 +1234,24 @@ se %>%
 
 ~~~
 # A SummarizedExperiment-tibble abstraction: 32,428 × 22
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts sample organism   age sex   infection strain  time
+   <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+ 1 Asl      GSM2545336   1170 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 2 Apod     GSM2545336  36194 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 3 Cyp2d22  GSM2545336   4060 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 4 Klk6     GSM2545336    287 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 5 Fcrls    GSM2545336     85 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 6 Slc2a4   GSM2545336    782 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 7 Exd2     GSM2545336   1619 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 8 Gjc2     GSM2545336    288 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+ 9 Plp1     GSM2545336  43217 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+10 Gnb4     GSM2545336   1071 GSM25… Mus mus…     8 Fema… Influenz… C57BL…     8
+# … with 40 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+#   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>
 ~~~
 {: .output}
 
@@ -1199,8 +1274,24 @@ tidySummarizedExperiment says: Key columns are missing. A data frame is returned
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 32,428 × 21
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample counts sample organism   age sex   group strain tissue mouse
+   <chr>    <chr>    <dbl> <chr>  <chr>    <dbl> <chr> <chr> <chr>  <chr>  <dbl>
+ 1 Asl      GSM254…   1170 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 2 Apod     GSM254…  36194 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 3 Cyp2d22  GSM254…   4060 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 4 Klk6     GSM254…    287 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 5 Fcrls    GSM254…     85 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 6 Slc2a4   GSM254…    782 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 7 Exd2     GSM254…   1619 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 8 Gjc2     GSM254…    288 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+ 9 Plp1     GSM254…  43217 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+10 Gnb4     GSM254…   1071 GSM25… Mus mus…     8 Fema… Infl… C57BL… Cereb…    14
+# … with 40 more rows, and 10 more variables: center <chr>, gene <chr>,
+#   ENTREZID <dbl>, product <chr>, ensembl_gene_id <chr>,
+#   external_synonym <chr>, chromosome_name <chr>, gene_biotype <chr>,
+#   phenotype_description <chr>, hsapiens_homolog_associated_gene_name <chr>
 ~~~
 {: .output}
 
@@ -1275,8 +1366,25 @@ se %>%
 > > 
 > > 
 > > ~~~
-> > # A SummarizedExperiment-tibble abstraction: 49 × 22
-> > [90m# Transcripts=7 | Samples=7 | Assays=counts[39m
+> > # A SummarizedExperiment-tibble abstraction: 49 × 7
+> > # [90mFeatures=7 | Samples=7 | Assays=counts[0m
+> >    .feature .sample    counts sample organism   age sex   infection strain  time
+> >    <chr>    <chr>       <dbl> <chr>  <chr>    <dbl> <chr> <chr>     <chr>  <dbl>
+> >  1 Mir1901  GSM2545337     45 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  2 Mir378a  GSM2545337     11 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  3 Mir133b  GSM2545337      4 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  4 Mir30c-2 GSM2545337     10 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  5 Mir149   GSM2545337      1 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  6 Mir128-1 GSM2545337      4 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  7 Mir7682  GSM2545337      2 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  8 Mir1901  GSM2545338     44 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> >  9 Mir378a  GSM2545338      7 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> > 10 Mir133b  GSM2545338      6 GSM25… Mus mus…     8 Fema… NonInfec… C57BL…     0
+> > # … with 39 more rows, and 12 more variables: tissue <chr>, mouse <dbl>,
+> > #   center <chr>, gene <chr>, ENTREZID <dbl>, product <chr>,
+> > #   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+> > #   gene_biotype <chr>, phenotype_description <chr>,
+> > #   hsapiens_homolog_associated_gene_name <chr>
 > > ~~~
 > > {: .output}
 > {: .solution}
