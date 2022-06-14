@@ -393,16 +393,6 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > char_logical <- c("a", "b", "c", TRUE)
 > combined_logical <- c(num_logical, char_logical)
 > ```
-> > ## Solution
-> >
-> > Only one. There is no memory of past data types, and the coercion
-> > happens the first time the vector is evaluated. Therefore, the `TRUE`
-> > in `num_logical` gets converted into a `1` before it gets converted
-> > into `"1"` in `combined_logical`.
-> >```{r}
-> > combined_logical
-> > ```
-> {: .solution}
 {: .challenge}
 
 
@@ -413,10 +403,12 @@ important ones are lists (`list`), matrices (`matrix`), data frames
 > whereby some types get preferentially coerced into other types. Can
 > you draw a diagram that represents the hierarchy of how these data
 > types are coerced?
+>
 > > ## Solution
 > > logical &#8594; numeric &#8594; character &#8592; logical
 > {: .solution}
 {: .challenge}
+
 
 
 ```{r, echo=FALSE, eval=FALSE, purl=TRUE}
@@ -531,6 +523,7 @@ molecules[molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")]
 > ## Homework Challenge:
 >
 > Can you figure out why `"four" > "five"` returns `TRUE`?
+>
 > > ## Solution
 > >
 > > ```{r}
@@ -542,6 +535,8 @@ molecules[molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")]
 > > it.
 > {: .solution}
 {: .challenge}
+
+
 
 ## Names
 
@@ -714,6 +709,7 @@ rep(c(1, 2, 3), 5)
 > {: .solution}
 {: .challenge}
 
+
 ### Sequence generation
 
 Another very useful function is `seq`, to generate a sequence of
@@ -814,6 +810,7 @@ sample(1:5, 10, replace = TRUE)
 > > ```
 > {: .solution}
 {: .challenge}
+
 
 ### Homework reading: Drawing samples from a normal distribution
 

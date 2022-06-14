@@ -487,8 +487,6 @@ rna %>%
 
 ## Reshaping data
 
-![](../fig/gatherspread_modified.jpeg)
-
 In the `rna` tibble, the rows contain expression values (the unit) that are
 associated with a combination of 2 other variables: `gene` and `sample`.
 
@@ -575,6 +573,27 @@ genes in certain samples. In the following fictive example, the gene Cyp2d22 has
 one expression value, in GSM2545338 sample.
 
 
+```{r, purl = FALSE, echo = FALSE}
+rna_with_missing_values <- rna %>%
+  select(gene, sample, expression) %>%
+  filter(gene %in% c("Asl", "Apod", "Cyp2d22")) %>%
+  filter(sample %in% c("GSM2545336", "GSM2545337", "GSM2545338")) %>%
+  arrange(sample) %>%
+  filter(!(gene == "Cyp2d22" & sample != "GSM2545338"))
+```
+
+```{r, purl = FALSE}
+rna_with_missing_values
+```
+
+By default, the `pivot_wider()` function will add `NA` for missing values.
+
+```{r, purl = FALSE}
+rna_with_missing_values %>%
+  pivot_wider(names_from = sample,
+              values_from = expression)
+```
+
 
 ### Pivoting data into a longer format
 
@@ -592,6 +611,7 @@ associated with the column names.
    current values;
 4. the names of the columns to be used to populate the `names_to` and
    `values_to` variables (or to drop).
+
 
 To recreate `rna_long` from `rna_long` we would create a key
 called `sample` and value called `expression` and use all columns
@@ -626,6 +646,31 @@ rna_wide %>%
                  values_to = "expression",
                  GSM2545336:GSM2545380)
 ```
+
+
+
+Note that if we had missing values in the wide-format, the `NA` would be
+included in the new long format.
+
+Remember our previous fictive tibble containing missing values:
+
+```{r}
+rna_with_missing_values
+
+wide_with_NA <- rna_with_missing_values %>%
+  pivot_wider(names_from = sample,
+              values_from = expression)
+wide_with_NA
+
+wide_with_NA %>%
+    pivot_longer(names_to = "sample",
+                 values_to = "expression",
+                 -gene)
+```
+
+Pivoting to wider and longer formats can be a useful way to balance out a dataset
+so every replicate has the same composition.
+
 
 
 > ## Challenge
