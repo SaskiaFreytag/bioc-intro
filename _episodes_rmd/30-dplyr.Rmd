@@ -494,6 +494,8 @@ All the other columns correspond to variables describing either
 the sample (organism, age, sex,...) or the gene (gene_biotype, ENTREZ_ID, product...).
 The variables that don’t change with genes or with samples will have the same value in all the rows.
 
+![](../fig/gatherspread_modified.png)
+
 
 ```{r}
 rna %>%
