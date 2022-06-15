@@ -9,9 +9,9 @@ objectives:
 - Introduce the notion of data containers
 - Give an overview of the `SummarizedExperiment`, extensively used in omics analyses
 keypoints:
-- "`SummarizedExperiment` represent an efficient way to store and to handle omics data"
+- "`SummarizedExperiment` represents an efficient way to store and to handle omics data"
 - "SummarizedExperiment is used in many Bioconductor packages"
-- "We can use tidySummarizedExperiment to interact with SummarizedExperiment using tidyverse commands"
+- "We can use `tidySummarizedExperiment` to interact with SummarizedExperiment objects using tidyverse commands"
 ---
 
 ```{r, include=FALSE}
@@ -20,10 +20,9 @@ source("../bin/chunk-options.R")
 
 ## Next steps
 
-Data in bioinformatics is often complex.
-To deal with this, developers define specialised
+Data in bioinformatics is often complex. For example, an experiment can have multiple types of files e.g. counts, sample information and gene information. To deal with this, developers define specialised
 data containers (termed classes) that match the properties of the
-data they need to handle.
+data they need to handle. 
 
 This aspect is central to the **Bioconductor**[^Bioconductor] project which
 uses the same **core data infrastructure** across packages. This certainly contributed
@@ -34,18 +33,23 @@ the project as a whole. You will learn more about Bioconductor in the next episo
 
 [^Bioconductor]:The [Bioconductor](http://www.bioconductor.org) was initiated by Robert Gentleman, one of the two creators of the R language. Bioconductor provides  tools dedicated to omics data analysis. Bioconductor uses the R statistical programming language, and is open source and open development.
 
-
-To illustrate such an omics data container, we'll present the `SummarizedExperiment`
-class.
-
 ## SummarizedExperiment
 
-The figure below represents the anatomy of SummarizedExperiment.
+To illustrate a Bioconductor omics data container, we'll present the `SummarizedExperiment` class. This is a core structure for omics data such as genomics, transcriptomics, proteomics, methylation and cytometry. The image below from this [website](https://ivanek.github.io/analysisOfGenomicsDataWithR/02_IntroToBioc_html.html#4_Standard_Bioconductor_data_structures) shows how many Bioconductor packages make use of SummarizedExperiment.
 
-```{r SE, echo=FALSE, out.width = '80%'}
-knitr::include_graphics("https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg")
+```{r SE-core, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("../fig/se_a_core_data_structure.png")
 ```
 
+### What is it 
+
+This is what it looks like. We will explain in more detail below.
+
+```{r SE-show, message = FALSE, echo = FALSE}
+se <- readRDS("~/Downloads/se2.rds")
+
+se
+```
 
 Objects of the class SummarizedExperiment contain :
 
@@ -66,7 +70,7 @@ Objects of the class SummarizedExperiment contain :
 ### Benefits of SummarizedExperiment format
 
 
-#### Coordination of samples and features
+* Coordination of samples and features
 
 The coordinated nature of the SummarizedExperiment guarantees that
 during data manipulation, the dimensions of the different slots will always match (i.e the columns
@@ -78,138 +82,41 @@ it would be automatically removed from the sample metadata in the same operation
 The metadata slots can grow additional co-variates
 (columns) without affecting the other structures.
 
-#### Interoperability between packages
+* Interoperability between packages
 
 There are a lot of R packages that make use of SummarizedExperiment format. If you follow a training focused on RNA sequencing analysis, you may learn to use the Bioconductor `DESeq2` package to do some differential expression analyses. `DESeq2`'s whole analysis is handled in a `SummarizedExperiment`. Or if you perform RNA sequencing analysis following tidy principles with the [tidybulk](https://stemangiola.github.io/tidybulk/) package you can input your data in SummarizedExperiment format. 
 
 You can see packages making use of SummarizedExperiment (Depend/Import) on the [SummarizedExperiment homepage](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html), some shown in the screenshot below.
 
 
-```{r SE-packages,  echo=FALSE, out.width = '80%'}
+```{r SE-packages,  echo=FALSE, out.width = '60%', out.height = '80%'}
 knitr::include_graphics("../fig/summarizedexperiment_packages.png")
-```
+```  
 
-### Creating a SummarizedExperiment
+### When would you use it
 
-We will demonstrate what SummarizedExperiment is by creating one. We will use the `rna` dataset again.
-
-We start by loading the tidyverse packages which we will use to import and format the data.
-
-```{r load-package, message=FALSE}
-library("tidyverse")
-```
-
-```{r next-steps_data, echo = FALSE, message = FALSE}
-rna <- read_csv("data/rnaseq.csv")
-```
-
-Load the `rna` data.
-
-```{r load-data, eval=FALSE}
-rna <- read_csv("course-data/data/GSE96870/rnaseq.csv")
-```
-
-From this table we will create the 3 different tables we need to create a SummarizedExperiment.
- 
-- **An expression matrix**
-
-```{r}
-# Select the columns needed and convert to wide format
-counts <- rna %>%
-  select(gene, sample, expression) %>%
-  pivot_wider(names_from = sample,
-              values_from = expression)
-
-# Convert to matrix format
-count_matrix <- counts %>% 
-    select(-gene) %>% 
-    as.matrix()
-
-# Set gene ids as rownames
-rownames(count_matrix) <- counts$gene
-
-# Take a look
-count_matrix[1:5, ]
-dim(count_matrix)
-```
-
-- **A table describing the samples**
-
-```{r}
-# Select the columns needed 
-sample_metadata <- rna %>%
-  select(sample, organism, age, sex, infection, strain, time, tissue, mouse)
-
-# Remove redundancy
-sample_metadata <- unique(sample_metadata)
-
-# Take a look
-sample_metadata
-```
-
-- **A table describing the genes**
-
-```{r}
-# Select the columns needed 
-gene_metadata <- rna %>%
-    select(gene, ENTREZID, product, ensembl_gene_id, external_synonym, chromosome_name, gene_biotype, phenotype_description, hsapiens_homolog_associated_gene_name)
-
-# Remove redundancy
-gene_metadata <- unique(gene_metadata)
-
-# Take a look
-gene_metadata
-```
-
-We will create a `SummarizedExperiment` from these tables:
-
-- The count matrix that will be used as the **`assay`**
-
-- The table describing the samples will be used as the **sample metadata** slot
-
-- The table describing the genes will be used as the **features metadata** slot
-
-To do this we can put the different parts together using the
-`SummarizedExperiment` constructor:
-
-```{r, message = FALSE}
-#BiocManager::install("SummarizedExperiment")
-library("SummarizedExperiment")
-```
-
-To create the `SummarizedExperiment` object we need to provide inputs for the arguments `assays` (count matrix), `colData` (sample metadata) and `rowData` (gene metadata). Because `assays` can accept multiple assays (e.g. raw counts, log normalized) we put them in a list (SimpleList) and give each assay a name (we'll use counts). We can see we need to do this in the help for the SummarizedExperiment function `?SummarizedExperiment `.
-
-```{r}
-se <- SummarizedExperiment(assays = SimpleList(counts=count_matrix),
-                           colData = sample_metadata,
-                           rowData = gene_metadata)
-se
-```
-
-We will save this SummarizedExperiment object in case we need it later.
-
-```{r}
-save(se, file = "data/SE.rda")
-```
+You may encounter a SummarizedExperiment object   
+* using a Bioconductor package function that imports your omics experiment files and produces a SummarizedExperiment object. The [tximeta](https://bioconductor.org/packages/release/bioc/vignettes/tximeta/inst/doc/tximeta.html#Tximeta_import_starts_with_sample_table) for transcript-level quantification is one example of this.  
+* using processed data provided in SummarizedExperiment format. The [Recount3 project](http://rna.recount.bio/) provides RNA-sequencing gene, exon, and exon-exon junction counts for 8,679 and 10,088 different studies for human and mouse respectively in SummarizedExperiment format.  
+* through creating one yourself to store your data or share with a collaborator
 
 ### Exploring a SummarizedExperiment
 
-If we check size of our data in tabular format
+Let's explore a SummarizedExperiment object in R. We'll load in an example. This is the same RNA data we've been working with but also contains genomic coordinates/ranges. Ranges are an optional part of a SummarizedExperiment. When they're attached, the object is called a `RangedSummarizedExperiment`.
 
-```{r}
-print(object.size(rna), units = "MB")
+```{r message = FALSE}
+se <- readRDS("~/Downloads/se2.rds")
+
+se
 ```
 
-And compare to our data in SummarizedExperiment format
+The figure below represents the anatomy of SummarizedExperiment.
 
-```{r}
-print(object.size(se), units = "MB")
+```{r SE, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg")
 ```
 
-We can see SummarizedExperiment format has reduced the size ~ 5 fold, providing a very efficient way to store the data.
-
-
-Using this data structure, we can access the expression matrix with
+We can access the expression matrix with
 the `assay` function:
 
 ```{r}
@@ -231,13 +138,63 @@ head(rowData(se))
 dim(rowData(se))
 ```
 
+If genomic coordinates are present, we can access using the `rowRanges` function:
+
+```{r}
+rowRanges(se)
+```
+
+`rowRanges` gives us the same information as `rowData` but also includes the coordinates.
+
+### Creating a SummarizedExperiment
+
+We will demonstrate how a SummarizedExperiment can be created. The different tables that make up a SummarizedExperiment object
+- **An expression matrix**
+- **A table describing the samples**
+- **A table describing the genes**
+
+```{r}
+count_matrix <- assay(se)
+sample_metadata <- colData(se)
+gene_metadata <- rowRanges(se) # or rowData(se)
+```
+
+We will create a `SummarizedExperiment` from these tables:
+
+- The count matrix that will be used as the **`assay`**
+- The table describing the samples will be used as the **sample metadata** slot
+- The table describing the genes will be used as the **features metadata** slot
+
+To do this we can put the different parts together using the
+`SummarizedExperiment` constructor:
+
+```{r, message = FALSE}
+# BiocManager::install("SummarizedExperiment")
+library("SummarizedExperiment")
+```
+
+To create the `SummarizedExperiment` object we need to provide inputs for the arguments `assays` (count matrix), `colData` (sample metadata) and `rowData` (gene metadata). Because `assays` can accept multiple assays (e.g. raw counts, log normalized) we put them in a list (SimpleList) and give each assay a name (we'll use counts). We can see we need to do this in the help for the SummarizedExperiment function `?SummarizedExperiment `.
+
+```{r}
+se_created <- SummarizedExperiment(assays = SimpleList(counts=count_matrix),
+                           colData = sample_metadata,
+                           rowRanges = gene_metadata) # or rowData =
+se_created
+```
+
+If we want to save a SummarizedExperiment object we can use the `saveRDS` function that we saw in a previous episode.
+
+```{r eval = FALSE}
+saveRDS(se_created, file = "data_output/se_created.rds")
+```
+
 
 ### Subsetting a SummarizedExperiment
 
 SummarizedExperiment can be subset just like with data frames,
 with numerics, characters or logicals. 
 
-Importantly, the sample and feature are coordinated. If we need to exclude one sample from the assay, it will be automatically removed from the sample metadata in the same operation. 
+Importantly, the samples and features are coordinated. If we need to exclude one sample from the assay, it will be automatically removed from the sample metadata in the same operation. 
 
 Let's try that. Imagine we've discovered we need to exclude GSM2545336 as it's a failed sample. We can do that with below.
 
@@ -251,13 +208,13 @@ We can check the dimensions and see that we now have 21 samples instead of 22.
 dim(se_good)
 ```
 
-If we take a look at the sample metadata we can see GSM2545336 is no longer there.
+If we take a look at the sample metadata we can see GSM2545336 is now not there.
 
 ```{r}
 colData(se_good)
 ```
 
-If we take a look at the counts we can see GSM2545336 is no longer there.
+If we take a look at the assay information we can see there are now no counts for GSM2545336.
 
 ```{r}
 head(assay(se_good))
@@ -287,10 +244,19 @@ colData(se1)
 rowData(se1)
 ```
 
+We can subset to a genomic region of interest using the `subsetByOverlaps` function.
+
+```{r}
+# Define a region of interest e.g. interval 1 to 10,000,000 of chromosome 1 
+roi <- GRanges(seqnames="1", ranges=1:10000000)
+# Subset se object for only rows in the region of interest
+subsetByOverlaps(se, roi)
+```
 
 > ## Challenge
 >
-> Extract the gene expression levels of the first 3 genes in samples at time 0 and at time 8.
+> 1. Extract the gene expression levels of the first 3 genes in samples at time 0 and at time 8.
+> 2. Extract all genes on chromosome Y between 1 and 10,000,000 on the negative strand.
 >
 > > ## Solution
 > >
@@ -301,12 +267,18 @@ rowData(se1)
 > > # Equivalent to
 > > assay(se)[1:3, colData(se)$time == 0 | colData(se)$time == 8]
 > > ```
+> >
+> > ```{r, purl=FALSE}
+> > roi <- GRanges(seqnames="Y", ranges = 1:10000000, strand = "-")
+> > subsetByOverlaps(se, roi)
+> >
+> > ```
 > {: .solution}
 {: .challenge}
 
 #### Adding variables to metadata
 
-We can also add information to the metadata.
+We can also add information to the sample metadata.
 Suppose that you want to add the center where the samples were collected...
 
 ```{r}
@@ -327,10 +299,11 @@ Remember what our SummarizedExperiment object looks like.
 se
 ```
 
-Load tidySummarizedExperiment and then take a look at the se object again.
+Load tidyverse and tidySummarizedExperiment and then take a look at the se object again.
 
 ```{r, message = FALSE}
-#BiocManager::install("tidySummarizedExperiment")
+# BiocManager::install("tidySummarizedExperiment")
+library("tidyverse")
 library("tidySummarizedExperiment")
 
 se
@@ -338,18 +311,23 @@ se
 
 It's still a SummarizedExperiment object, so maintains the efficient structure, but now we can view it as a tibble. Note the first line of the output says this, it's a SummarizedExperiment-tibble abstraction. We can also see in the second line of the output the number of transcripts and samples. 
 
-If we want to revert to the standard SummarizedExperiment view we can do that.
-```{r}
-options("restore_SummarizedExperiment_show" = TRUE)
-se
-```
-
-But here we will use the tibble view.
-
-```{r}
-options("restore_SummarizedExperiment_show" = FALSE)
-se
-```
+> ## Reverting to standard SummarizedExperiment view
+>
+> If we want to revert to the standard SummarizedExperiment view we can do that.
+>
+> ```{r}
+> options("restore_SummarizedExperiment_show" = TRUE)
+> se
+> ```
+> 
+> If we want to revert back to tidy SummarizedExperiment view we can.
+> 
+> ```{r}
+> options("restore_SummarizedExperiment_show" = FALSE)
+> se
+> ```
+>
+{: .callout}
 
 We can now use tidyverse commands to interact with the SummarizedExperiment object.
 
@@ -422,9 +400,13 @@ se %>%
     theme_bw()
 ```
 
+To work with genomic coordinates (ranges) with tidy methods, performing subsetting etc,  we can use the [plyranges](https://bioconductor.org/packages/devel/bioc/vignettes/plyranges/inst/doc/an-introduction.html#1_Ranges_revisited) package.
+
 
 > ## Challenge
-> > 1. Extract the miRNA and NonInfected this time using tidyverse commands
+> > 1. Extract the miRNA and NonInfected this time using tidyverse commands.
+> > 2. Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8 this time using tidyverse commands.
+> > 3. Create a bar plot of the sample counts using the se object. Hint use geom_col to plot the summarised counts.
 > >
 > > ## Solution
 > >
@@ -432,12 +414,6 @@ se %>%
 > > se %>% 
 > > filter(gene_biotype == "miRNA" & infection == "NonInfected")
 > > ```
-> {: .solution}
-> >
-> >
-> > 2. Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8 this time using tidyverse commands
-> >
-> > ## Solution
 > >
 > > ```{r, purl=FALSE}
 > > se %>% 
@@ -445,29 +421,48 @@ se %>%
 > >   group_by(.sample) %>% 
 > >   slice(1:3)
 > > ```
+> >
+> > ```{r, purl=FALSE}
+> > se %>%
+> >   group_by(.sample) %>%
+> >   summarise(total_counts=sum(counts)) %>%
+> >   ggplot(aes(x = .sample, y = total_counts)) +
+> >   geom_col() +
+> >   theme_bw() +
+> >   theme(axis.text.x = element_text(angle = 90,  hjust = 0.5, vjust = 0.5))
+> > ```
 > {: .solution}
 {: .challenge}
 
 
+## Interactive exploration
+
+[iSEE](https://bioconductor.org/packages/release/bioc/vignettes/iSEE/inst/doc/basic.html) is a Bioconductor package that provides an interactive graphical user interface for exploring data stored in SummarizedExperiment objects.
+
+```{r}
+# We won't use here but to install and use 
+# BiocManager::install('iSEE')
+# library(iSEE)
+# iSEE(se)
+```
+
 ## Extensions to SummarizedExperiment
 
-### SingleCellExperiment
-
-The [SingleCellExperiment](https://bioconductor.org/packages/devel/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html) container extends SummarizedExperiment. It follows similar conventions but is for single-cell data. Rows represent features (genes, transcripts, genomic regions) and columns represent cells. It provides methods for storing dimensionality reduction results and data for alternative feature sets (e.g., synthetic spike-in transcripts, antibody-derived tags). It is the central data structure for Bioconductor single-cell packages.
+* [SingleCellExperiment](https://bioconductor.org/packages/devel/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html) container extends SummarizedExperiment for **single-cell** data. It follows similar conventions, rows represent features (genes, transcripts, genomic regions) and columns represent cells. It provides methods for storing dimensionality reduction results and data for alternative feature sets (e.g., synthetic spike-in transcripts, antibody-derived tags). It is the central data structure for Bioconductor single-cell packages.
 
 ```{r SCE, echo=FALSE, out.width = '80%'}
 knitr::include_graphics("https://bioconductor.org/books/release/OSCA.intro/images/SingleCellExperiment.png")
 ```
 
-The [Orchestrating Single-Cell Analysis with Bioconductor book](https://bioconductor.org/books/release/OSCA/) is a great resource for single cell analysis that describes using SingleCellExperiment.
+  The [Orchestrating Single-Cell Analysis with Bioconductor book](https://bioconductor.org/books/release/OSCA/) is a great resource for single cell analysis that describes using SingleCellExperiment.
 
-As there is tidySummarizedExperiment for interacting with SummarizedExperiment objects using tidyverse commands, there is equivalently the [tidySingleCellExperiment](https://stemangiola.github.io/tidySingleCellExperiment/) package for SingleCellExperiment objects.
+  As there is tidySummarizedExperiment for interacting with SummarizedExperiment objects using tidyverse commands, there is equivalently the [tidySingleCellExperiment](https://stemangiola.github.io/tidySingleCellExperiment/) package for SingleCellExperiment objects.
 
-### Interactive exploration
+There are also extensions to SummarizedExperiment for other data types:
 
-[iSEE](https://bioconductor.org/packages/release/bioc/vignettes/iSEE/inst/doc/basic.html) is a Bioconductor package that provides an interactive graphical user interface for exploring data stored in SummarizedExperiment and SingleCellExperiment objects.
+*  [SpatialExperiment](http://www.bioconductor.org/packages/release/bioc/vignettes/SpatialExperiment/inst/doc/SpatialExperiment.html) for **spatial** data 
 
-```{r iSEE, echo=FALSE, out.width = '80%'}
-knitr::include_graphics("https://raw.githubusercontent.com/iSEE/iSEE/master/vignettes/screenshots/basic-demo.png")
-```
+* [Qfeatures]( http://www.bioconductor.org/packages/release/bioc/vignettes/QFeatures/inst/doc/QFeatures.html) for **proteomics and metabolomics** mass spectrometry data
+
+* [MultiAssayExperiment](https://bioconductor.org/packages/release/bioc/vignettes/MultiAssayExperiment/inst/doc/MultiAssayExperiment.html) for **multi-omics**   data
 
