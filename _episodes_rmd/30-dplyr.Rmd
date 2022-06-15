@@ -682,7 +682,7 @@ so every replicate has the same composition.
 > rows, and the mean expression of genes located in each chromosome as the values,
 > as in the following tibble:
 >
-> ![](../fig/Exercise_pivot_W.png)
+> ![](../fig/Exercise_pivot_W1.png)
 >
 > You will need to summarize before reshaping!
 >
@@ -738,7 +738,7 @@ so every replicate has the same composition.
 > > # Solution
 > >
 > > Let's first calculate the mean expression by gene and by time
-> > ```{r}
+> > ```{r, answer=TRUE, purl=FALSE}
 > > rna %>%
 > >   group_by(gene, time) %>%
 > >   summarize(mean_exp = mean(expression))
@@ -746,7 +746,7 @@ so every replicate has the same composition.
 > >
 > > before using the pivot_wider() function
 > >
-> > ```{r}
+> > ```{r, answer=TRUE, purl=FALSE}
 > > rna_time <- rna %>%
 > >   group_by(gene, time) %>%
 > >   summarize(mean_exp = mean(expression)) %>%
@@ -759,7 +759,7 @@ so every replicate has the same composition.
 > > If we wanted to select the column corresponding to the timepoints,
 > > we could not use the column names directly... What happens when we select the colum 4?
 > >
-> > ```{r}
+> > ```{r, answer=TRUE, purl=FALSE}
 > > rna %>%
 > >   group_by(gene, time) %>%
 > >   summarize(mean_exp = mean(expression)) %>%
@@ -770,7 +770,7 @@ so every replicate has the same composition.
 > >
 > > To select the timepoint 4, we would have to quote the column name, with backticks "`"
 > >
-> > ```{r}
+> > ```{r, answer=TRUE, purl=FALSE}
 > > rna %>%
 > >   group_by(gene, time) %>%
 > >   summarize(mean_exp = mean(expression)) %>%
@@ -782,7 +782,7 @@ so every replicate has the same composition.
 > > Another possibility would be to rename the column,
 > > choosing a name that doesn't start by a number :
 > >
-> > ```{r}
+> > ```{r, answer=TRUE, purl=FALSE}
 > > rna_time <- rna %>%
 > >   group_by(gene, time) %>%
 > >   summarize(mean_exp = mean(expression)) %>%
@@ -794,14 +794,14 @@ so every replicate has the same composition.
 > >
 > > Calculate FoldChanges:
 > >
-> > ```{r}
+> > ```{r, answer=TRUE, purl=FALSE}
 > > rna_time %>%
 > >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`)
 > > ```
 > >
 > > And use the pivot_longer() function:
 > >
-> > ```{r}
+> > ```{r, answer=TRUE, purl=FALSE}
 > > rna_time %>%
 > >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`) %>%
 > >   pivot_longer(names_to = "comparisons",
