@@ -788,22 +788,21 @@ so every replicate has the same composition.
 > >   summarize(mean_exp = mean(expression)) %>%
 > >   pivot_wider(names_from = time,
 > >               values_from = mean_exp) %>%
-> >   rename("time0" = `0`, "time4" = `4`, "time8" = `8`) %>%
-> >   select(gene, time4)
+> >   rename("time0" = `0`, "time4" = `4`, "time8" = `8`)
 > > ```
 > >
 > > Calculate FoldChanges:
 > >
 > > ```{r, answer=TRUE, purl=FALSE}
 > > rna_time %>%
-> >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`)
+> >   mutate(time_8_vs_0 = time8 / time0, time_8_vs_4 = time8 / time4)
 > > ```
 > >
 > > And use the pivot_longer() function:
 > >
 > > ```{r, answer=TRUE, purl=FALSE}
 > > rna_time %>%
-> >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`) %>%
+> >   mutate(time_8_vs_0 = time8 / time0, time_8_vs_4 = time8 / time4) %>%
 > >   pivot_longer(names_to = "comparisons",
 > >                values_to = "Fold_changes",
 > >                time_8_vs_0:time_8_vs_4)

@@ -1956,8 +1956,7 @@ so every replicate has the same composition.
 > >   summarize(mean_exp = mean(expression)) %>%
 > >   pivot_wider(names_from = time,
 > >               values_from = mean_exp) %>%
-> >   rename("time0" = `0`, "time4" = `4`, "time8" = `8`) %>%
-> >   select(gene, time4)
+> >   rename("time0" = `0`, "time4" = `4`, "time8" = `8`)
 > > ~~~
 > > {: .language-r}
 > > 
@@ -1974,27 +1973,37 @@ so every replicate has the same composition.
 > > 
 > > ~~~
 > > rna_time %>%
-> >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`)
+> >   mutate(time_8_vs_0 = time8 / time0, time_8_vs_4 = time8 / time4)
 > > ~~~
 > > {: .language-r}
 > > 
 > > 
 > > 
 > > ~~~
-> > Error in `mutate()`:
-> > ! Problem while computing `time_8_vs_0 = `8`/`0``.
-> > ℹ The error occurred in group 1: gene = "Aamp".
-> > Caused by error:
-> > ! object '8' not found
+> > # A tibble: 1,474 × 6
+> > # Groups:   gene [1,474]
+> >    gene      time0   time4   time8 time_8_vs_0 time_8_vs_4
+> >    <chr>     <dbl>   <dbl>   <dbl>       <dbl>       <dbl>
+> >  1 Aamp    4603.   4870    4763.         1.03        0.978
+> >  2 Abca12     5.29    4.25    4.14       0.784       0.975
+> >  3 Abcc8   2576.   2609.   2292.         0.889       0.878
+> >  4 Abhd14a  591.    547.    432.         0.731       0.791
+> >  5 Abi2    4881.   4903.   4945.         1.01        1.01 
+> >  6 Abi3bp  1175.   1061.    762.         0.649       0.719
+> >  7 Abl2    2170.   2078.   2131.         0.982       1.03 
+> >  8 Acadl   2059.   2099    1995.         0.969       0.950
+> >  9 Acap3   3745    3446.   3431.         0.916       0.996
+> > 10 Acbd4   1219.   1410.   1668.         1.37        1.18 
+> > # … with 1,464 more rows
 > > ~~~
-> > {: .error}
+> > {: .output}
 > >
 > > And use the pivot_longer() function:
 > >
 > > 
 > > ~~~
 > > rna_time %>%
-> >   mutate(time_8_vs_0 = `8` / `0`, time_8_vs_4 = `8` / `4`) %>%
+> >   mutate(time_8_vs_0 = time8 / time0, time_8_vs_4 = time8 / time4) %>%
 > >   pivot_longer(names_to = "comparisons",
 > >                values_to = "Fold_changes",
 > >                time_8_vs_0:time_8_vs_4)
@@ -2004,13 +2013,23 @@ so every replicate has the same composition.
 > > 
 > > 
 > > ~~~
-> > Error in `mutate()`:
-> > ! Problem while computing `time_8_vs_0 = `8`/`0``.
-> > ℹ The error occurred in group 1: gene = "Aamp".
-> > Caused by error:
-> > ! object '8' not found
+> > # A tibble: 2,948 × 6
+> > # Groups:   gene [1,474]
+> >    gene      time0   time4   time8 comparisons Fold_changes
+> >    <chr>     <dbl>   <dbl>   <dbl> <chr>              <dbl>
+> >  1 Aamp    4603.   4870    4763.   time_8_vs_0        1.03 
+> >  2 Aamp    4603.   4870    4763.   time_8_vs_4        0.978
+> >  3 Abca12     5.29    4.25    4.14 time_8_vs_0        0.784
+> >  4 Abca12     5.29    4.25    4.14 time_8_vs_4        0.975
+> >  5 Abcc8   2576.   2609.   2292.   time_8_vs_0        0.889
+> >  6 Abcc8   2576.   2609.   2292.   time_8_vs_4        0.878
+> >  7 Abhd14a  591.    547.    432.   time_8_vs_0        0.731
+> >  8 Abhd14a  591.    547.    432.   time_8_vs_4        0.791
+> >  9 Abi2    4881.   4903.   4945.   time_8_vs_0        1.01 
+> > 10 Abi2    4881.   4903.   4945.   time_8_vs_4        1.01 
+> > # … with 2,938 more rows
 > > ~~~
-> > {: .error}
+> > {: .output}
 > >
 > {: .solution}
 {: .challenge}
