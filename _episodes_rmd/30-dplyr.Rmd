@@ -732,7 +732,8 @@ so every replicate has the same composition.
 > the mean expression levels of genes and columns represent the different timepoints.
 > 2. Use the previous table containing mean expression levels per timepoint and create
 > a new column containing fold-changes between timepoint 8 and timepoint 0, and fold-changes
-> between timepoint 8 and timepoint 4. Convert this table into a long-format table gathering the foldchanges calculated.
+> between timepoint 8 and timepoint 4. Convert this table into a long-format table 
+> gathering the foldchanges calculated.
 >
 > > # Solution
 > >
