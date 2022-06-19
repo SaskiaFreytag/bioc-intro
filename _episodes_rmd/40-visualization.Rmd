@@ -148,6 +148,19 @@ rna_plot + geom_histogram()
 >
 > Change the arguments `bins` or `binwidth` of `geom_histogram()` to
 > change the number or width of the bins.
+>
+> > ## Solution
+> >
+> > ```{r}
+> > # change bins
+> > ggplot(rna, aes(x = expression)) +
+> >     geom_histogram(bins = 15)
+> >
+> > # change binwidth
+> > ggplot(rna, aes(x = expression)) +
+> >     geom_histogram(binwidth = 2000)
+> > ```
+> {: .solution}
 {: .challenge}
 
 We can observe here that the data are skewed to the right. We can
@@ -183,6 +196,13 @@ From now on we will work on the log-transformed expression values.
 >   `scale_x_log10()`. Compare it with the previous graph. Why do you
 >   now have warning messages appearing?
 >
+> > ## Solution
+> > ```{r, eval=TRUE, purl=TRUE, echo=TRUE}
+> > ggplot(data = rna,mapping = aes(x = expression))+
+> >   geom_histogram() +
+> >   scale_x_log10()
+> > ```
+> {: .solution}
 {: .challenge}
 
 
@@ -393,7 +413,25 @@ ggplot(data = rna,
 > 2. Fill in the violins according to the time with the argument `fill`.
 > 3. Modify the violin plot to fill in the violins by `sex`.
 >
+>
+> > ## Solution
+> > ```{r, eval=TRUE, echo=TRUE, cache=FALSE}
+> > ggplot(data = rna,
+> >          mapping = aes(y = expression_log, x = sample)) +
+> >   geom_violin(aes(fill = as.factor(time))) +
+> >   theme(axis.text.x = element_text(angle = 90,  hjust = 0.5, vjust = 0.5))
+> > ```
+> > ```{r, eval=TRUE, echo=TRUE, cache=FALSE}
+> > ggplot(data = rna,
+> >          mapping = aes(y = expression_log, x = sample)) +
+> >   geom_violin(aes(fill = sex)) +
+> >   theme(axis.text.x = element_text(angle = 90,  hjust = 0.5, vjust = 0.5))
+> > ```
+> {: .solution}
 {: .challenge}
+> {: .solution}
+{: .challenge}
+
 
 ## Line plots
 
@@ -499,6 +537,19 @@ ggplot(data = mean_exp_by_time_sex,
 > Use what you just learned to create a plot that depicts how the average expression
 > of each chromosome changes through the duration of infection.
 >
+> > ## Solution
+> >
+> > ```{r mean-exp-chromosome-time-series}
+> > mean_exp_by_chromosome <- rna %>%
+> >   group_by(chromosome_name, time) %>%
+> >   summarize(mean_exp = mean(expression_log))
+> >
+> > ggplot(data = mean_exp_by_chromosome, mapping = aes(x = time,
+> >                                 y = mean_exp)) +
+> >   geom_line() +
+> >   facet_wrap(~ chromosome_name, scales = "free_y")
+> > ```
+> {: .solution}
 {: .challenge}
 
 
