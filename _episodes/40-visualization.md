@@ -168,6 +168,28 @@ rna_plot + geom_histogram()
 >
 > Change the arguments `bins` or `binwidth` of `geom_histogram()` to
 > change the number or width of the bins.
+>
+> > ## Solution
+> >
+> > 
+> > ~~~
+> > # change bins
+> > ggplot(rna, aes(x = expression)) +
+> >     geom_histogram(bins = 15)
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+> > 
+> > ~~~
+> > # change binwidth
+> > ggplot(rna, aes(x = expression)) +
+> >     geom_histogram(binwidth = 2000)
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-5-2.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+> {: .solution}
 {: .challenge}
 
 We can observe here that the data are skewed to the right. We can
@@ -216,6 +238,38 @@ From now on we will work on the log-transformed expression values.
 >   `scale_x_log10()`. Compare it with the previous graph. Why do you
 >   now have warning messages appearing?
 >
+> > ## Solution
+> > 
+> > ~~~
+> > ggplot(data = rna,mapping = aes(x = expression))+
+> >   geom_histogram() +
+> >   scale_x_log10()
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Warning: Transformation introduced infinite values in continuous x-axis
+> > ~~~
+> > {: .warning}
+> > 
+> > 
+> > 
+> > ~~~
+> > `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> > Warning: Removed 507 rows containing non-finite values (stat_bin).
+> > ~~~
+> > {: .warning}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+> {: .solution}
 {: .challenge}
 
 
@@ -377,7 +431,7 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -493,7 +547,33 @@ ggplot(data = rna,
 > 2. Fill in the violins according to the time with the argument `fill`.
 > 3. Modify the violin plot to fill in the violins by `sex`.
 >
+>
+> > ## Solution
+> > 
+> > ~~~
+> > ggplot(data = rna,
+> >          mapping = aes(y = expression_log, x = sample)) +
+> >   geom_violin(aes(fill = as.factor(time))) +
+> >   theme(axis.text.x = element_text(angle = 90,  hjust = 0.5, vjust = 0.5))
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+> > 
+> > ~~~
+> > ggplot(data = rna,
+> >          mapping = aes(y = expression_log, x = sample)) +
+> >   geom_violin(aes(fill = sex)) +
+> >   theme(axis.text.x = element_text(angle = 90,  hjust = 0.5, vjust = 0.5))
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+> {: .solution}
 {: .challenge}
+> {: .solution}
+{: .challenge}
+
 
 ## Line plots
 
@@ -647,6 +727,36 @@ ggplot(data = mean_exp_by_time_sex,
 > Use what you just learned to create a plot that depicts how the average expression
 > of each chromosome changes through the duration of infection.
 >
+> > ## Solution
+> >
+> > 
+> > ~~~
+> > mean_exp_by_chromosome <- rna %>%
+> >   group_by(chromosome_name, time) %>%
+> >   summarize(mean_exp = mean(expression_log))
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > `summarise()` has grouped output by 'chromosome_name'. You can override using
+> > the `.groups` argument.
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> > ggplot(data = mean_exp_by_chromosome, mapping = aes(x = time,
+> >                                 y = mean_exp)) +
+> >   geom_line() +
+> >   facet_wrap(~ chromosome_name, scales = "free_y")
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-mean-exp-chromosome-time-series-1.png" title="plot of chunk mean-exp-chromosome-time-series" alt="plot of chunk mean-exp-chromosome-time-series" width="612" style="display: block; margin: auto;" />
+> {: .solution}
 {: .challenge}
 
 
@@ -877,7 +987,7 @@ count_gene_chromosome + exp_boxplot_sex
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
 
 ~~~
 ## or count_gene_chromosome | exp_boxplot_sex
@@ -890,7 +1000,7 @@ count_gene_chromosome / exp_boxplot_sex
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 
 We can combine further control the layout of the final composition
 with `plot_layout` to create more complex layouts:
@@ -901,7 +1011,7 @@ count_gene_chromosome + exp_boxplot_sex + plot_layout(ncol = 1)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -912,7 +1022,7 @@ count_gene_chromosome +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
 
 The last plot can also be created using the `|` and `/` composers:
 
@@ -924,7 +1034,7 @@ count_gene_chromosome /
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
 
 Learn more about `patchwork` on its
 [webpage](https://patchwork.data-imaginist.com/) or in this

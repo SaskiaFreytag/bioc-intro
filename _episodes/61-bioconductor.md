@@ -25,6 +25,12 @@ keypoints:
 
 
 
+
+~~~
+se <- readRDS("course-data/data/GSE96870/se2.rds")
+~~~
+{: .language-r}
+
 In the previous lesson we have already learned a little bit about the  **Bioconductor**[^Bioconductor] project. In this class we will formalize our
 understanding of the **Bioconductor**[^Bioconductor] project. 
 
@@ -160,33 +166,102 @@ se@colData
 
 
 ~~~
-DataFrame with 22 rows and 9 columns
-                sample     organism       age         sex   infection
-           <character>  <character> <numeric> <character> <character>
-GSM2545336  GSM2545336 Mus musculus         8      Female  InfluenzaA
-GSM2545337  GSM2545337 Mus musculus         8      Female NonInfected
-GSM2545338  GSM2545338 Mus musculus         8      Female NonInfected
-GSM2545339  GSM2545339 Mus musculus         8      Female  InfluenzaA
-GSM2545340  GSM2545340 Mus musculus         8        Male  InfluenzaA
-...                ...          ...       ...         ...         ...
-GSM2545353  GSM2545353 Mus musculus         8      Female NonInfected
-GSM2545354  GSM2545354 Mus musculus         8        Male NonInfected
-GSM2545362  GSM2545362 Mus musculus         8      Female  InfluenzaA
-GSM2545363  GSM2545363 Mus musculus         8        Male  InfluenzaA
-GSM2545380  GSM2545380 Mus musculus         8      Female  InfluenzaA
-                strain      time      tissue     mouse
-           <character> <numeric> <character> <numeric>
-GSM2545336     C57BL/6         8  Cerebellum        14
-GSM2545337     C57BL/6         0  Cerebellum         9
-GSM2545338     C57BL/6         0  Cerebellum        10
-GSM2545339     C57BL/6         4  Cerebellum        15
-GSM2545340     C57BL/6         4  Cerebellum        18
-...                ...       ...         ...       ...
-GSM2545353     C57BL/6         0  Cerebellum         4
-GSM2545354     C57BL/6         0  Cerebellum         2
-GSM2545362     C57BL/6         4  Cerebellum        20
-GSM2545363     C57BL/6         4  Cerebellum        12
-GSM2545380     C57BL/6         8  Cerebellum        19
+Loading required package: S4Vectors
+~~~
+{: .output}
+
+
+
+~~~
+Loading required package: stats4
+~~~
+{: .output}
+
+
+
+~~~
+Loading required package: BiocGenerics
+~~~
+{: .output}
+
+
+
+~~~
+
+Attaching package: 'BiocGenerics'
+~~~
+{: .output}
+
+
+
+~~~
+The following objects are masked from 'package:stats':
+
+    IQR, mad, sd, var, xtabs
+~~~
+{: .output}
+
+
+
+~~~
+The following objects are masked from 'package:base':
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which.max, which.min
+~~~
+{: .output}
+
+
+
+~~~
+
+Attaching package: 'S4Vectors'
+~~~
+{: .output}
+
+
+
+~~~
+The following objects are masked from 'package:base':
+
+    expand.grid, I, unname
+~~~
+{: .output}
+
+
+
+~~~
+DataFrame with 22 rows and 10 columns
+                     title geo_accession     organism         age      sex
+               <character>   <character>  <character> <character> <factor>
+GSM2545336 CNS_RNA-seq_10C    GSM2545336 Mus musculus     8 weeks   Female
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus     8 weeks   Female
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus     8 weeks   Female
+GSM2545339 CNS_RNA-seq_13C    GSM2545339 Mus musculus     8 weeks   Female
+GSM2545340 CNS_RNA-seq_14C    GSM2545340 Mus musculus     8 weeks   Male  
+...                    ...           ...          ...         ...      ...
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus     8 weeks   Female
+GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus     8 weeks   Male  
+GSM2545362  CNS_RNA-seq_5C    GSM2545362 Mus musculus     8 weeks   Female
+GSM2545363  CNS_RNA-seq_6C    GSM2545363 Mus musculus     8 weeks   Male  
+GSM2545380  CNS_RNA-seq_9C    GSM2545380 Mus musculus     8 weeks   Female
+             infection      strain     time     tissue    mouse
+              <factor> <character> <factor>   <factor> <factor>
+GSM2545336 InfluenzaA      C57BL/6     Day8 Cerebellum       14
+GSM2545337 NonInfected     C57BL/6     Day0 Cerebellum       9 
+GSM2545338 NonInfected     C57BL/6     Day0 Cerebellum       10
+GSM2545339 InfluenzaA      C57BL/6     Day4 Cerebellum       15
+GSM2545340 InfluenzaA      C57BL/6     Day4 Cerebellum       18
+...                ...         ...      ...        ...      ...
+GSM2545353 NonInfected     C57BL/6     Day0 Cerebellum       4 
+GSM2545354 NonInfected     C57BL/6     Day0 Cerebellum       2 
+GSM2545362 InfluenzaA      C57BL/6     Day4 Cerebellum       20
+GSM2545363 InfluenzaA      C57BL/6     Day4 Cerebellum       12
+GSM2545380 InfluenzaA      C57BL/6     Day8 Cerebellum       19
 ~~~
 {: .output}
 
@@ -200,35 +275,9 @@ colData(se) #colData is a method that allows access to the column meta data
 
 
 ~~~
-DataFrame with 22 rows and 9 columns
-                sample     organism       age         sex   infection
-           <character>  <character> <numeric> <character> <character>
-GSM2545336  GSM2545336 Mus musculus         8      Female  InfluenzaA
-GSM2545337  GSM2545337 Mus musculus         8      Female NonInfected
-GSM2545338  GSM2545338 Mus musculus         8      Female NonInfected
-GSM2545339  GSM2545339 Mus musculus         8      Female  InfluenzaA
-GSM2545340  GSM2545340 Mus musculus         8        Male  InfluenzaA
-...                ...          ...       ...         ...         ...
-GSM2545353  GSM2545353 Mus musculus         8      Female NonInfected
-GSM2545354  GSM2545354 Mus musculus         8        Male NonInfected
-GSM2545362  GSM2545362 Mus musculus         8      Female  InfluenzaA
-GSM2545363  GSM2545363 Mus musculus         8        Male  InfluenzaA
-GSM2545380  GSM2545380 Mus musculus         8      Female  InfluenzaA
-                strain      time      tissue     mouse
-           <character> <numeric> <character> <numeric>
-GSM2545336     C57BL/6         8  Cerebellum        14
-GSM2545337     C57BL/6         0  Cerebellum         9
-GSM2545338     C57BL/6         0  Cerebellum        10
-GSM2545339     C57BL/6         4  Cerebellum        15
-GSM2545340     C57BL/6         4  Cerebellum        18
-...                ...       ...         ...       ...
-GSM2545353     C57BL/6         0  Cerebellum         4
-GSM2545354     C57BL/6         0  Cerebellum         2
-GSM2545362     C57BL/6         4  Cerebellum        20
-GSM2545363     C57BL/6         4  Cerebellum        12
-GSM2545380     C57BL/6         8  Cerebellum        19
+Error in colData(se): could not find function "colData"
 ~~~
-{: .output}
+{: .error}
 
 > ## Challenge
 >
@@ -507,8 +556,7 @@ the context of an organism package.
 >
 > Display the OrgDb object for the `org.Hs.eg.db` package.
 > Use the columns method to discover which sorts of annotations can be extracted
-> from it. Is this the same as the result from the keytypes method? Use the keytypes
-> method to find out.
+> from it.
 > Finally, use the keys method to extract UNIPROT identifiers and then pass those
 > keys in to the select method in such a way that you extract the gene symbol and
 > KEGG pathway information for each. Use the help system as needed to learn which

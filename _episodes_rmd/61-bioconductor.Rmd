@@ -19,32 +19,7 @@ source("../bin/chunk-options.R")
 ```
 
 ```{r, echo=FALSE, message=FALSE}
-library(SummarizedExperiment)
-library(tidyverse)
-rna <- read_csv("data/rnaseq.csv")
-counts <- rna %>%
-  select(gene, sample, expression) %>%
-  pivot_wider(names_from = sample,
-              values_from = expression)
-
-count_matrix <- counts %>% select(-gene) %>% as.matrix()
-rownames(count_matrix) <- counts$gene
-
-
-sample_metadata <- rna %>%
-  select(sample, organism, age, sex, infection, strain, time, tissue, mouse)
-
-sample_metadata <- unique(sample_metadata)
-
-gene_metadata <- rna %>%
-  select(gene, ENTREZID, product, ensembl_gene_id, external_synonym, chromosome_name, gene_biotype, phenotype_description, hsapiens_homolog_associated_gene_name)
-
-# Remove redundancy
-gene_metadata <- unique(gene_metadata)
-
-se <- SummarizedExperiment(assays = count_matrix,
-                           colData = sample_metadata,
-                           rowData = gene_metadata)
+se <- readRDS("data/se2.rds")
 ```
 
 
@@ -52,6 +27,10 @@ se <- SummarizedExperiment(assays = count_matrix,
 
 ```{r, echo = FALSE, message = FALSE}
 library("BiocManager")
+```
+
+```{r, eval = FALSE}
+se <- readRDS("course-data/data/GSE96870/se2.rds")
 ```
 
 In the previous lesson we have already learned a little bit about the  **Bioconductor**[^Bioconductor] project. In this class we will formalize our
@@ -327,8 +306,7 @@ the context of an organism package.
 >
 > Display the OrgDb object for the `org.Hs.eg.db` package.
 > Use the columns method to discover which sorts of annotations can be extracted
-> from it. Is this the same as the result from the keytypes method? Use the keytypes
-> method to find out.
+> from it.
 > Finally, use the keys method to extract UNIPROT identifiers and then pass those
 > keys in to the select method in such a way that you extract the gene symbol and
 > KEGG pathway information for each. Use the help system as needed to learn which
