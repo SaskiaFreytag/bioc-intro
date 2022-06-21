@@ -59,23 +59,15 @@ E.g., description of each sample
 
 ### Benefits of SummarizedExperiment format
 
-* Coordination of samples and features
-
-As soon as the data for a project are distributed in multiple tables or files, the alignment of data records or the consistency of identifiers is precarious. The coordinated nature of the SummarizedExperiment container overcomes this by guaranteeing that
+* **Coordination of samples and features**. As soon as the data for a project are distributed in multiple tables or files, the alignment of data records or the consistency of identifiers is precarious. The coordinated nature of the SummarizedExperiment container overcomes this by guaranteeing that
 during data manipulation, the dimensions of the different slots will always match (i.e the columns
 in the expression data and the rows in the sample metadata, as well
 as the rows in the expression data and feature metadata) during data
 manipulation. For example, if we had to exclude one sample from the assay,
-it would be automatically removed from the sample metadata in the same operation. 
-
-The metadata slots can grow additional co-variates
+it would be automatically removed from the sample metadata in the same operation. The metadata slots can grow additional co-variates
 (columns) without affecting the other structures.
 
-* Interoperability between packages
-
-There are a lot of R packages that make use of SummarizedExperiment format. For the user this makes analysis easier as less data wrangling is required when outputs of one package can work as input for another. And with many packages using the SummarizedExperiment format there are less different formats to learn. If you follow a training focused on RNA sequencing analysis, you may learn to use the Bioconductor `DESeq2` package to do some differential expression analyses. `DESeq2`'s whole analysis is handled in a `SummarizedExperiment`. Or if you perform RNA sequencing analysis following tidy principles with the [tidybulk](https://stemangiola.github.io/tidybulk/) package you can input your data in SummarizedExperiment format. 
-
-You can see packages making use of SummarizedExperiment (Depend/Import) on the [SummarizedExperiment homepage](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html), some shown in the screenshot below.
+* **Interoperability between packages**. There are a lot of R packages that make use of SummarizedExperiment format. For the user this makes analysis easier as less data wrangling is required when outputs of one package can work as input for another. And with many packages using the SummarizedExperiment format there are less different formats to learn. If you follow a training focused on RNA sequencing analysis, you may learn to use the Bioconductor `DESeq2` package to do some differential expression analyses. `DESeq2`'s whole analysis is handled in a `SummarizedExperiment`. Or if you perform RNA sequencing analysis following tidy principles with the [tidybulk](https://stemangiola.github.io/tidybulk/) package you can input your data in SummarizedExperiment format. You can see packages making use of SummarizedExperiment (Depend/Import) on the [SummarizedExperiment homepage](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html), some shown in the screenshot below.
 
 
 <img src="../fig/summarizedexperiment_packages.png" title="plot of chunk SE-packages" alt="plot of chunk SE-packages" width="60%" height="80%" style="display: block; margin: auto;" />
@@ -105,192 +97,6 @@ se <- readRDS("course-data/data/GSE96870/se2.rds")
 se
 ~~~
 {: .language-r}
-
-
-
-~~~
-Loading required package: SummarizedExperiment
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: MatrixGenerics
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: matrixStats
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'MatrixGenerics'
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:matrixStats':
-
-    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
-    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
-    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
-    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
-    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
-    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
-    colWeightedMeans, colWeightedMedians, colWeightedSds,
-    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
-    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
-    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
-    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
-    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
-    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
-    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
-    rowWeightedSds, rowWeightedVars
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: GenomicRanges
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: stats4
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: BiocGenerics
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'BiocGenerics'
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:stats':
-
-    IQR, mad, sd, var, xtabs
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:base':
-
-    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
-    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
-    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
-    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
-    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
-    union, unique, unsplit, which.max, which.min
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: S4Vectors
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'S4Vectors'
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:base':
-
-    expand.grid, I, unname
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: IRanges
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: GenomeInfoDb
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: Biobase
-~~~
-{: .output}
-
-
-
-~~~
-Welcome to Bioconductor
-
-    Vignettes contain introductory material; view with
-    'browseVignettes()'. To cite Bioconductor, see
-    'citation("Biobase")', and for packages 'citation("pkgname")'.
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'Biobase'
-~~~
-{: .output}
-
-
-
-~~~
-The following object is masked from 'package:MatrixGenerics':
-
-    rowMedians
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:matrixStats':
-
-    anyMissing, rowMedians
-~~~
-{: .output}
 
 
 
@@ -553,10 +359,13 @@ GRanges object with 1474 ranges and 11 metadata columns:
 
 ### Creating a SummarizedExperiment
 
-We will demonstrate how a SummarizedExperiment can be created. The different tables that make up a SummarizedExperiment object
+Often a package will create a SummarizedExperiment for you but we will demonstrate how a SummarizedExperiment can be created. 
+The 3 different tables that make up a SummarizedExperiment object are:
 - **An expression matrix**
 - **A table describing the samples**
 - **A table describing the genes**
+
+You would import these tables into R or generate them in R. Here we will create them from the `se` object that we have.
 
 
 ~~~
@@ -566,26 +375,13 @@ gene_metadata <- rowRanges(se) # or rowData(se)
 ~~~
 {: .language-r}
 
-We will create a `SummarizedExperiment` from these tables:
-
-- The count matrix that will be used as the **`assay`**
-- The table describing the samples will be used as the **sample metadata** slot
-- The table describing the genes will be used as the **features metadata** slot
-
-To do this we can put the different parts together using the
-`SummarizedExperiment` constructor:
+We will create a `SummarizedExperiment` from these tables using the `SummarizedExperiment` constructor. We need to provide inputs for the arguments `assays` (count matrix), `colData` (sample metadata) and `rowData` (gene metadata). Because `assays` can accept multiple assays (e.g. raw counts, log normalized) we put them in a list (SimpleList) and give each assay a name (we'll use counts). We can see we need to do this in the help for the SummarizedExperiment function `?SummarizedExperiment `.
 
 
 ~~~
 # BiocManager::install("SummarizedExperiment")
 library("SummarizedExperiment")
-~~~
-{: .language-r}
 
-To create the `SummarizedExperiment` object we need to provide inputs for the arguments `assays` (count matrix), `colData` (sample metadata) and `rowData` (gene metadata). Because `assays` can accept multiple assays (e.g. raw counts, log normalized) we put them in a list (SimpleList) and give each assay a name (we'll use counts). We can see we need to do this in the help for the SummarizedExperiment function `?SummarizedExperiment `.
-
-
-~~~
 se_created <- SummarizedExperiment(assays = SimpleList(counts=count_matrix),
                            colData = sample_metadata,
                            rowRanges = gene_metadata) # or rowData =
@@ -691,6 +487,25 @@ colnames(3): GSM2545336 GSM2545337 GSM2545338
 colData names(10): title geo_accession ... tissue mouse
 ~~~
 {: .output}
+
+
+~~~
+assay(se1)
+~~~
+{: .language-r}
+
+
+
+~~~
+        GSM2545336 GSM2545337 GSM2545338
+Asl           1170        361        400
+Apod         36194      10347       9173
+Cyp2d22       4060       1616       1603
+Klk6           287        629        641
+Fcrls           85        233        244
+~~~
+{: .output}
+
 
 
 ~~~
@@ -1609,7 +1424,7 @@ To work with genomic coordinates (ranges) with tidy methods, performing subsetti
 > > ~~~
 > > {: .output}
 > > 
-> > <img src="../fig/rmd-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-unnamed-chunk-35-1.png" title="plot of chunk unnamed-chunk-35" alt="plot of chunk unnamed-chunk-35" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
