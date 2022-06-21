@@ -59,23 +59,15 @@ E.g., description of each sample
 
 ### Benefits of SummarizedExperiment format
 
-* Coordination of samples and features
-
-As soon as the data for a project are distributed in multiple tables or files, the alignment of data records or the consistency of identifiers is precarious. The coordinated nature of the SummarizedExperiment container overcomes this by guaranteeing that
+* **Coordination of samples and features**. As soon as the data for a project are distributed in multiple tables or files, the alignment of data records or the consistency of identifiers is precarious. The coordinated nature of the SummarizedExperiment container overcomes this by guaranteeing that
 during data manipulation, the dimensions of the different slots will always match (i.e the columns
 in the expression data and the rows in the sample metadata, as well
 as the rows in the expression data and feature metadata) during data
 manipulation. For example, if we had to exclude one sample from the assay,
-it would be automatically removed from the sample metadata in the same operation. 
-
-The metadata slots can grow additional co-variates
+it would be automatically removed from the sample metadata in the same operation. The metadata slots can grow additional co-variates
 (columns) without affecting the other structures.
 
-* Interoperability between packages
-
-There are a lot of R packages that make use of SummarizedExperiment format. For the user this makes analysis easier as less data wrangling is required when outputs of one package can work as input for another. And with many packages using the SummarizedExperiment format there are less different formats to learn. If you follow a training focused on RNA sequencing analysis, you may learn to use the Bioconductor `DESeq2` package to do some differential expression analyses. `DESeq2`'s whole analysis is handled in a `SummarizedExperiment`. Or if you perform RNA sequencing analysis following tidy principles with the [tidybulk](https://stemangiola.github.io/tidybulk/) package you can input your data in SummarizedExperiment format. 
-
-You can see packages making use of SummarizedExperiment (Depend/Import) on the [SummarizedExperiment homepage](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html), some shown in the screenshot below.
+* **Interoperability between packages**. There are a lot of R packages that make use of SummarizedExperiment format. For the user this makes analysis easier as less data wrangling is required when outputs of one package can work as input for another. And with many packages using the SummarizedExperiment format there are less different formats to learn. If you follow a training focused on RNA sequencing analysis, you may learn to use the Bioconductor `DESeq2` package to do some differential expression analyses. `DESeq2`'s whole analysis is handled in a `SummarizedExperiment`. Or if you perform RNA sequencing analysis following tidy principles with the [tidybulk](https://stemangiola.github.io/tidybulk/) package you can input your data in SummarizedExperiment format. You can see packages making use of SummarizedExperiment (Depend/Import) on the [SummarizedExperiment homepage](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html), some shown in the screenshot below.
 
 
 <img src="../fig/summarizedexperiment_packages.png" title="plot of chunk SE-packages" alt="plot of chunk SE-packages" width="60%" height="80%" style="display: block; margin: auto;" />
@@ -105,192 +97,6 @@ se <- readRDS("course-data/data/GSE96870/se2.rds")
 se
 ~~~
 {: .language-r}
-
-
-
-~~~
-Loading required package: SummarizedExperiment
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: MatrixGenerics
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: matrixStats
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'MatrixGenerics'
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:matrixStats':
-
-    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
-    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
-    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
-    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
-    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
-    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
-    colWeightedMeans, colWeightedMedians, colWeightedSds,
-    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
-    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
-    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
-    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
-    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
-    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
-    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
-    rowWeightedSds, rowWeightedVars
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: GenomicRanges
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: stats4
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: BiocGenerics
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'BiocGenerics'
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:stats':
-
-    IQR, mad, sd, var, xtabs
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:base':
-
-    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
-    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
-    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
-    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
-    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
-    union, unique, unsplit, which.max, which.min
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: S4Vectors
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'S4Vectors'
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:base':
-
-    expand.grid, I, unname
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: IRanges
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: GenomeInfoDb
-~~~
-{: .output}
-
-
-
-~~~
-Loading required package: Biobase
-~~~
-{: .output}
-
-
-
-~~~
-Welcome to Bioconductor
-
-    Vignettes contain introductory material; view with
-    'browseVignettes()'. To cite Bioconductor, see
-    'citation("Biobase")', and for packages 'citation("pkgname")'.
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'Biobase'
-~~~
-{: .output}
-
-
-
-~~~
-The following object is masked from 'package:MatrixGenerics':
-
-    rowMedians
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:matrixStats':
-
-    anyMissing, rowMedians
-~~~
-{: .output}
 
 
 
@@ -553,10 +359,13 @@ GRanges object with 1474 ranges and 11 metadata columns:
 
 ### Creating a SummarizedExperiment
 
-We will demonstrate how a SummarizedExperiment can be created. The different tables that make up a SummarizedExperiment object
+Often a package will create a SummarizedExperiment for you but we will demonstrate how a SummarizedExperiment can be created. 
+The 3 different tables that make up a SummarizedExperiment object are:
 - **An expression matrix**
 - **A table describing the samples**
 - **A table describing the genes**
+
+You would import these tables into R or generate them in R. Here we will create them from the `se` object that we have.
 
 
 ~~~
@@ -566,26 +375,13 @@ gene_metadata <- rowRanges(se) # or rowData(se)
 ~~~
 {: .language-r}
 
-We will create a `SummarizedExperiment` from these tables:
-
-- The count matrix that will be used as the **`assay`**
-- The table describing the samples will be used as the **sample metadata** slot
-- The table describing the genes will be used as the **features metadata** slot
-
-To do this we can put the different parts together using the
-`SummarizedExperiment` constructor:
+We will create a `SummarizedExperiment` from these tables using the `SummarizedExperiment` constructor. We need to provide inputs for the arguments `assays` (count matrix), `colData` (sample metadata) and `rowData` (gene metadata). Because `assays` can accept multiple assays (e.g. raw counts, log normalized) we put them in a list (SimpleList) and give each assay a name (we'll use counts). We can see we need to do this in the help for the SummarizedExperiment function `?SummarizedExperiment `.
 
 
 ~~~
 # BiocManager::install("SummarizedExperiment")
 library("SummarizedExperiment")
-~~~
-{: .language-r}
 
-To create the `SummarizedExperiment` object we need to provide inputs for the arguments `assays` (count matrix), `colData` (sample metadata) and `rowData` (gene metadata). Because `assays` can accept multiple assays (e.g. raw counts, log normalized) we put them in a list (SimpleList) and give each assay a name (we'll use counts). We can see we need to do this in the help for the SummarizedExperiment function `?SummarizedExperiment `.
-
-
-~~~
 se_created <- SummarizedExperiment(assays = SimpleList(counts=count_matrix),
                            colData = sample_metadata,
                            rowRanges = gene_metadata) # or rowData =
@@ -691,6 +487,25 @@ colnames(3): GSM2545336 GSM2545337 GSM2545338
 colData names(10): title geo_accession ... tissue mouse
 ~~~
 {: .output}
+
+
+~~~
+assay(se1)
+~~~
+{: .language-r}
+
+
+
+~~~
+        GSM2545336 GSM2545337 GSM2545338
+Asl           1170        361        400
+Apod         36194      10347       9173
+Cyp2d22       4060       1616       1603
+Klk6           287        629        641
+Fcrls           85        233        244
+~~~
+{: .output}
+
 
 
 ~~~
@@ -1105,8 +920,27 @@ se
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 32,428 × 30
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts title geo_accession organism age   sex   infection
+   <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+ 1 Asl      GSM2545336   1170 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 2 Apod     GSM2545336  36194 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 3 Cyp2d22  GSM2545336   4060 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 4 Klk6     GSM2545336    287 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 5 Fcrls    GSM2545336     85 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 6 Slc2a4   GSM2545336    782 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 7 Exd2     GSM2545336   1619 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 8 Gjc2     GSM2545336    288 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 9 Plp1     GSM2545336  43217 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+10 Gnb4     GSM2545336   1071 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+# … with 40 more rows, and 21 more variables: strain <chr>, time <fct>,
+#   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+#   product <chr>, gbkey <chr>, external_gene_name <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+#   end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1150,8 +984,27 @@ It's still a SummarizedExperiment object but now we can view it as a tibble. Not
 > 
 > 
 > ~~~
-> # A SummarizedExperiment-tibble abstraction: 32,428 × 30
-> [90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+> # A SummarizedExperiment-tibble abstraction: 32,428 × 22
+> # [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+>    .feature .sample    counts title geo_accession organism age   sex   infection
+>    <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+>  1 Asl      GSM2545336   1170 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  2 Apod     GSM2545336  36194 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  3 Cyp2d22  GSM2545336   4060 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  4 Klk6     GSM2545336    287 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  5 Fcrls    GSM2545336     85 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  6 Slc2a4   GSM2545336    782 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  7 Exd2     GSM2545336   1619 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  8 Gjc2     GSM2545336    288 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  9 Plp1     GSM2545336  43217 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+> 10 Gnb4     GSM2545336   1071 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+> # … with 40 more rows, and 21 more variables: strain <chr>, time <fct>,
+> #   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+> #   product <chr>, gbkey <chr>, external_gene_name <chr>,
+> #   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+> #   gene_biotype <chr>, phenotype_description <chr>,
+> #   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+> #   end <int>, width <int>, strand <fct>
 > ~~~
 > {: .output}
 >
@@ -1171,8 +1024,27 @@ se %>%
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 30,954 × 30
-[90m# Transcripts=1474 | Samples=21 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 30,954 × 21
+# [90mFeatures=1474 | Samples=21 | Assays=counts[0m
+   .feature .sample    counts title geo_accession organism age   sex   infection
+   <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+ 1 Asl      GSM2545337    361 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 2 Apod     GSM2545337  10347 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 3 Cyp2d22  GSM2545337   1616 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 4 Klk6     GSM2545337    629 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 5 Fcrls    GSM2545337    233 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 6 Slc2a4   GSM2545337    231 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 7 Exd2     GSM2545337   2288 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 8 Gjc2     GSM2545337    595 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 9 Plp1     GSM2545337 101241 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+10 Gnb4     GSM2545337   1791 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+# … with 40 more rows, and 21 more variables: strain <chr>, time <fct>,
+#   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+#   product <chr>, gbkey <chr>, external_gene_name <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+#   end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1258,8 +1130,27 @@ se %>%
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 32,428 × 30
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts title geo_accession organism age   sex   infection
+   <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+ 1 Asl      GSM2545336   1170 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 2 Apod     GSM2545336  36194 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 3 Cyp2d22  GSM2545336   4060 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 4 Klk6     GSM2545336    287 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 5 Fcrls    GSM2545336     85 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 6 Slc2a4   GSM2545336    782 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 7 Exd2     GSM2545336   1619 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 8 Gjc2     GSM2545336    288 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 9 Plp1     GSM2545336  43217 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+10 Gnb4     GSM2545336   1071 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+# … with 40 more rows, and 21 more variables: strain <chr>, time <fct>,
+#   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+#   product <chr>, gbkey <chr>, external_gene_name <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+#   end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1317,8 +1208,17 @@ se %>%
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 1 × 30
-[90m# Transcripts=1 | Samples=1 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 1 × 1
+# [90mFeatures=1 | Samples=1 | Assays=counts[0m
+  .feature .sample    counts title  geo_accession organism age   sex   infection
+  <chr>    <chr>       <int> <chr>  <chr>         <chr>    <chr> <fct> <fct>    
+1 Asl      GSM2545336   1170 CNS_R… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+# … with 21 more variables: strain <chr>, time <fct>, tissue <fct>,
+#   mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>, product <chr>,
+#   gbkey <chr>, external_gene_name <chr>, ensembl_gene_id <chr>,
+#   external_synonym <chr>, chromosome_name <chr>, gene_biotype <chr>,
+#   phenotype_description <chr>, hsapiens_homolog_associated_gene_name <chr>,
+#   seqnames <fct>, start <int>, end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1378,8 +1278,26 @@ tidySummarizedExperiment says: Key columns are missing. A data frame is returned
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 32,428 × 29
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample counts title geo_accession organism age   sex   group strain
+   <chr>    <chr>    <int> <chr> <chr>         <chr>    <chr> <fct> <chr> <chr> 
+ 1 Asl      GSM254…   1170 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 2 Apod     GSM254…  36194 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 3 Cyp2d22  GSM254…   4060 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 4 Klk6     GSM254…    287 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 5 Fcrls    GSM254…     85 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 6 Slc2a4   GSM254…    782 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 7 Exd2     GSM254…   1619 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 8 Gjc2     GSM254…    288 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 9 Plp1     GSM254…  43217 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+10 Gnb4     GSM254…   1071 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+# … with 40 more rows, and 19 more variables: tissue <fct>, mouse <fct>,
+#   center <chr>, gene <chr>, ENTREZID <chr>, product <chr>, gbkey <chr>,
+#   external_gene_name <chr>, ensembl_gene_id <chr>, external_synonym <chr>,
+#   chromosome_name <chr>, gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+#   end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1403,10 +1321,11 @@ To work with genomic coordinates (ranges) with tidy methods, performing subsetti
 
 
 > ## Challenge
-> > 1. Extract the miRNA and NonInfected this time using tidyverse commands.
-> > 2. Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8 this time using tidyverse commands.
-> > 3. Create a bar plot of the sample counts using the se object. Hint use geom_col to plot the summarised counts.
-> >
+>
+> 1. Extract the miRNA and NonInfected this time using tidyverse commands.
+> 2. Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8 this time using tidyverse commands.
+> 3. Create a bar plot of the sample counts using the se object. Hint use geom_col to plot the summarised counts.
+> 
 > > ## Solution
 > >
 > > 
@@ -1419,8 +1338,27 @@ To work with genomic coordinates (ranges) with tidy methods, performing subsetti
 > > 
 > > 
 > > ~~~
-> > # A SummarizedExperiment-tibble abstraction: 49 × 30
-> > [90m# Transcripts=7 | Samples=7 | Assays=counts[39m
+> > # A SummarizedExperiment-tibble abstraction: 49 × 7
+> > # [90mFeatures=7 | Samples=7 | Assays=counts[0m
+> >    .feature .sample    counts title geo_accession organism age   sex   infection
+> >    <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+> >  1 Mir1901  GSM2545337     45 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  2 Mir378a  GSM2545337     11 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  3 Mir133b  GSM2545337      4 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  4 Mir30c-2 GSM2545337     10 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  5 Mir149   GSM2545337      1 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  6 Mir128-1 GSM2545337      4 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  7 Mir7682  GSM2545337      2 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  8 Mir1901  GSM2545338     44 CNS_… GSM2545338    Mus mus… 8 we… Fema… NonInfec…
+> >  9 Mir378a  GSM2545338      7 CNS_… GSM2545338    Mus mus… 8 we… Fema… NonInfec…
+> > 10 Mir133b  GSM2545338      6 CNS_… GSM2545338    Mus mus… 8 we… Fema… NonInfec…
+> > # … with 39 more rows, and 21 more variables: strain <chr>, time <fct>,
+> > #   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+> > #   product <chr>, gbkey <chr>, external_gene_name <chr>,
+> > #   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+> > #   gene_biotype <chr>, phenotype_description <chr>,
+> > #   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+> > #   end <int>, width <int>, strand <fct>
 > > ~~~
 > > {: .output}
 > >
@@ -1486,7 +1424,7 @@ To work with genomic coordinates (ranges) with tidy methods, performing subsetti
 > > ~~~
 > > {: .output}
 > > 
-> > <img src="../fig/rmd-unnamed-chunk-36-1.png" title="plot of chunk unnamed-chunk-36" alt="plot of chunk unnamed-chunk-36" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-unnamed-chunk-35-1.png" title="plot of chunk unnamed-chunk-35" alt="plot of chunk unnamed-chunk-35" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
