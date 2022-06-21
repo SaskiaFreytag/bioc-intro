@@ -19,19 +19,12 @@ source("../bin/chunk-options.R")
 ```
 
 ```{r, echo=FALSE, message=FALSE}
+library(tidySummarizedExperiment)
 se <- readRDS("data/se2.rds")
 ```
 
 
 ## Bioconductor
-
-```{r, echo = FALSE, message = FALSE}
-library("BiocManager")
-```
-
-```{r, eval = FALSE}
-se <- readRDS("course-data/data/GSE96870/se2.rds")
-```
 
 In the previous lesson we have already learned a little bit about the  **Bioconductor**[^Bioconductor] project. In this class we will formalize our
 understanding of the **Bioconductor**[^Bioconductor] project. 
@@ -147,8 +140,8 @@ may come across.
 
 > ## Challenge
 >
-> Use the function `str` on the SummarizedExperiment object you created during
-> the last lession. What oddity do you notice? 
+> Use the function `str` on the `se` SummarizedExperiment object you worked with during the last lession.
+What oddity do you notice? 
 > Hint: Compare the output to output of `str` function applied to `rna`.
 >
 > > ## Solution
@@ -161,7 +154,7 @@ may come across.
 S4 programming allows object-oriented programming in R and thus ensure **coherence,**
 **stability, and interoperability**. Object-oriented programming is a computer programming model that organizes software design around data, or objects, rather than functions and logic. An object can be defined as a data field that has unique attributes and behavior.In S4, certain classes are defined with specific accessibility functions (called methods). 
 
-```{r}
+```{r message = FALSE}
 # These two statements will result in the same output.
 
 se@colData
