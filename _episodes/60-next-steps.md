@@ -1105,8 +1105,27 @@ se
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 32,428 × 30
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts title geo_accession organism age   sex   infection
+   <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+ 1 Asl      GSM2545336   1170 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 2 Apod     GSM2545336  36194 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 3 Cyp2d22  GSM2545336   4060 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 4 Klk6     GSM2545336    287 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 5 Fcrls    GSM2545336     85 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 6 Slc2a4   GSM2545336    782 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 7 Exd2     GSM2545336   1619 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 8 Gjc2     GSM2545336    288 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 9 Plp1     GSM2545336  43217 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+10 Gnb4     GSM2545336   1071 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+# … with 40 more rows, and 21 more variables: strain <chr>, time <fct>,
+#   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+#   product <chr>, gbkey <chr>, external_gene_name <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+#   end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1150,8 +1169,27 @@ It's still a SummarizedExperiment object but now we can view it as a tibble. Not
 > 
 > 
 > ~~~
-> # A SummarizedExperiment-tibble abstraction: 32,428 × 30
-> [90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+> # A SummarizedExperiment-tibble abstraction: 32,428 × 22
+> # [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+>    .feature .sample    counts title geo_accession organism age   sex   infection
+>    <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+>  1 Asl      GSM2545336   1170 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  2 Apod     GSM2545336  36194 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  3 Cyp2d22  GSM2545336   4060 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  4 Klk6     GSM2545336    287 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  5 Fcrls    GSM2545336     85 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  6 Slc2a4   GSM2545336    782 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  7 Exd2     GSM2545336   1619 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  8 Gjc2     GSM2545336    288 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+>  9 Plp1     GSM2545336  43217 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+> 10 Gnb4     GSM2545336   1071 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+> # … with 40 more rows, and 21 more variables: strain <chr>, time <fct>,
+> #   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+> #   product <chr>, gbkey <chr>, external_gene_name <chr>,
+> #   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+> #   gene_biotype <chr>, phenotype_description <chr>,
+> #   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+> #   end <int>, width <int>, strand <fct>
 > ~~~
 > {: .output}
 >
@@ -1171,8 +1209,27 @@ se %>%
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 30,954 × 30
-[90m# Transcripts=1474 | Samples=21 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 30,954 × 21
+# [90mFeatures=1474 | Samples=21 | Assays=counts[0m
+   .feature .sample    counts title geo_accession organism age   sex   infection
+   <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+ 1 Asl      GSM2545337    361 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 2 Apod     GSM2545337  10347 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 3 Cyp2d22  GSM2545337   1616 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 4 Klk6     GSM2545337    629 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 5 Fcrls    GSM2545337    233 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 6 Slc2a4   GSM2545337    231 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 7 Exd2     GSM2545337   2288 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 8 Gjc2     GSM2545337    595 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+ 9 Plp1     GSM2545337 101241 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+10 Gnb4     GSM2545337   1791 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+# … with 40 more rows, and 21 more variables: strain <chr>, time <fct>,
+#   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+#   product <chr>, gbkey <chr>, external_gene_name <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+#   end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1258,8 +1315,27 @@ se %>%
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 32,428 × 30
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample    counts title geo_accession organism age   sex   infection
+   <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+ 1 Asl      GSM2545336   1170 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 2 Apod     GSM2545336  36194 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 3 Cyp2d22  GSM2545336   4060 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 4 Klk6     GSM2545336    287 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 5 Fcrls    GSM2545336     85 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 6 Slc2a4   GSM2545336    782 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 7 Exd2     GSM2545336   1619 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 8 Gjc2     GSM2545336    288 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+ 9 Plp1     GSM2545336  43217 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+10 Gnb4     GSM2545336   1071 CNS_… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+# … with 40 more rows, and 21 more variables: strain <chr>, time <fct>,
+#   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+#   product <chr>, gbkey <chr>, external_gene_name <chr>,
+#   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+#   gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+#   end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1317,8 +1393,17 @@ se %>%
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 1 × 30
-[90m# Transcripts=1 | Samples=1 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 1 × 1
+# [90mFeatures=1 | Samples=1 | Assays=counts[0m
+  .feature .sample    counts title  geo_accession organism age   sex   infection
+  <chr>    <chr>       <int> <chr>  <chr>         <chr>    <chr> <fct> <fct>    
+1 Asl      GSM2545336   1170 CNS_R… GSM2545336    Mus mus… 8 we… Fema… Influenz…
+# … with 21 more variables: strain <chr>, time <fct>, tissue <fct>,
+#   mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>, product <chr>,
+#   gbkey <chr>, external_gene_name <chr>, ensembl_gene_id <chr>,
+#   external_synonym <chr>, chromosome_name <chr>, gene_biotype <chr>,
+#   phenotype_description <chr>, hsapiens_homolog_associated_gene_name <chr>,
+#   seqnames <fct>, start <int>, end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1378,8 +1463,26 @@ tidySummarizedExperiment says: Key columns are missing. A data frame is returned
 
 
 ~~~
-# A SummarizedExperiment-tibble abstraction: 32,428 × 29
-[90m# Transcripts=1474 | Samples=22 | Assays=counts[39m
+# A SummarizedExperiment-tibble abstraction: 32,428 × 22
+# [90mFeatures=1474 | Samples=22 | Assays=counts[0m
+   .feature .sample counts title geo_accession organism age   sex   group strain
+   <chr>    <chr>    <int> <chr> <chr>         <chr>    <chr> <fct> <chr> <chr> 
+ 1 Asl      GSM254…   1170 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 2 Apod     GSM254…  36194 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 3 Cyp2d22  GSM254…   4060 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 4 Klk6     GSM254…    287 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 5 Fcrls    GSM254…     85 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 6 Slc2a4   GSM254…    782 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 7 Exd2     GSM254…   1619 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 8 Gjc2     GSM254…    288 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+ 9 Plp1     GSM254…  43217 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+10 Gnb4     GSM254…   1071 CNS_… GSM2545336    Mus mus… 8 we… Fema… Infl… C57BL…
+# … with 40 more rows, and 19 more variables: tissue <fct>, mouse <fct>,
+#   center <chr>, gene <chr>, ENTREZID <chr>, product <chr>, gbkey <chr>,
+#   external_gene_name <chr>, ensembl_gene_id <chr>, external_synonym <chr>,
+#   chromosome_name <chr>, gene_biotype <chr>, phenotype_description <chr>,
+#   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+#   end <int>, width <int>, strand <fct>
 ~~~
 {: .output}
 
@@ -1403,10 +1506,11 @@ To work with genomic coordinates (ranges) with tidy methods, performing subsetti
 
 
 > ## Challenge
-> > 1. Extract the miRNA and NonInfected this time using tidyverse commands.
-> > 2. Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8 this time using tidyverse commands.
-> > 3. Create a bar plot of the sample counts using the se object. Hint use geom_col to plot the summarised counts.
-> >
+>
+> 1. Extract the miRNA and NonInfected this time using tidyverse commands.
+> 2. Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8 this time using tidyverse commands.
+> 3. Create a bar plot of the sample counts using the se object. Hint use geom_col to plot the summarised counts.
+> 
 > > ## Solution
 > >
 > > 
@@ -1419,8 +1523,27 @@ To work with genomic coordinates (ranges) with tidy methods, performing subsetti
 > > 
 > > 
 > > ~~~
-> > # A SummarizedExperiment-tibble abstraction: 49 × 30
-> > [90m# Transcripts=7 | Samples=7 | Assays=counts[39m
+> > # A SummarizedExperiment-tibble abstraction: 49 × 7
+> > # [90mFeatures=7 | Samples=7 | Assays=counts[0m
+> >    .feature .sample    counts title geo_accession organism age   sex   infection
+> >    <chr>    <chr>       <int> <chr> <chr>         <chr>    <chr> <fct> <fct>    
+> >  1 Mir1901  GSM2545337     45 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  2 Mir378a  GSM2545337     11 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  3 Mir133b  GSM2545337      4 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  4 Mir30c-2 GSM2545337     10 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  5 Mir149   GSM2545337      1 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  6 Mir128-1 GSM2545337      4 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  7 Mir7682  GSM2545337      2 CNS_… GSM2545337    Mus mus… 8 we… Fema… NonInfec…
+> >  8 Mir1901  GSM2545338     44 CNS_… GSM2545338    Mus mus… 8 we… Fema… NonInfec…
+> >  9 Mir378a  GSM2545338      7 CNS_… GSM2545338    Mus mus… 8 we… Fema… NonInfec…
+> > 10 Mir133b  GSM2545338      6 CNS_… GSM2545338    Mus mus… 8 we… Fema… NonInfec…
+> > # … with 39 more rows, and 21 more variables: strain <chr>, time <fct>,
+> > #   tissue <fct>, mouse <fct>, center <chr>, gene <chr>, ENTREZID <chr>,
+> > #   product <chr>, gbkey <chr>, external_gene_name <chr>,
+> > #   ensembl_gene_id <chr>, external_synonym <chr>, chromosome_name <chr>,
+> > #   gene_biotype <chr>, phenotype_description <chr>,
+> > #   hsapiens_homolog_associated_gene_name <chr>, seqnames <fct>, start <int>,
+> > #   end <int>, width <int>, strand <fct>
 > > ~~~
 > > {: .output}
 > >

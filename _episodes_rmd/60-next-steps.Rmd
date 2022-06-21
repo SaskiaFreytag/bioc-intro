@@ -388,10 +388,11 @@ To work with genomic coordinates (ranges) with tidy methods, performing subsetti
 
 
 > ## Challenge
-> > 1. Extract the miRNA and NonInfected this time using tidyverse commands.
-> > 2. Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8 this time using tidyverse commands.
-> > 3. Create a bar plot of the sample counts using the se object. Hint use geom_col to plot the summarised counts.
-> >
+>
+> 1. Extract the miRNA and NonInfected this time using tidyverse commands.
+> 2. Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8 this time using tidyverse commands.
+> 3. Create a bar plot of the sample counts using the se object. Hint use geom_col to plot the summarised counts.
+> 
 > > ## Solution
 > >
 > > ```{r, purl=FALSE}
